@@ -1,7 +1,8 @@
 <script setup>
+import {ref} from "vue";
+const numberColor = ref("#17A2B8");
 
-
-defineProps({
+const props = defineProps({
     place : {
         type : Object,
         default(){
@@ -11,13 +12,31 @@ defineProps({
                 time : "11:30 ~ 16:00",
             }
         }
+    }, 
+    cardColor : {
+        type : String,
+        default() {
+            return "#17A2B8" 
+        }
     }
 })
+
+// console.log(props.cardColor)
+
+if(props.cardColor === "red" ){
+    numberColor.value = "#FF5F5F"
+}else if(props.cardColor === "blue"){
+    numberColor.value = "#17A2B8"
+}else{
+    numberColor.value = props.cardColor
+}
+
+
 </script>
 
 <template>
     <div id="card-container">
-        <div id="card-number">
+        <div id="card-number" :style="{backgroundColor : numberColor}" >
             1
         </div>
         <div id="place-info">
@@ -35,7 +54,7 @@ defineProps({
     width: 18.75rem;
     height: 5.14213rem;
     border-radius: 0.6125rem;
-    background: var(--, #FFF);
+    background-color: var(--, #FFF);
     box-shadow: 0px 1.59657px 3.19314px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
@@ -56,9 +75,9 @@ defineProps({
     font-family: Pretendard Variable;
     font-size: 9.8px;
     font-style: normal;
+    margin-right: 10px;
     font-weight: 600;
     line-height: normal;
-    margin-right: 10px;
 }
 
 #place-info{
@@ -88,9 +107,9 @@ defineProps({
     font-size: 12.04px;
     font-style: normal;
     font-weight: 400;
+    margin-right: 10px;
     line-height: normal;
     margin-bottom: 0;
-    margin-right: 10px;
 }
 
 #place-time{
