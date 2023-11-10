@@ -11,11 +11,12 @@ defineProps({
 <template>
     <a-list-item id="plan-listItem">
       <template #actions>
-          <a key="list-loadmore-edit">상세보기</a>
-          <a key="list-loadmore-more">후기 작성</a>
-          <a key="list-loadmore-delete">삭제</a>
+            <a key="list-loadmore-edit">상세보기</a>
+            <a key="list-loadmore-more">후기 작성</a>
+            <a key="list-loadmore-delete">삭제</a>
       </template>
-        <a-list-item-meta
+        
+      <a-list-item-meta
           :description="plan.date" id="plan-description"
         >
           <template #title>
@@ -29,13 +30,14 @@ defineProps({
 </template>
 
 <style scoped>
+
 #plan-listItem{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 89.48794rem;
+  /* width: 89.48794rem; */
+  width: 60%;
   padding: 1.3rem 2.5rem;
-  align-items: flex-start;
   margin-bottom: 2.70988rem;
   border-radius: 0.87606rem;
   border: 1.869px solid #EAEAEA;
@@ -61,5 +63,11 @@ defineProps({
   font-weight: 400;
   line-height: 131%; /* 2.14575rem */
 }
+
+a{
+  color : black;
+}
+
+
 
 </style>
