@@ -24,9 +24,9 @@ p{
     color: var(--neutral-colors-text-gray, #9795B5);
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: DM Sans;
-    font-size: 1.7rem;
+    font-size: 1.625rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 1.52106rem; /* 100% */
+    line-height: 1.52106rem; /* 93.606% */
 }
 </style>

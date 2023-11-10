@@ -1,5 +1,6 @@
 import "./assets/main.css";
-
+import "ant-design-vue/dist/reset.css";
+import Antd from "ant-design-vue";
 import { createApp } from "vue";
 // import { createPinia } from 'pinia'
 
@@ -11,4 +12,4 @@ const app = createApp(App);
 // app.use(createPinia());
 // app.use(router);
 
-app.mount("#app");
+app.use(Antd).mount("#app");
