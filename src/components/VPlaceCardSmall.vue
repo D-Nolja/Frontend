@@ -1,5 +1,18 @@
 <script setup>
 
+
+defineProps({
+    place : {
+        type : Object,
+        default(){
+            return {
+                name : "혜인식탁",
+                cate : "맛집",
+                time : "11:30 ~ 16:00",
+            }
+        }
+    }
+})
 </script>
 
 <template>
@@ -8,10 +21,10 @@
             1
         </div>
         <div id="place-info">
-            <p id="place-name">혜인 식탁</p>
+            <p id="place-name">{{place.name}}</p>
             <div id="place-subInfo">
-                <p id="place-cate">맛집</p>
-                <p id="place-time">11:30 ~ 16:00</p>
+                <p id="place-cate">{{place.cate}}</p>
+                <p id="place-time">{{place.time}}</p>
             </div>
         </div>
     </div>
