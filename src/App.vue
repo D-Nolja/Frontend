@@ -3,15 +3,15 @@
 // import TheFooter from './components/layout/TheFooter.vue';
 // import PlanList from './components/PlanList.vue';
 // import VTab from './components/VTab.vue';
-// import VPlaceCardBig from './components/VPlaceCardSmall.vue';
-import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
+import VPlaceCardBig from './components/VPlaceCardBig.vue';
+// import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
 </script>
 
 <template>
   <!-- <TheHeader/>
   <TheFooter/> -->
   <!-- <PlanList/> -->
-  <VPlaceCardSmall cardColor = "red"/> 
+  <VPlaceCardBig cardColor="blue"/> 
   <VTab/>
 </template>
 
