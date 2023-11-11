@@ -4,9 +4,16 @@
   margin : 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: pretendard;
+
+  font-family: Pretendard;
+
 }
 
 html, body {
   height: 100%;
+}
+
+#app{
+  margin :100px;
+  
 }

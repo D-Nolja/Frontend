@@ -104,7 +104,9 @@ svg{
 
 #place-name{
     color: #333;
-    font-family: Pretendard ;
+
+    font-family: Pretendard;
+
     font-size: 18px;
     font-style: normal;
     font-weight: 600;

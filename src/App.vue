@@ -1,20 +1,22 @@
 <script setup>
 // import TheHeader from './components/layout/TheHeader.vue';
-<<<<<<< HEAD
-import TheFooter from './components/layout/TheFooter.vue';
+
+// import TheFooter from './components/layout/TheFooter.vue';
 import PlanList from './components/PlanList.vue';
-import VTab from './components/VTab.vue';
-import VPlaceCardBig from './components/VPlaceCardBig.vue';
-import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
+// import VTab from './components/VTab.vue';
+// import VPlaceCardBig from './components/VPlaceCardBig.vue';
+// import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
+import VButton from './components/VButton.vue';
+
 </script>
 
 <template>
-  <!-- <TheHeader/> -->
+  <!-- <TheHeader/>
+  <TheFooter/> -->
   <PlanList/>
-  <VPlaceCardSmall cardColor = "blue"/>
   <!-- <VPlaceCardBig cardColor="blue"/>  -->
-  <VTab/>
-  <!-- <TheFooter/> -->
+  <!-- <VTab/> -->
+  <VButton  text="hi"/>
 
 </template>
 
