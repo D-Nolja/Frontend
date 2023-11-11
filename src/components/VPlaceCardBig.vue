@@ -104,7 +104,7 @@ svg{
 
 #place-name{
     color: #333;
-    font-family: Pretendard Variable;
+    font-family: Pretendard;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -131,7 +131,7 @@ svg{
 }
 #place-cate{
     color: rgba(23, 162, 184, 0.70);
-    font-family: Pretendard Variable;
+    font-family: Pretendard;
     font-size: 12.04px;
     font-style: normal;
     font-weight: 400;
@@ -142,7 +142,7 @@ svg{
 
 #place-time{
     color: #B7B7B7;
-    font-family: Pretendard Variable;
+    font-family: Pretendard;
     font-size: 12.04px;
     font-style: normal;
     font-weight: 400;

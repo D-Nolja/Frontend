@@ -37,7 +37,7 @@ defineProps({
   align-items: center;
   /* width: 89.48794rem; */
   width: 60%;
-  padding: 1.3rem 2.5rem;
+  padding: 1.0rem 2.0rem;
   margin-bottom: 2.70988rem;
   border-radius: 0.87606rem;
   border: 1.869px solid #EAEAEA;
@@ -47,8 +47,8 @@ defineProps({
 
 #plan-title{
   color: var(--character-primary-85, rgba(0, 0, 0, 0.85));
-  font-family: Pretendard Variable;
-  font-size : 1.3rem;
+  font-family: Pretendard;
+  font-size : 1.2rem;
   font-style: normal;
   font-weight: 500;
   line-height: 3.024rem; /* 150% */
@@ -57,7 +57,7 @@ defineProps({
 
 #plan-description{
   color: var(--character-secondary-45, rgba(0, 0, 0, 0.45));
-  font-family: Pretendard Variable;
+  font-family: Pretendard;
   font-size: 1.638rem;
   font-style: normal;
   font-weight: 400;
