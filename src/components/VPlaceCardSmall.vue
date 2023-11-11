@@ -72,7 +72,6 @@ if(props.cardColor === "red" ){
     align-items: center;
     color: #fff;
     text-align: center;
-    font-family: Pretendard Variable;
     font-size: 9.8px;
     font-style: normal;
     margin-right: 10px;
@@ -90,7 +89,6 @@ if(props.cardColor === "red" ){
 
 #place-name{
     color: #333;
-    font-family: Pretendard Variable;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -103,7 +101,6 @@ if(props.cardColor === "red" ){
 
 #place-cate{
     color: rgba(23, 162, 184, 0.70);
-    font-family: Pretendard Variable;
     font-size: 12.04px;
     font-style: normal;
     font-weight: 400;
@@ -114,7 +111,6 @@ if(props.cardColor === "red" ){
 
 #place-time{
     color: #B7B7B7;
-    font-family: Pretendard Variable;
     font-size: 12.04px;
     font-style: normal;
     font-weight: 400;

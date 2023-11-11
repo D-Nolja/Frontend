@@ -67,7 +67,7 @@ svg{
     height: 141px;
     border-radius: 12px;
     background-color: var(--, #FFF);
-    box-shadow: 0px 1.86972px 3.73943px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 8px 0 rgba(31,38,135,.08)!important;
    
 }
 
@@ -87,7 +87,7 @@ svg{
 #place-container{
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
 #place-text-container{
@@ -104,10 +104,10 @@ svg{
 
 #place-name{
     color: #333;
-    font-family: Pretendard Variable;
+    font-family: Pretendard ;
     font-size: 18px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 5px;
 }
 
@@ -123,15 +123,16 @@ svg{
 
 #place-description{
     color: #848484;
-    font-family: Inter;
+    font-family: pretendard;
     font-size: 11.75px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    margin-top: 5px;
 }
 #place-cate{
     color: rgba(23, 162, 184, 0.70);
-    font-family: Pretendard Variable;
+    font-family: Pretendard;
     font-size: 12.04px;
     font-style: normal;
     font-weight: 400;
@@ -142,7 +143,7 @@ svg{
 
 #place-time{
     color: #B7B7B7;
-    font-family: Pretendard Variable;
+    font-family: Pretendard;
     font-size: 12.04px;
     font-style: normal;
     font-weight: 400;
