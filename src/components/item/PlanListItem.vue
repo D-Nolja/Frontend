@@ -47,7 +47,7 @@ defineProps({
 
 #plan-title{
   color: var(--character-primary-85, rgba(0, 0, 0, 0.85));
-  font-family: Pretendard;
+
   font-size : 1.2rem;
   font-style: normal;
   font-weight: 500;
@@ -57,7 +57,7 @@ defineProps({
 
 #plan-description{
   color: var(--character-secondary-45, rgba(0, 0, 0, 0.45));
-  font-family: Pretendard;
+
   font-size: 1.638rem;
   font-style: normal;
   font-weight: 400;

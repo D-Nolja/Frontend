@@ -1,5 +1,6 @@
 <script setup>
 // import TheHeader from './components/layout/TheHeader.vue';
+
 // import TheFooter from './components/layout/TheFooter.vue';
 import PlanList from './components/PlanList.vue';
 // import VTab from './components/VTab.vue';
@@ -16,6 +17,7 @@ import VButton from './components/VButton.vue';
   <!-- <VPlaceCardBig cardColor="blue"/>  -->
   <!-- <VTab/> -->
   <VButton  text="hi"/>
+
 </template>
 
 <style scoped>
