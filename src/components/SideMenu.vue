@@ -76,13 +76,15 @@ onUnmounted(() => {
     /* 전체 높이 */
     position: fixed;
     /* 고정 위치 */
-    left: 0;
+    left: 8.25rem;
     /* 왼쪽에 위치 */
     top: 0;
     /* 상단에 위치 */
     display: flex;
     /* 내부 섹션들을 가로로 정렬 */
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    background: var(--, #FFF);
+    border-right: 1.5px solid #EAEAEA;
 }
 
 .fixed-section {
