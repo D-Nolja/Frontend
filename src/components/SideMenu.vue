@@ -324,7 +324,6 @@ padding-left: 7px;
 .day-section{
     overflow-y: auto;
     height: 80vh;
-    width: 270px;
     border-radius: 10px;
     /* height: 75%; */
     background-color: #F7F8F9;
