@@ -7,7 +7,7 @@
 // import VPlaceCardBig from './components/VPlaceCardBig.vue';
 // import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
 // import VButton from './components/VButton.vue';
-import VPlan from './views/VPlan.vue';
+import PlanView from './views/PlanView.vue';
 </script>
 
 <template>
@@ -17,7 +17,7 @@ import VPlan from './views/VPlan.vue';
 <!-- <VPlaceCardBig cardColor="blue"/>  -->
 <!-- <VTab/> -->
 <!-- <VButton  text="hi"/> -->
-<VPlan />
+<PlanView />
 </template>
 
 <style scoped>

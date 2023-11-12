@@ -40,7 +40,7 @@ const days = ref([1,2,3]);
     justify-content: space-between;
 }
 
-div{
+.sideNav div{
     display: flex;
     flex-direction: column;
     justify-content: center;
