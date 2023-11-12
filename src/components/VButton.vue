@@ -35,10 +35,10 @@ if(props.color === "white"){
 
 <style scoped>
 Button{
-    width: 6.5625rem;
-    height: 2.9375rem;
+    width: 4.44625rem;
+    height: 2.75244rem;
     flex-shrink: 0;
-    border-radius: 0.65525rem;
+    border-radius: 10px;
     background: #4285F4;
     border: none;
     text-align: center;
