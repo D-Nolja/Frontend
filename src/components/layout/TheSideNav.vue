@@ -12,7 +12,7 @@ const days = ref([1,2,3]);
         <div>
         <img src="../../assets/img/avatar.svg" alt="icon" id="logo">
         <VButton text="전체일정"/>
-            <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white"></VButton>
+            <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white" size="small"></VButton>
         </div>
         <div>
             <VButton text="편집"/>
@@ -30,9 +30,8 @@ const days = ref([1,2,3]);
     margin: 0 auto;
 }
 .sideNav{
-    padding: 10px 0;
+    padding: 10px 10px;
     width: 8.25rem;
-    height: 100%;
     display: flex;
     flex-direction: column;
     border-right: 1.5px solid #EAEAEA;
