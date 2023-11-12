@@ -62,11 +62,11 @@ svg{
 }
 
 #card-container{
-    margin: 20%;
-    width: 352.5px;
-    height: 141px;
+    margin : 5px;
+    width : 280px;
+    height: 120px;
     border-radius: 12px;
-    background-color: var(--, #FFF);
+    background-color : #fff;
     box-shadow: 0 2px 8px 0 rgba(31,38,135,.08)!important;
    
 }
@@ -76,7 +76,7 @@ svg{
     display: inline-flex;
     width: 23.972px;
     height: 23.204px;
-    padding: 4.591px 9.181px;
+    padding: 4px 8px;
     gap: 9.181px;
     flex-shrink: 0;
     border-radius: 13.772px;
@@ -87,11 +87,12 @@ svg{
 #place-container{
     display: flex;
     align-items: center;
-    margin-left: 30px;
+    /* margin-bottom: 20px; */
+    margin-left: 20px;
 }
 
 #place-text-container{
-    margin-right: 40px;
+    margin-right: 20px;
 }
 
 #place-info{
@@ -107,7 +108,7 @@ svg{
 
     font-family: Pretendard;
 
-    font-size: 18px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 600;
     margin-bottom: 5px;
@@ -126,7 +127,7 @@ svg{
 #place-description{
     color: #848484;
     font-family: pretendard;
-    font-size: 11.75px;
+    font-size: 0.7rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -135,7 +136,7 @@ svg{
 #place-cate{
     color: rgba(23, 162, 184, 0.70);
     font-family: Pretendard;
-    font-size: 12.04px;
+    font-size: 0.7rem;
     font-style: normal;
     font-weight: 400;
     margin-right: 10px;

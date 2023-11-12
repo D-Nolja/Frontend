@@ -51,14 +51,14 @@ if(props.cardColor === "red" ){
 
 <style scoped>
 #card-container{
-    width: 18.75rem;
-    height: 5.14213rem;
+    width: 250px;
     border-radius: 0.6125rem;
-    background-color: var(--, #FFF);
+    background-color: #fff;
     box-shadow: 0px 1.59657px 3.19314px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
-    padding : 10px;
+    padding : 20px 10px;
+    margin: 5px;
 }
 
 
