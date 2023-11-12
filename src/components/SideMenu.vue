@@ -155,17 +155,13 @@ onUnmounted(() => {
     max-width: 900px;
     /* 최대 너비 */
     height: 100vh;
-    /* 전체 높이 */
-    position: fixed;
-    /* 고정 위치 */
-    left: 8.25rem;
     /* 왼쪽에 위치 */
     top: 0;
     /* 상단에 위치 */
     display: flex;
     /* 내부 섹션들을 가로로 정렬 */
     /* border: 1px solid black; */
-    background: var(--, #FFF);
+    background-color: #fff;
     border-right: 1.5px solid #EAEAEA;
 }
 
