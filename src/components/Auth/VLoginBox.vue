@@ -3,36 +3,42 @@
 </script>
 
 <template>
-  <div class="loginBox-container">
-    <p id="loginBox-title">Sign in</p>
+  <div class="contents-container">
+    <p id="loginBox-title">Sign In</p>
     <input type="text" name="" id="" placeholder="Enter email or user name">
     <input type="text" name="" id="" placeholder="Password">
     <div id="fp-box">
-    <p>Forgot password?</p>
+    <p id="fp-text">Forgot password?</p>
 
     </div>
     <input type="button" value="Login" id="login-btn">
     <p id="continue-text">or continue with</p>
 
     <div id="icons">
-        <img src="../assets/img/loginIcon/kakao.svg" alt="kakaoIcon" srcset="">
-        <img src="../assets/img/loginIcon/naver.svg" alt="naverIcon" srcset="">
-        <img src="../assets/img/loginIcon/google.svg" alt="googleIcon" srcset="">
+        <img src="../../assets/img/loginIcon/kakao.svg" alt="kakaoIcon" srcset="">
+        <img src="../../assets/img/loginIcon/naver.svg" alt="naverIcon" srcset="">
+        <img src="../../assets/img/loginIcon/google.svg" alt="googleIcon" srcset="">
     </div>
   </div>
 </template>
 
 <style scoped>
-.loginBox-container{
-    height: calc(100vh - 15rem);
-    width: 23.0625rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 80px auto;
+.contents-container{
+  height: 70vh;
+  width: 23.0625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 80px auto;
+  padding-top : 80px;
+  
+   -ms-overflow-style: none;
 }
 
+.contents-container::-webkit-scrollbar{
+    display: none;
+}
 #loginBox-title{
     color: #333;
     font-family: Poppins;
@@ -71,7 +77,7 @@ input:not(#login-btn):focus {
     box-shadow: 0 0 5px #9cbcf5; 
 }
 
-.loginBox-container p{
+#fp-text{
     color: #B0B0B0;
     font-family: Poppins;
     font-size: 0.8rem;
@@ -125,6 +131,16 @@ input:not(#login-btn):focus {
 }
 
 #icons img{
-    margin: 7px;
+    margin: 8px;
 }
+
+#icons img {
+    /* 기존 스타일... */
+    transition: transform 0.3s ease; /* 부드러운 변환 효과 */
+}
+
+#icons img:active {
+    transform: scale(1.15); /* 클릭 시 이미지 크기를 10% 증가 */
+}
+
 </style>

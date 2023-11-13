@@ -45,12 +45,16 @@
     font-family: Roboto;
     font-size: 18px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 35.695px; /* 157.143% */
 
     background: #fff;
-    box-shadow: 0px -1.6225px 0px 0px #F0F0F0 inset;
-    position : fixed
+    /* box-shadow: 0px -1.6225px 0px 0px #F0F0F0 inset; */
+    position : fixed;
+
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.05); /* 더 세밀하고 부드러운 그림자 효과 */
+    border-bottom: 1px solid #eaeaea; /* 하단 경계선 유지 */
+    background: linear-gradient(to right, #fefefe, #fff); /* 그라디언트 배경 유지 */
 }
 
 .nav-btn-container {
@@ -61,5 +65,6 @@
 
 .nav-btn-container div{
     margin: 0 20px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* 더 미묘한 텍스트 그림자 효과 */
 }
 </style>
