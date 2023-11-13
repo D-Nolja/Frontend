@@ -3,10 +3,6 @@ import VButton from '../VButton.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
 
-<<<<<<< HEAD
-import {
-    ref
-} from "vue";
 
 const days = ref([1, 2, 3]);
 </script>
@@ -25,10 +21,9 @@ const days = ref([1, 2, 3]);
 </nav>
 </template>
 
-<style>
-#logo {
-=======
+
 const days = ref([1, 2, 3]);
+
 const router = useRouter();
 
 const navigate = (path) => {
@@ -55,7 +50,6 @@ const navigate = (path) => {
 <style scoped>∏
 
 #logo{
->>>>>>> view-plan
     width: 5rem;
     height: 5rem;
     align-items: center;
