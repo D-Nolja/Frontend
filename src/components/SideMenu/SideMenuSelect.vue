@@ -13,7 +13,7 @@
 
 <script setup>
 
-import VPlaceCardSmall from "../../Item/cards/VPlaceCardSmall.vue";
+import VPlaceCardSmall from "@/components/Common/cards/VPlaceCardSmall.vue"
 
 defineProps({
     dayPlan: {

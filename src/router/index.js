@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../components/SideMenuSelect.vue'),
+      component: () => import('@/components/SideMenu/SideMenuSelect.vue')
     },
     {
       path: '/days',
@@ -15,7 +15,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../components/SideMenuSelect.vue')
+      component: () => import('@/components/SideMenu/SideMenuSelect.vue')
     },
     {
       path: '/day/:number',
@@ -23,7 +23,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../components/SideMenuSelect.vue')
+      component: () => import('@/components/SideMenu/SideMenuSelect.vue')
     },
     // {
     //   path: '/edit',
