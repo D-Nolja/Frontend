@@ -3,6 +3,7 @@ import VButton from '../VButton.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
 
+
 const days = ref([1, 2, 3]);
 const router = useRouter();
 
@@ -30,12 +31,14 @@ const navigate = (path) => {
 <style scoped>∏
 
 #logo{
+
     width: 5rem;
     height: 5rem;
     align-items: center;
     margin: 0 auto;
 }
-.sideNav{
+
+.sideNav {
     padding: 10px 10px;
     width: 8.25rem;
     display: flex;
@@ -45,7 +48,7 @@ const navigate = (path) => {
     justify-content: space-between;
 }
 
-.sideNav div{
+.sideNav div {
     display: flex;
     flex-direction: column;
     justify-content: center;
