@@ -1,7 +1,7 @@
 
 
 <script setup>
-import VTab from "@/components/Common/VTab.vue"
+import VTab from "../MyPage/VTab.vue"
 </script>
 
 <template>
