@@ -5,15 +5,12 @@
                 <p id="plan-name">싸방학 언제 와</p>
                 <p id="plan-date">2023.12.04 ~ 2023.</p>
             </div>
-
             <side-menu-search :places=places></side-menu-search>
-
         </div>
 
-   
         <!-- menu section component 분리 -->
         <div class="scrollable-section" @mousedown="startDrag">
-            <SideMenuSelect v-for="dayPlan in dayPlans" :key="dayPlan.number" :dayPlan="dayPlan"/>
+            <!-- <SideMenuSelect v-for="dayPlan in dayPlans" :key="dayPlan.number" :dayPlan="dayPlan"/> -->
         </div>
     </div>
 </template>
@@ -27,9 +24,13 @@ import SideMenuSearch from "./SideMenuSearch.vue"
 import {
     ref,
     onMounted,
-    onUnmounted
+    onUnmounted, 
 } from 'vue';
-    
+ 
+import {useRoute} from 'vue-router';
+const route = useRoute();
+console.log("route", route.params.number);
+
 const places = ref([
 {
     "name" : "혜인식탁" ,
@@ -185,6 +186,7 @@ onUnmounted(() => {
 
 #plan-title {
     margin: 30px 0 15px 0;
+    width :300px;
 }
 
 #plan-name {
