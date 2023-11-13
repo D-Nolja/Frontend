@@ -31,8 +31,10 @@
    
         <!-- menu section component 분리 -->
         <div class="scrollable-section" @mousedown="startDrag">
+
             <SideMenuSelect v-for="dayPlan in dayPlans" :key="dayPlan.number" :dayPlan="dayPlan"/>
          
+
         </div>
     </div>
     </template>
@@ -117,12 +119,15 @@
         max-width: 900px;
         /* 최대 너비 */
         height: 100vh;
+
         /* 상단에 위치 */
         display: flex;
         /* 내부 섹션들을 가로로 정렬 */
         /* border: 1px solid black; */
         background-color: #fff;
+
         border-right: 1.5px solid #EAEAEA;
+
     }
     
     
@@ -145,7 +150,6 @@
         /* 가로 스크롤 허용 */
     }
     
-  
 
 
 .fixed-section {
@@ -167,17 +171,7 @@
     /* 가로 스크롤 허용 */
 }
 
-.menu-section {
-    width: 300px;
-    /* 각 섹션의 너비 */
-    flex-shrink: 0;
-    /* 섹션 크기 유지 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 14vh;
-    /* margin-top: 40%; */
-}
+
 
 .dragging {
     cursor: pointer;
@@ -339,11 +333,5 @@ padding-left: 7px;
     }
     
     
-    
- 
-  
-    
 
     </style>
-    
-
