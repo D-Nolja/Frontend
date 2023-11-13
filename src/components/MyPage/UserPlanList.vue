@@ -29,7 +29,7 @@ const data = [
 </script>
 
 <template>
- <a-list item-layout="horizontal" :data-source="data">
+ <a-list item-layout="horizontal" :data-source="data" class="planList">
     <template #renderItem="{ item }">
       <div class="list-item-container">
         <user-plan-list-item :plan="item"></user-plan-list-item>
@@ -46,4 +46,9 @@ const data = [
     width: 100%;             
     padding: 10px 0;        
 }
+
+.planList{
+  margin-top: 20px;
+}
+
 </style>
