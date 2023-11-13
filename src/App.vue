@@ -1,5 +1,6 @@
 <script setup>
-// import TheHeader from './components/layout/TheHeader.vue';
+import TheHeader from "./components/layout/TheHeader.vue";
+
 
 // import TheFooter from './components/layout/TheFooter.vue';
 // import PlanList from './components/PlanList.vue';
@@ -11,6 +12,10 @@ import PlanView from './views/PlanView.vue';
 </script>
 
 <template>
+
+    <the-header></the-header>
+
+
 <!-- <TheHeader/>
   <TheFooter/> -->
 <!-- <PlanList/> -->
@@ -18,6 +23,7 @@ import PlanView from './views/PlanView.vue';
 <!-- <VTab/> -->
 <!-- <VButton  text="hi"/> -->
 <PlanView />
+
 </template>
 
 <style scoped>
