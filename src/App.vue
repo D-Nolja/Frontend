@@ -6,13 +6,13 @@
 // import VTab from './components/VTab.vue';
 // import VPlaceCardBig from './components/VPlaceCardBig.vue';
 // import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
-// import VButton from './components/VButton.vue';
+// import VButton f∏rom './components/VButton.vue';
 import PlanView from './views/PlanView.vue';
 </script>
 
 <template>
 <!-- <TheHeader/>
-  <TheFooter/> -->
+  <TheFooter/> -->~
 <!-- <PlanList/> -->
 <!-- <VPlaceCardBig cardColor="blue"/>  -->
 <!-- <VTab/> -->

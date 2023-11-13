@@ -27,79 +27,41 @@
                 </div>
             </div>
         </div>
+
+   
         <!-- menu section component 분리 -->
         <div class="scrollable-section" @mousedown="startDrag">
-            <div class="menu-section" id="section2">
-                <div id="day-section-title">
-                        <p>1일차</p>
-                        <p>12.04</p>
-                </div>
-                <div class="day-section">
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                </div>
-            </div>
-            <div class="menu-section" id="section2">
-                <div id="day-section-title">
-                        <p>1일차</p>
-                        <p>12.04</p>
-                </div>
-                <div class="day-section">
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                </div>
-            </div>
-            <div class="menu-section" id="section2">
-                <div id="day-section-title">
-                        <p>1일차</p>
-                        <p>12.04</p>
-                </div>
-                <div class="day-section">
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                </div>
-            </div>
-            <div class="menu-section" id="section2">
-                <div id="day-section-title">
-                        <p>1일차</p>
-                        <p>12.04</p>
-                </div>
-                <div class="day-section">
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                    <VPlaceCardSmall/>
-                </div>
-            </div>
+            <SideMenuSelect v-for="dayPlan in dayPlans" :key="dayPlan.number" :dayPlan="dayPlan"/>
+         
         </div>
     </div>
     </template>
     
       
       
-    <script setup>
+<script setup>
+    import SideMenuSelect from "./SideMenuSelect.vue";
     import VPlaceCardBig from "../components/VPlaceCardBig.vue";
-    import VPlaceCardSmall from "../components/VPlaceCardSmall.vue"
+    
     import {
         ref,
         onMounted,
         onUnmounted
     } from 'vue';
     
+    const dayPlans = ref([{
+                number : 1,
+                date : 12.05,
+                places : [{
+                    name : "혜인식탁", 
+                    cate : "맛집",
+                    time : "11:30 ~ 16:00"
+                },{
+                    name : "원빈식탁", 
+                    cate : "맛집",
+                    time : "11:30 ~ 16:00"
+                },  ] 
+    }]);
     const sideMenu = ref(null);
     const minWidth = 600; // 최소 너비 설정
     const maxWidth = 1200; // 최대 너비 설정
@@ -155,17 +117,11 @@
         max-width: 900px;
         /* 최대 너비 */
         height: 100vh;
-        /* 전체 높이 */
-        position: fixed;
-        /* 고정 위치 */
-        left: 8.25rem;
-        /* 왼쪽에 위치 */
-        top: 0;
         /* 상단에 위치 */
         display: flex;
         /* 내부 섹션들을 가로로 정렬 */
         /* border: 1px solid black; */
-        background: var(--, #FFF);
+        background-color: #fff;
         border-right: 1.5px solid #EAEAEA;
     }
     
@@ -189,35 +145,7 @@
         /* 가로 스크롤 허용 */
     }
     
-    .menu-section {
-        width: 300px;
-        /* 각 섹션의 너비 */
-        flex-shrink: 0;
-        /* 섹션 크기 유지 */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 14vh;
-        /* margin-top: 40%; */
-    }
-
-
-<style scoped>
-.side-menu {
-    width: calc(300px + 300px);
-    /* 초기 너비 (고정 섹션 + 스크롤 섹션) */
-    max-width: 900px;
-    /* 최대 너비 */
-    height: 100vh;
-    /* 왼쪽에 위치 */
-    top: 0;
-    /* 상단에 위치 */
-    display: flex;
-    /* 내부 섹션들을 가로로 정렬 */
-    /* border: 1px solid black; */
-    background-color: #fff;
-    border-right: 1.5px solid #EAEAEA;
-}
+  
 
 
 .fixed-section {
@@ -349,21 +277,7 @@ padding-left: 7px;
 
 
 
-#day-section-title{
-    width: 270px;
-    display: flex;
-    justify-content: space-between;
-}
 
-#day-section-title p:first-child{
-    color: #000;
-    text-align: center;
-    font-size: 1.125rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.72888rem; /* 153.676% */
-    letter-spacing: 0.03375rem;
-    }
     #sst1-dropdown{
         display: flex;
     }
@@ -426,45 +340,10 @@ padding-left: 7px;
     
     
     
+ 
+  
     
-    #day-section-title{
-        width: 270px;
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    #day-section-title p:first-child{
-        color: #000;
-        text-align: center;
-        font-family: Pretendard Variable;
-        font-size: 1.3rem;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 1.72888rem; /* 115.257% */
-        letter-spacing: 0.045rem;
-        padding-bottom: 5px;
-    }
-    
-    #day-section-title p:last-child{
-        color: #B7B7B7;
-        font-size: 0.8rem;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 1.72888rem; /* 172.885% */
-        letter-spacing: 0.03rem;
-    }
-    .day-section{
-        overflow-y: auto;
-        height: 80vh;
-        width: 270px;
-        border-radius: 10px;
-        /* height: 75%; */
-        background-color: #F7F8F9;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding:  10px;
-    }
+
     </style>
     
 
