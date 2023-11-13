@@ -1,35 +1,36 @@
 <script setup>
 import VButton from '../VButton.vue';
 
-import {ref} from "vue";
+import {
+    ref
+} from "vue";
 
-const days = ref([1,2,3]);
-
+const days = ref([1, 2, 3]);
 </script>
 
-<template >
-    <nav class="sideNav">   
-        <div>
+<template>
+<nav class="sideNav">
+    <div>
         <img src="../../assets/img/avatar.svg" alt="icon" id="logo">
-        <VButton text="전체일정"/>
-            <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white" size="small"></VButton>
-        </div>
-        <div>
-            <VButton text="편집"/>
-            <VButton text="다음"/>
-        </div>
-    </nav>
+        <VButton text="전체일정" @click="showFullDays"/>
+        <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white" size="small" @click="showDays"></VButton>
+    </div>
+    <div>
+        <VButton text="편집" @click="modify" />
+        <VButton text="다음"  @click="moveNext"/>
+    </div>
+</nav>
 </template>
 
-<style sco>
-
-#logo{
+<style>
+#logo {
     width: 5rem;
     height: 5rem;
     align-items: center;
     margin: 0 auto;
 }
-.sideNav{
+
+.sideNav {
     padding: 10px 10px;
     width: 8.25rem;
     display: flex;
@@ -39,7 +40,7 @@ const days = ref([1,2,3]);
     justify-content: space-between;
 }
 
-.sideNav div{
+.sideNav div {
     display: flex;
     flex-direction: column;
     justify-content: center;
