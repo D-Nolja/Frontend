@@ -199,28 +199,7 @@
         /* margin-top: 40%; */
 
     }
-<<<<<<< HEAD
-=======
 
-
-<style scoped>
-.side-menu {
-    width: calc(300px + 300px);
-    /* 초기 너비 (고정 섹션 + 스크롤 섹션) */
-    max-width: 900px;
-    /* 최대 너비 */
-    height: 100vh;
-    /* 왼쪽에 위치 */
-    top: 0;
-    /* 상단에 위치 */
-    display: flex;
-    /* 내부 섹션들을 가로로 정렬 */
-    /* border: 1px solid black; */
-    background-color: #fff;
-    border-right: 1.5px solid #EAEAEA;
-}
-
->>>>>>> view-plan
 
 .fixed-section {
     width: 300px;
@@ -468,8 +447,3 @@ padding-left: 7px;
         padding:  10px;
     }
     </style>
-<<<<<<< HEAD
-=======
-    
-
->>>>>>> view-plan
