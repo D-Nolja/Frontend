@@ -11,7 +11,7 @@
 <style scoped>
 footer{
     display: flex;
-    height: 13.6875rem;
+    height: 10rem;
     align-items: center;
     background-color: #E5E8EE;
     position: absolute;
