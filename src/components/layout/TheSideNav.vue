@@ -1,29 +1,37 @@
 <script setup>
 import VButton from '../VButton.vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router'
 
-import {
-    ref
-} from "vue";
 
 const days = ref([1, 2, 3]);
+const router = useRouter();
+
+const navigate = (path) => {
+    router.push(path);
+};
 </script>
 
 <template>
-<nav class="sideNav">
-    <div>
-        <img src="../../assets/img/avatar.svg" alt="icon" id="logo">
-        <VButton text="전체일정" @click="showFullDays"/>
-        <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white" size="small" @click="showDays"></VButton>
-    </div>
-    <div>
-        <VButton text="편집" @click="modify" />
-        <VButton text="다음"  @click="moveNext"/>
-    </div>
-</nav>
+    <nav class="sideNav">   
+        <div>
+            <img src="../../assets/img/avatar.svg" alt="icon" id="logo">
+            <VButton text="전체일정" @click="navigate('/days')"/>
+            <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white" size="small" @click="navigate(`/days/${day}`)"/>
+        </div>
+        <div>
+            <VButton text="편집" @click="navigate('/edit')"/>
+            <VButton text="다음" @click="navigate('/next')"/>
+        </div>
+    </nav>
 </template>
 
-<style>
-#logo {
+
+
+<style scoped>∏
+
+#logo{
+
     width: 5rem;
     height: 5rem;
     align-items: center;
