@@ -63,7 +63,7 @@ svg{
 
 #card-container{
     margin : 5px;
-    width : 280px;
+    width : 250px;
     height: 120px;
     border-radius: 12px;
     background-color : #fff;
@@ -88,11 +88,11 @@ svg{
     display: flex;
     align-items: center;
     /* margin-bottom: 20px; */
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 #place-text-container{
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 #place-info{
@@ -117,6 +117,7 @@ svg{
 #place-subInfo{
     display: flex;
     flex-direction: column;
+    margin-bottom: 5px;
 }
 
 #place-ssubInfo{
