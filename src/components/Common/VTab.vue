@@ -14,8 +14,14 @@ const activeKey = ref('1');
 
 <style scoped>
 #tab-container{
-    background-color: none;
+    margin-top: 80px;
     width: 70%;
+}
+#tab-container .ant-tabs-tabpane {
+    width: 100%; /* 혹은 원하는 너비 */
+    padding: 10px; /* 내부 여백 */
+    height: 100%;
+    /* 기타 원하는 스타일 */
 }
 
 

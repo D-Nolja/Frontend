@@ -1,5 +1,5 @@
 <script setup>
-import VButton from '../VButton.vue';
+import VButton from '../common/VButton.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
 

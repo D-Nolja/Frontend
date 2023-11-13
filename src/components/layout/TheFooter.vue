@@ -14,8 +14,6 @@ footer{
     height: 10rem;
     align-items: center;
     background-color: #E5E8EE;
-    position: absolute;
-    bottom: 0;
     padding-left: 5rem;
     width: 100%;
 }
