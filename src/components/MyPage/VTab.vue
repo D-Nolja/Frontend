@@ -24,15 +24,12 @@ const activeKey = ref('1');
 
 <style scoped>
 #tab-container{
-    margin-top: 80px;
-    width: 70%;
+    margin-top: 40px;
+    width: 60%;
 }
 #tab-container .ant-tabs-tabpane {
-    width: 100%; /* 혹은 원하는 너비 */
-    padding: 10px; /* 내부 여백 */
-    /* 기타 원하는 스타일 */
+    width: 100%; 
 }
-
 
 
 </style>

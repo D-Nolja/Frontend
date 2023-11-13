@@ -15,6 +15,5 @@ import VTab from "../MyPage/VTab.vue"
   width: 100%;
   align-items: center;
   margin: 80px auto;
-  height: 70vh;
 }
 </style>

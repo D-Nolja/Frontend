@@ -31,11 +31,19 @@ const data = [
 <template>
  <a-list item-layout="horizontal" :data-source="data">
     <template #renderItem="{ item }">
+      <div class="list-item-container">
         <user-plan-list-item :plan="item"></user-plan-list-item>
+      </div>
     </template>
   </a-list>
 </template>
 
 <style scoped>
-
+.list-item-container {
+    display: flex;   
+    justify-content: center; 
+    align-items: center;     
+    width: 100%;             
+    padding: 10px 0;        
+}
 </style>
