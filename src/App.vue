@@ -12,7 +12,7 @@ import PlanView from './views/PlanView.vue';
 
 <template>
 <!-- <TheHeader/>
-  <TheFooter/> -->~
+  <TheFooter/> -->
 <!-- <PlanList/> -->
 <!-- <VPlaceCardBig cardColor="blue"/>  -->
 <!-- <VTab/> -->

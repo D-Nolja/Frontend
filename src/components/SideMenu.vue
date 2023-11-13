@@ -112,72 +112,36 @@
     
     </script>
     
-    <style scoped>
-    .side-menu {
-        width: calc(300px + 300px);
-        /* 초기 너비 (고정 섹션 + 스크롤 섹션) */
-        max-width: 900px;
-        /* 최대 너비 */
-        height: 100vh;
+<style scoped>
 
-        /* 상단에 위치 */
-        display: flex;
-        /* 내부 섹션들을 가로로 정렬 */
-        /* border: 1px solid black; */
-        background-color: #fff;
-
-        border-right: 1.5px solid #EAEAEA;
-
-    }
-    
-    
-    .fixed-section {
-        width: 300px;
-        /* 고정 섹션의 너비 */
-        flex-shrink: 0;
-        /* 섹션 크기 유지 */
-        display: flex;
-        flex-direction: column;
-        align-items:  center;
-    }
-    
-    .scrollable-section {
-        width: 600px;
-        /* 스크롤 섹션의 초기 너비 */
-        display: flex;
-        /* 섹션들을 가로로 정렬 */
-        overflow-x: auto;
-        /* 가로 스크롤 허용 */
-    }
-    
-
+.side-menu {
+    width: calc(300px + 300px); /* 초기 너비 (고정 섹션 + 스크롤 섹션) */
+    max-width: 900px; /* 최대 너비 */
+    height: 100vh;
+    display: flex; /* 내부 섹션들을 가로로 정렬 */
+    background-color: #fff;
+    border-right: 1.5px solid #EAEAEA;
+}
 
 .fixed-section {
-    width: 300px;
-    /* 고정 섹션의 너비 */
-    flex-shrink: 0;
-    /* 섹션 크기 유지 */
+    width: 300px; /* 고정 섹션의 너비 */
+    flex-shrink: 0; /* 섹션 크기 유지 */
     display: flex;
     flex-direction: column;
-    align-items:  center;
+    align-items: center;
 }
 
 .scrollable-section {
-    width: 600px;
-    /* 스크롤 섹션의 초기 너비 */
-    display: flex;
-    /* 섹션들을 가로로 정렬 */
-    overflow-x: auto;
-    /* 가로 스크롤 허용 */
+    width: 600px; /* 스크롤 섹션의 초기 너비 */
+    display: flex; /* 섹션들을 가로로 정렬 */
+    overflow-x: auto; /* 가로 스크롤 허용 */
 }
-
-
 
 .dragging {
     cursor: pointer;
 }
 
-#search-section{
+#search-section {
     width: 290px;
     border-radius: 10px;
     height: 85%;
@@ -187,96 +151,34 @@
     align-items: center;
 }
 
-#search-section-title{
+#search-section-title {
     display: flex;
     flex-direction: column;
     padding: 10px 10px 5px 10px;
 }
 
-#sst1{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-
-#sst1 p{
-    color: #000;
-text-align: center;
-font-size: 1.125rem;
-font-style: normal;
-font-weight: 600;
-line-height: 1.72888rem; /* 153.676% */
-letter-spacing: 0.03375rem;
-}
-#sst1-dropdown{
-    display: flex;
-}
-
-#ss-input{
-border-radius: 10px;
-background-color: #fff;
-color: #B7B7B7;
-font-size: 0.7rem;
-font-style: normal;
-font-weight: 500;
-letter-spacing: 0.05rem;
-width: 280px;
-height: 2.625rem;
-border: none;
-padding-left: 7px;
-}
-
-#ss-checkbox{
-    text-align: end;
-    font-size: 10px;    
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    margin-right: 3px;
-    margin-top: 10px;
-}
-
-#ss-checkbox p{
-    margin-left : 5px;
-}
-
-
-#plan-title-container{
+#sst1, #plan-title-container {
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    margin-left: 5px;
 }
 
-#plan-title{
-    margin : 30px 0 15px 0 ;
+#sst1 {
+    width: 100%;
+    justify-content: space-between;
 }
 
-#plan-name{
+#sst1 p, #plan-name, #plan-date {
     color: #000;
-    font-size: 1.5rem;
+    font-size: 1.125rem;
     font-style: normal;
-    font-weight: 700;
-    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 1.72888rem;
+    letter-spacing: 0.03375rem;
 }
 
-#plan-date{
-    color: #B7B7B7;
-    font-size: 1.2rem;
-    font-style: normal;
-    font-weight: 500;
-}
-
-
-
-
-
-    #sst1-dropdown{
-        display: flex;
-    }
-    
-    #ss-input{
+#ss-input {
     border-radius: 10px;
     background-color: #fff;
     color: #B7B7B7;
@@ -288,50 +190,34 @@ padding-left: 7px;
     height: 2.625rem;
     border: none;
     padding-left: 7px;
-    }
-    
-    #ss-checkbox{
-        text-align: end;
-        font-size: 10px;    
-        display: flex;
-        align-items: center;
-        justify-content: end;
-        margin-right: 3px;
-        margin-top: 10px;
-    }
-    
-    #ss-checkbox p{
-        margin-left : 5px;
-    }
-    
-    
-    #plan-title-container{
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        justify-content: center;
-        margin-left: 5px;
-    }
-    
-    #plan-title{
-        margin : 30px 0 15px 0 ;
-    }
-    
-    #plan-name{
-        color: #000;
-        font-size: 1.5rem;
-        font-style: normal;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-    
-    #plan-date{
-        color: #B7B7B7;
-        font-size: 1.2rem;
-        font-style: normal;
-        font-weight: 500;
-    }
-    
-    
+}
 
-    </style>
+#ss-checkbox {
+    text-align: end;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-right: 3px;
+    margin-top: 10px;
+}
+
+#ss-checkbox p {
+    margin-left: 5px;
+}
+
+#plan-title {
+    margin: 30px 0 15px 0;
+}
+
+#plan-name {
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+#plan-date {
+    color: #B7B7B7;
+    font-weight: 500;
+}
+
+</style>
