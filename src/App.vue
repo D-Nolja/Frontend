@@ -22,7 +22,7 @@ import PlanView from './views/PlanView.vue';
 <!-- <VPlaceCardBig cardColor="blue"/>  -->
 <!-- <VTab/> -->
 <!-- <VButton  text="hi"/> -->
-  <plan-view></plan-view>
+  <!-- <plan-view></plan-view> -->
 
 </template>
 

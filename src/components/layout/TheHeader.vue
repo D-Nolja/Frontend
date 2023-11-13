@@ -6,7 +6,7 @@
 
     <div class="nav-container">
         <div>
-            <p>로고</p>
+           <img src="../../assets/img/avatar.svg" alt="" srcset="">
         </div>
         <div class="nav-btn-container">
             <div>여행계획</div>
