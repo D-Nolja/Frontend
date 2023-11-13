@@ -155,18 +155,16 @@
         max-width: 900px;
         /* 최대 너비 */
         height: 100vh;
-        /* 전체 높이 */
-        position: fixed;
-        /* 고정 위치 */
-        left: 8.25rem;
+ 
         /* 왼쪽에 위치 */
         top: 0;
         /* 상단에 위치 */
         display: flex;
         /* 내부 섹션들을 가로로 정렬 */
         /* border: 1px solid black; */
-        background: var(--, #FFF);
+        background: #fff;
         border-right: 1.5px solid #EAEAEA;
+
     }
     
     
@@ -199,34 +197,8 @@
         align-items: center;
         margin-top: 14vh;
         /* margin-top: 40%; */
+
     }
-<<<<<<< HEAD
-});
-
-onUnmounted(() => {
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-});
-
-</script>
-
-<style scoped>
-.side-menu {
-    width: calc(300px + 300px);
-    /* 초기 너비 (고정 섹션 + 스크롤 섹션) */
-    max-width: 900px;
-    /* 최대 너비 */
-    height: 100vh;
-    /* 왼쪽에 위치 */
-    top: 0;
-    /* 상단에 위치 */
-    display: flex;
-    /* 내부 섹션들을 가로로 정렬 */
-    /* border: 1px solid black; */
-    background-color: #fff;
-    border-right: 1.5px solid #EAEAEA;
-}
-
 
 .fixed-section {
     width: 300px;
@@ -365,37 +337,6 @@ padding-left: 7px;
 
 #day-section-title p:first-child{
     color: #000;
-=======
-    
-    .dragging {
-        cursor: pointer;
-    }
-    
-    #search-section{
-        width: 290px;
-        border-radius: 10px;
-        height: 85%;
-        background-color: #F7F8F9;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    #search-section-title{
-        display: flex;
-        flex-direction: column;
-        padding: 10px 10px 5px 10px;
-    }
-    
-    #sst1{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    #sst1 p{
-        color: #000;
->>>>>>> view-plan
     text-align: center;
     font-size: 1.125rem;
     font-style: normal;
@@ -414,23 +355,6 @@ padding-left: 7px;
     font-size: 0.7rem;
     font-style: normal;
     font-weight: 500;
-<<<<<<< HEAD
-    line-height: 1.72888rem; /* 172.885% */
-    letter-spacing: 0.03rem;
-}
-.day-section{
-    overflow-y: auto;
-    height: 80vh;
-    border-radius: 10px;
-    /* height: 75%; */
-    background-color: #F7F8F9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding:  10px;
-}
-</style>
-=======
     letter-spacing: 0.05rem;
     width: 280px;
     height: 2.625rem;
@@ -522,5 +446,3 @@ padding-left: 7px;
         padding:  10px;
     }
     </style>
-    
->>>>>>> view-plan
