@@ -3,6 +3,7 @@
 </script>
 
 <template>
+
     <div class="nav-container">
         <div>
             <p>로고</p>
@@ -14,6 +15,7 @@
             <div>로그인</div>
         </div>
     </div>
+
 </template>
 
 <style scoped>
