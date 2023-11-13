@@ -1,5 +1,6 @@
 import "ant-design-vue/dist/reset.css";
 import "./assets/main.css";
+import "@/assets/text-truncate-util.css";
 import Antd from "ant-design-vue";
 import { createApp } from "vue";
 // import { createPinia } from 'pinia'

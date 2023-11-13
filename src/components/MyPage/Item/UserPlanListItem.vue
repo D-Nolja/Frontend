@@ -6,6 +6,7 @@ defineProps({
     }
 })
 
+
 </script>
 
 <template>
@@ -19,10 +20,10 @@ defineProps({
 
 
       <a-list-item-meta
-          :description="plan.date" id="plan-description"
+          :description="plan.date" id="plan-description"  class="text-truncate"
         >
           <template #title>
-            <p id="plan-title">{{ plan.title }}</p>
+            <p id="plan-title" class="text-truncate">{{ plan.title }}</p>
           </template>
           <template #avatar >
             <img src="@/assets/img/avatar.svg" alt=""  id="plan-img">
@@ -51,7 +52,6 @@ defineProps({
   font-size : 18px;
   font-style: normal;
   font-weight: 500;
-  margin-bottom: 0;
 }
 
 #plan-description{
@@ -74,7 +74,7 @@ a{
 
 #plan-listItem:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 호버 시 더 연한 그림자 효과 */
-    transform: translateY(-3spx); /* 호버 시 약간 위로 이동 */
+    transform: translateY(-3px); /* 호버 시 약간 위로 이동 */
 }
 
 #plan-title, #plan-description, a {
