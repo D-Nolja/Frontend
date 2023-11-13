@@ -24,7 +24,6 @@
     display : flex;
     justify-content: space-between;
     width: 100vw;
-    height: 100%;
     height: 80px;
     padding: 0px 30px;
     align-items: center;
