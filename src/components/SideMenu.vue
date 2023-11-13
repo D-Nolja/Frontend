@@ -41,6 +41,11 @@
                     <VPlaceCardSmall/>
                     <VPlaceCardSmall/>
                     <VPlaceCardSmall/>
+                    <VPlaceCardSmall/>
+                    <VPlaceCardSmall/>
+                    <VPlaceCardSmall/>
+                    <VPlaceCardSmall/>
+                 
                 </div>
             </div>
             <div class="menu-section" id="section2">
@@ -406,7 +411,24 @@ padding-left: 7px;
     }
     
     
-    
+    .day-section{
+        overflow-y: auto;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+        height: 80vh;
+        width: 270px;
+        border-radius: 10px;
+        /* height: 75%; */
+        background-color: #F7F8F9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding:  10px;
+    }
+
+    .day-section::-webkit-scrollbar{
+        display: none;
+    }
     
     #day-section-title{
         width: 270px;
@@ -434,16 +456,5 @@ padding-left: 7px;
         line-height: 1.72888rem; /* 172.885% */
         letter-spacing: 0.03rem;
     }
-    .day-section{
-        overflow-y: auto;
-        height: 80vh;
-        width: 270px;
-        border-radius: 10px;
-        /* height: 75%; */
-        background-color: #F7F8F9;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding:  10px;
-    }
+  
     </style>
