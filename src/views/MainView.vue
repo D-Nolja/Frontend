@@ -2,13 +2,13 @@
 
 import TheHeader from "../components/layout/TheHeader.vue";
 import TheFooter from "../components/layout/TheFooter.vue";
-import VLoginBoxVue from "../components/VLoginBox.vue";
+// import VLoginBox from "../components/VLoginBox.vue";
 </script>
 
 <template>
 <div class="contents-container">
 <the-header></the-header>
-<VLoginBoxVue></VLoginBoxVue>
+<!-- <VLoginBox></VLoginBox> -->
 <the-footer></the-footer>
 </div>
 

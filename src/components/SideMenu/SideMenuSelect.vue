@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import VPlaceCardSmall from './VPlaceCardSmall.vue';
+import VPlaceCardSmall from '../item/cards/VPlaceCardSmall.vue';
 defineProps({
     dayPlan: {
         type: Object,

@@ -18,8 +18,8 @@
       
       
 <script setup>
-import SideMenuSelect from "./SideMenuSelect.vue";
-import SideMenuSearch from "./SideMenuSearch.vue"
+// import SideMenuSelect from "../SideMenu/SideMenuSelect.vue";
+import SideMenuSearch from "../SideMenu/SideMenuSearch.vue"
 
 import {
     ref,
