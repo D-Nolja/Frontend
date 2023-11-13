@@ -3,25 +3,6 @@ import VButton from '../VButton.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
 
-
-const days = ref([1, 2, 3]);
-</script>
-
-<template>
-<nav class="sideNav">
-    <div>
-        <img src="../../assets/img/avatar.svg" alt="icon" id="logo">
-        <VButton text="전체일정" @click="showFullDays"/>
-        <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white" size="small" @click="showDays"></VButton>
-    </div>
-    <div>
-        <VButton text="편집" @click="modify" />
-        <VButton text="다음"  @click="moveNext"/>
-    </div>
-</nav>
-</template>
-
-
 const days = ref([1, 2, 3]);
 
 const router = useRouter();
