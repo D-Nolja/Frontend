@@ -64,6 +64,13 @@ input::placeholder{
     line-height: normal;
 }
 
+
+input:not(#login-btn):focus {
+    border: 1.5px solid #9cbcf5; 
+    outline: none;
+    box-shadow: 0 0 5px #9cbcf5; 
+}
+
 .loginBox-container p{
     color: #B0B0B0;
     font-family: Poppins;
@@ -101,6 +108,16 @@ input::placeholder{
     font-weight: 500;
     line-height: normal;
     margin: 30px 0;
+}
+
+#login-btn {
+    /* Existing styles... */
+    transition: transform 0.1s ease, background-color 0.2s ease; /* Smooth transition for transform and background-color */
+}
+
+#login-btn:active {
+    transform: scale(0.95); /* Slightly reduce the scale to give a pressed effect */
+    background-color: #729fdd; /* Optional: Change color to indicate it's active/pressed */
 }
 
 #icons{
