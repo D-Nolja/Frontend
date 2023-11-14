@@ -1,5 +1,7 @@
 <script setup>
-import UserPlanListItem from "./Item/UserPlanListItem.vue";
+import UserPlanListItem from "@/components/MyPage/Item/UserPlanListItem.vue"
+
+
 const data = [
   {
     title: '김댕댕 수난시대',
@@ -29,16 +31,22 @@ const data = [
 </script>
 
 <template>
+  <div class="list-container">
  <a-list item-layout="horizontal" :data-source="data">
     <template #renderItem="{ item }">
       <div class="list-item-container">
-        <user-plan-list-item :plan="item"></user-plan-list-item>
+        <UserPlanListItem :plan="item"></UserPlanListItem>
       </div>
     </template>
   </a-list>
+</div>
 </template>
 
 <style scoped>
+
+.list-container{
+  margin-top:6px;
+}
 .list-item-container {
     display: flex;   
     justify-content: center; 

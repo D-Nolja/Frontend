@@ -1,7 +1,11 @@
+<script setup>
+
+</script>
+
 <template>
     <a-card class="cardItem">
       <template #cover>
-        <img alt="example" src="@/assets/img/dang.png" />
+        <img alt="example" src="../../../assets/img/dang.png" />
       </template>
       <a-card-meta title="안녕">
         <template #description>내용임</template>
@@ -9,9 +13,7 @@
     </a-card>
   </template>
 
-<script setup>
 
-</script>
 
 <style scoped> 
 .cardItem{
@@ -24,4 +26,4 @@ background: #fff;
 box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
 margin: 20px;
 }
-</style>
+</style>~

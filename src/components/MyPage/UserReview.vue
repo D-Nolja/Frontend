@@ -1,15 +1,14 @@
 <template>
   <div class="review-card-container">
-    <user-review-item></user-review-item>
-  <user-review-item></user-review-item>
-  <user-review-item></user-review-item>
-  <user-review-item></user-review-item>
+    <UserReviewItem />
+    <UserReviewItem />
 </div>
  
 </template>
 
 <script setup>
-import UserReviewItem from './Item/UserReviewItem.vue';
+import UserReviewItem from "../MyPage/Item/userReviewitem.vue"
+
 </script>
 
 <style scoped>
