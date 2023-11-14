@@ -1,8 +1,7 @@
 <script setup>
-
 import TheHeader from "@/components/layout/TheHeader.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
-import VMain from "../components/MainPage/VMain.vue";
+import MyPage from "@/components/MyPage/MyPageContents.vue";
 
 </script>
 
@@ -10,8 +9,8 @@ import VMain from "../components/MainPage/VMain.vue";
 <div class="contents-container">
 <the-header></the-header>
 
-<VMain/>
 
+<MyPage/>
 
 <the-footer></the-footer>
 </div>
