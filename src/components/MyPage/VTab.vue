@@ -2,7 +2,9 @@
 import { ref } from 'vue';
 import UserPlanList from './UserPlanList.vue';
 import UserProfile from './UserProfile.vue';
-import UserReview from './UserReview.vue';
+import UserReview from '@/components/MyPage/UserReview.vue';
+
+
 const size = ref("large");
 const activeKey = ref('1');
 
