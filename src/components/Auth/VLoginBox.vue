@@ -1,17 +1,20 @@
 <script setup>
+import VInput from '../Common/VInput.vue';
+import VButtonSubmit from '../Common/VButtonSubmit.vue';
 
 </script>
 
 <template>
   <div class="contents-container">
     <p id="loginBox-title">Sign In</p>
-    <input type="text" name="" id="" placeholder="Enter email or user name">
-    <input type="text" name="" id="" placeholder="Password">
+    <VInput txt="Enter email or user name"/>
+    <VInput txt="Password"/>
+
     <div id="fp-box">
     <p id="fp-text">Forgot password?</p>
 
     </div>
-    <input type="button" value="Login" id="login-btn">
+    <VButtonSubmit txt="Login" />
     <p id="continue-text">or continue with</p>
 
     <div id="icons">
