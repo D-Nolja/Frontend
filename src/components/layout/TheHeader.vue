@@ -1,4 +1,23 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const movePlan = () => {
+    router.push({name : 'plan'});
+}
+const moveMyPage = () => {
+    console.log("mypage")
+    router.push({name : 'myPage'});
+}
+const moveQna = () => {
+    router.push({name : 'qna'});
+}
+const moveLogin = () => {
+    router.push({name : 'login'});
+}
+
+
 
 </script>
 
@@ -9,10 +28,10 @@
            <img src="../../assets/img/avatar.svg" alt="" srcset="">
         </div>
         <div class="nav-btn-container">
-            <div>여행계획</div>
-            <div>마이페이지</div>
-            <div>Q&A</div>
-            <div>로그인</div>
+            <div @click="movePlan" >여행계획</div>
+            <div @click="moveMyPage">마이페이지</div>
+            <div @click="moveQna">Q&A</div>
+            <div @click="moveLogin">로그인</div>
         </div>
     </div>
 

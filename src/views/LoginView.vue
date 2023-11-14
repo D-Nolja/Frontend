@@ -2,7 +2,7 @@
 
 import TheHeader from "@/components/layout/TheHeader.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
-import VMain from "../components/MainPage/VMain.vue";
+import VLoginBox from "@/components/Auth/VLoginBox.vue";
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import VMain from "../components/MainPage/VMain.vue";
 <the-header></the-header>
 
 
-<VMain/>
+<VLoginBox/>
 
 <the-footer></the-footer>
 </div>
