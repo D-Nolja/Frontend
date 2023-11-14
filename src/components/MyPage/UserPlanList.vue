@@ -31,8 +31,10 @@ const data = [
 </script>
 
 <template>
+
   <div class="list-container">
  <a-list item-layout="horizontal" :data-source="data">
+
     <template #renderItem="{ item }">
       <div class="list-item-container">
         <UserPlanListItem :plan="item"></UserPlanListItem>
@@ -54,4 +56,9 @@ const data = [
     width: 100%;             
     padding: 10px 0;        
 }
+
+.planList{
+  margin-top: 20px;
+}
+
 </style>
