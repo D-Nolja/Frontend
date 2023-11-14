@@ -1,14 +1,12 @@
-
+<template>
+    <div class="contents-container">
+        <h1>메인이지</h1>
+    </div>
+</template>
 
 <script setup>
-import VTab from "../MyPage/VTab.vue"
-</script>
 
-<template>
-<div class="contents-container"> 
-    <v-tab></v-tab>
-</div>
-</template>
+</script>
 
 <style scoped>
 .contents-container{

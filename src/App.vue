@@ -1,6 +1,6 @@
 <script setup>
-import MainView from "./views/MainView.vue";
-
+// import MainView from "./views/MainView.vue";
+import { RouterView } from "vue-router";
 // import TheFooter from './components/layout/TheFooter.vue';
 // import PlanList from './components/PlanList.vue';
 // import VTab from './components/VTab.vue';
@@ -11,7 +11,7 @@ import MainView from "./views/MainView.vue";
 </script>
 
 <template>
-  <main-view></main-view>
+  <!-- <main-view></main-view> -->
 
 <!-- <TheHeader/>
   <TheFooter/> -->
@@ -20,6 +20,9 @@ import MainView from "./views/MainView.vue";
 <!-- <VTab/> -->
 <!-- <VButton  text="hi"/> -->
   <!-- <plan-view></plan-view> -->
+
+  <router-view></router-view>
+
 
 </template>
 
