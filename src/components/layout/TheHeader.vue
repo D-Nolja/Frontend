@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const movePlan = () => {
-    router.push({path : 'plan/all' });
+    router.push({path : 'plan/all' }); 111
 }
 const moveMyPage = () => {
     console.log("mypage")
@@ -17,6 +17,9 @@ const moveLogin = () => {
     router.push({name : 'login'});
 }
 
+const moveMain = () => {
+    router.push({name : 'home'})
+}
 
 
 </script>
@@ -25,9 +28,8 @@ const moveLogin = () => {
 
     <div class="nav-container">
         <div class="nav-contents-container">
-            <div>
+            <div @click="moveMain">
                 <img src="../../assets/img/avatar.svg" alt="" srcset="">
-
             </div>
             <div class="nav-btn-container">
                 <div @click="movePlan" >여행계획</div>
