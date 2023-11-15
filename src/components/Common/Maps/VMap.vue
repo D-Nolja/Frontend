@@ -4,41 +4,115 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-//생성한 map정보를 담을 곳(반응형 아니어도 된다는데....우선 반응형으로 만들었음)
-const map = ref(null);
+const places = ref([
+  {
+    name: "혜인식탁",
+    type: "맛집",
+    x: "33.24833404783013",
+    y: "126.56835909631332",
+    address: "도로명 주소1",
+    tel: "010-1234-1234",
+    openTime: "11:30 ~ 16:00",
+    info: "반려동물 동반 가능 / 무료",
+  },
+  {
+    name: "원빈식탁",
+    type: "맛집",
+    x: "33.27874670832252",
+    y: "126.70801347099405",
+    address: "도로명 주소1",
+    tel: "010-9876-9876",
+    openTime: "12:30 ~ 15:00",
+    info: "반려동물 동반 가능 / 무료",
+  },
+  {
+    name: "형민식탁",
+    type: "맛집",
+    x: "33.239221362414035",
+    y: "126.60445492699344",
+    address: "도로명 주소1",
+    tel: "010-9876-9876",
+    openTime: "12:30 ~ 15:00",
+    info: "반려동물 동반 가능 / 무료",
+  },
+  {
+    name: "은서식탁",
+    type: "맛집",
+    x: "33.2488301865394",
+    y: "126.32352822201112",
+    address: "도로명 주소1",
+    tel: "010-9876-9876",
+    openTime: "12:30 ~ 15:00",
+    info: "반려동물 동반 가능 / 무료",
+  },
+]);
 
-//카카오map을 생성해서 화면에 반영하기 위한 initMap 메소드
-//mounted에서 해당 메소드를 이용해서 지도를 생성할 예정
+const map = ref(null);
+const bounds = new kakao.maps.LatLngBounds();
+const markerImgSrc = "";
+
+// Lifecycle Hooks
+onMounted(() => {
+  loadKakaoMaps();
+});
+
+// Functions
+function loadKakaoMaps() {
+  if (window.kakao && window.kakao.maps) {
+    initMap();
+  } else {
+    const script = document.createElement("script");
+    script.onload = () => kakao.maps.load(initMap);
+    script.src =
+      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=YOUR_KAKAO_API_KEY";
+    document.head.appendChild(script);
+  }
+}
+
 function initMap() {
   const container = document.getElementById("map");
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
-    level: 5,
+    level: 9,
   };
 
-  //지도 객체를 등록합니다.
-  //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
   map.value = new kakao.maps.Map(container, options);
+  placeSearch();
+  map.value.setZoomable(true);
+  map.value.setBounds(bounds);
 }
 
-onMounted(() => {
-  //여기서 kakao 맵을 화면에 반영합니다.
-  //카카오 라이브러리 정보 및 map을 확인
-  if (window.kakao && window.kakao.maps) {
-    initMap(); //지도 초기화 - 상단에 function 선언해 있습니다.
-  } else {
-    //카카오map 라이브러리 정보 셋팅
-    // script태그를 생성해서 apikey를 셋팅해야합니다.
-    const script = document.createElement("script");
-    /* global kakao */
-    script.onload = () => kakao.maps.load(initMap);
-    //아래 appkey 부분에 본인의 apikey를 셋팅해주세요.
-    //(카카오 developers에 현재 vue 도메인 정보가 등록되어 있어야합니다.)
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=7aa7a6f8809715f984d7d5db26e6293a";
-    document.head.appendChild(script);
-  }
-});
+var markerImgSize = new kakao.maps.Size(22, 26),
+  markerImgOptions = {
+    spriteOrigin: new kakao.maps.Point(10, 0),
+    spriteSize: new kakao.maps.Size(36, 98),
+  };
+// 마커이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수입니다
+function createMarkerImage(src, size, options) {
+  var markerImage = new kakao.maps.MarkerImage(src, size, options);
+  return markerImage;
+}
+
+function placeSearch() {
+  places.value.forEach((place) => {
+    bounds.extend(new kakao.maps.LatLng(place.x, place.y));
+
+    const markerImage = createMarkerImage(
+      markerImgSrc,
+      markerImgSize,
+      markerImgOptions
+    );
+    displayMarker(place, markerImage);
+  });
+}
+
+function displayMarker(place, image) {
+  new kakao.maps.Marker({
+    map: map.value,
+    position: new kakao.maps.LatLng(parseFloat(place.x), parseFloat(place.y)),
+    image: image,
+  });
+}
 </script>
 
 <style scoped>
