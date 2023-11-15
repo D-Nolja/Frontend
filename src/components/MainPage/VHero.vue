@@ -31,7 +31,6 @@ background-repeat: no-repeat;
 background-size: cover;
 color : #fff;
 box-shadow: 0px 1.23602px 3.70807px 0px rgba(0, 0, 0, 0.25);
-
 }
 
 
@@ -67,5 +66,9 @@ margin: 5px;
     font-weight: 600;
     line-height: normal;
     margin-left: 5px;
+}
+
+#hero-btn:hover{
+    cursor: pointer;
 }
 </style>
