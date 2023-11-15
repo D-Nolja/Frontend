@@ -88,11 +88,10 @@ if (props.cardColor === "red") {
 
 #place-name {
   color: #333;
-
+  padding-bottom: 5px;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  margin-bottom: 5px;
 }
 
 #place-subInfo {
