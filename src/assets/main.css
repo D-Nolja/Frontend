@@ -1,6 +1,5 @@
-
-*{
-  margin : 0;
+* {
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 
@@ -9,27 +8,26 @@
   list-style: none;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
-*{
+* {
   -ms-overflow-style: none;
 }
 
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
   display: none;
 }
 
-#app{
+#app {
   height: 100vh;
 }
 
-
-p{
+p {
   margin-bottom: 0px !important;
 }
-@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@200;300;400;500&display=swap');
 
 @font-face {
   font-family: RixInooAriDuriPR;
@@ -37,8 +35,9 @@ p{
 }
 
 @font-face {
-    font-family: 'PyeongChangPeace-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
+  font-family: "PyeongChangPeace-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
 }

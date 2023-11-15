@@ -4,7 +4,7 @@
       <p>{{ dayPlan.number }}일차</p>
       <p>{{ dayPlan.date }}</p>
     </div>
-    <!-- {{ dayPlan.places }} -->
+
     <div class="day-section">
       <VPlaceCardSmall
         v-for="(place, index) in dayPlan.places"
@@ -48,13 +48,10 @@ defineProps({
 <style scoped>
 .menu-section {
   width: 300px;
-  /* 각 섹션의 너비 */
   flex-shrink: 0;
-  /* 섹션 크기 유지 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 40%; */
 }
 
 #day-section-title {
