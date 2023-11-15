@@ -2,12 +2,18 @@
     <div class="hero-container">
         <p id="hero-sub-title">반려견과 함께하는 특별한 여행 경험을 계획하세요</p>
         <p id="hero-title">댕놀자</p>
-        <input type="button" value="렛 츠고" id="hero-btn">
+        <input type="button" value="렛 츠고" id="hero-btn" @click="movePlan">
     </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
+const movePlan = () => {
+    router.push({path : 'plan/all' });
+}
 </script>
 
 <style scoped>
