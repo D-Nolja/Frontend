@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import VPlaceCardBig from "../item/cards/VPlaceCardBig.vue";
+import VPlaceCardBig from "@/components/Common/cards/VPlaceCardBig.vue"
 
 defineProps({
     places : {

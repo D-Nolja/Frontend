@@ -61,7 +61,7 @@ if (props.cardColor === "red") {
                 <div id="place-description">{{ place.info }}</div>
             </div>
         </div>
-        <img src="../assets/img/place.svg" alt="장소 사진">
+        <img src="@/assets/img/place.svg" alt="장소 사진">
     </div>
 </div>
 </template>

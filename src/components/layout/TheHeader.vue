@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const movePlan = () => {
-    router.push({name : 'plan'});
+    router.push({path : 'plan/all' });
 }
 const moveMyPage = () => {
     console.log("mypage")

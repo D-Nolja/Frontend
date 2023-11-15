@@ -11,13 +11,13 @@ const navigate = (path) => {
     router.push(path);
 };
 </script>
-
+ㄴ
 <template>
     <nav class="sideNav">   
         <div>
             <img src="../../assets/img/avatar.svg" alt="icon" id="logo">
-            <VButton text="전체일정" @click="navigate('/days')"/>
-            <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white" size="small" @click="navigate(`/days/${day}`)"/>
+            <VButton text="전체일정" @click="navigate('/plan/all')"/>
+            <VButton v-for="day in days" :key="day" :text="`${day}일차`" color="white" size="small" @click="navigate(`/plan/${day}`)"/>
         </div>
         <div>
             <VButton text="편집" @click="navigate('/edit')"/>
@@ -31,8 +31,6 @@ const navigate = (path) => {
 <style scoped>∏
 
 #logo{
-    width: 5rem;
-    height: 5rem;
     align-items: center;
     margin: 0 auto;
 }

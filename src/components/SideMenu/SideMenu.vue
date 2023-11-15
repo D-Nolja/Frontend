@@ -10,7 +10,7 @@
 
         <!-- menu section component 분리 -->
         <div class="scrollable-section" @mousedown="startDrag">
-            <!-- <SideMenuSelect v-for="dayPlan in dayPlans" :key="dayPlan.number" :dayPlan="dayPlan"/> -->
+            <SideMenuSelect v-for="dayPlan in dayPlans" :key="dayPlan.number" :dayPlan="dayPlan"/>
         </div>
     </div>
 </template>
@@ -18,7 +18,8 @@
       
       
 <script setup>
-// import SideMenuSelect from "../SideMenu/SideMenuSelect.vue";
+import { useRoute } from "vue-router";
+import SideMenuSelect from "../SideMenu/SideMenuSelect.vue";
 import SideMenuSearch from "../SideMenu/SideMenuSearch.vue"
 
 import {
@@ -27,7 +28,7 @@ import {
     onUnmounted, 
 } from 'vue';
  
-import {useRoute} from 'vue-router';
+
 const route = useRoute();
 console.log("route", route.params.number);
 

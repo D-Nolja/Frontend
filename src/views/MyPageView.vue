@@ -8,10 +8,7 @@ import MyPage from "@/components/MyPage/MyPageContents.vue";
 <template>
 <div class="contents-container">
 <the-header></the-header>
-
-
 <MyPage/>
-
 <the-footer></the-footer>
 </div>
 

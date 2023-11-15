@@ -1,11 +1,11 @@
 <template>
     <div class="contents-container">
-        <h1>메인이지</h1>
+        <VHero/>
     </div>
 </template>
 
 <script setup>
-
+import VHero from './VHero.vue';
 </script>
 
 <style scoped>
