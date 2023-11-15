@@ -26,14 +26,15 @@ const moveLogin = () => {
     <div class="nav-container">
         <div class="nav-contents-container">
             <div>
-           <img src="../../assets/img/avatar.svg" alt="" srcset="">
-        </div>
-        <div class="nav-btn-container">
-            <div @click="movePlan" >여행계획</div>
-            <div @click="moveMyPage">마이페이지</div>
-            <div @click="moveQna">Q&A</div>
-            <div @click="moveLogin">로그인</div>
-        </div>
+                <img src="../../assets/img/avatar.svg" alt="" srcset="">
+
+            </div>
+            <div class="nav-btn-container">
+                <div @click="movePlan" >여행계획</div>
+                <div @click="moveMyPage">마이페이지</div>
+                <div @click="moveQna">Q&A</div>
+                <div @click="moveLogin">로그인</div>
+            </div>
         </div>
    
     </div>
@@ -92,11 +93,12 @@ const moveLogin = () => {
 .nav-btn-container {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .nav-btn-container div{
-    margin: 0 0 0 20px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* 더 미묘한 텍스트 그림자 효과 */
+    margin: 0 0 0 30px;
+    text-shadow: 0 1px 1px rgba(95, 95, 95, 0.1); /* 더 미묘한 텍스트 그림자 효과 */
+    font-size: 16px;
 }
 </style>
