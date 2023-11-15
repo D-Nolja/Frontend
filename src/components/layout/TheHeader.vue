@@ -24,7 +24,8 @@ const moveLogin = () => {
 <template>
 
     <div class="nav-container">
-        <div>
+        <div class="nav-contents-container">
+            <div>
            <img src="../../assets/img/avatar.svg" alt="" srcset="">
         </div>
         <div class="nav-btn-container">
@@ -33,6 +34,8 @@ const moveLogin = () => {
             <div @click="moveQna">Q&A</div>
             <div @click="moveLogin">로그인</div>
         </div>
+        </div>
+   
     </div>
 
 </template>
@@ -53,12 +56,11 @@ const moveLogin = () => {
 
 .nav-container{
     box-sizing: border-box;
-    display : flex;
-    justify-content: space-between;
+   
     width: 100vw;
     height: 80px;
-    padding: 0px 30px;
-    align-items: center;
+    /* padding: 0px 30px; */
+    
 
     color: #333;
     font-family: Roboto;
@@ -77,6 +79,16 @@ const moveLogin = () => {
     background: linear-gradient(to right, #fefefe, #fff); /* 그라디언트 배경 유지 */
 }
 
+.nav-contents-container{
+    height: 100%;
+    width: 92vw;
+    display: flex;
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2px;
+}
 .nav-btn-container {
     display: flex;
     align-items: center;
@@ -84,7 +96,7 @@ const moveLogin = () => {
 }
 
 .nav-btn-container div{
-    margin: 0 20px;
+    margin: 0 0 0 20px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* 더 미묘한 텍스트 그림자 효과 */
 }
 </style>

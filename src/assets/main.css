@@ -29,4 +29,16 @@ html, body {
 p{
   margin-bottom: 0px !important;
 }
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@200;300;400;500&display=swap');
 
+@font-face {
+  font-family: RixInooAriDuriPR;
+  src: url(src/assets/RixInooAriDuri_Pro_Regular.otf);
+}
+
+@font-face {
+    font-family: 'PyeongChangPeace-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
