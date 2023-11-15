@@ -1,23 +1,19 @@
 <script setup>
-import TheSideNav from '@/components/layout/TheSideNav.vue';
-import SideMenu from '@/components/SideMenu/SideMenu.vue';
-import VMap from '@/components/Common/Maps/VMap.vue';
-
+import TheSideNav from "@/components/layout/TheSideNav.vue";
+import SideMenu from "@/components/SideMenu/SideMenu.vue";
+import VMap from "@/components/Common/Maps/VMap.vue";
 </script>
 
 <template>
-    <div class="planView-container">
-        <TheSideNav />
-        
-        <SideMenu/>
-
-        <VMap/>
-    </div>
-
+  <div class="planView-container">
+    <TheSideNav />
+    <SideMenu />
+    <VMap />
+  </div>
 </template>
 
 <style scoped>
 .planView-container {
-    display: flex;
+  display: flex;
 }
 </style>
