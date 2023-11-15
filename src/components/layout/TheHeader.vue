@@ -92,7 +92,7 @@ const moveLogin = () => {
 .nav-btn-container {
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .nav-btn-container div{
