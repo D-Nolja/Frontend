@@ -9,8 +9,8 @@ const props = defineProps({
     default() {
       return {
         name: "혜인식탁",
-        cate: "맛집",
-        time: "11:30 ~ 16:00",
+        type: "맛집",
+        openTime: "11:30 ~ 16:00",
       };
     },
   },
@@ -41,8 +41,8 @@ if (props.cardColor === "red") {
     <div id="place-info">
       <p id="place-name">{{ place.name }}</p>
       <div id="place-subInfo">
-        <p id="place-cate">{{ place.cate }}</p>
-        <p id="place-time">{{ place.time }}</p>
+        <p id="place-cate">{{ place.type }}</p>
+        <p id="place-time">{{ place.openTime }}</p>
       </div>
     </div>
   </div>

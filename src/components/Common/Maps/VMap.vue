@@ -3,7 +3,43 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
+
+const props = defineProps({
+  clickedPlace: {
+    type: Object,
+    default() {
+      return {
+        name: "형민식탁",
+        type: "맛집",
+        x: "33.239221362414035",
+        y: "126.60445492699344",
+        address: "도로명 주소1",
+        tel: "010-9876-9876",
+        openTime: "12:30 ~ 15:00",
+        info: "반려동물 동반 가능 / 무료",
+      };
+    },
+  },
+});
+
+// props 변화 감지
+watch(
+  () => props.clickedPlace,
+  (newVal) => {
+    console.log("clickedPlace prop 변경됨:", newVal);
+    // 새로운 마커 이미지 생성
+    const markerImage = createMarkerImage(
+      markerImgSrc,
+      markerImgSize,
+      markerImgOptions
+    );
+    // 마커 표시
+    displayMarker(newVal, markerImage);
+  },
+  { deep: true }
+);
+
 const places = ref([
   {
     name: "혜인식탁",
@@ -120,9 +156,10 @@ function showOverlay(overlay) {
 // const content = `<div>뜨냐??</div>`;
 let currentOverlay = null;
 function displayMarker(place, image) {
+  console.log("ppp  : ", place);
   var marker = new kakao.maps.Marker({
     map: map.value,
-    position: new kakao.maps.LatLng(place.x, place.y),
+    position: new kakao.maps.LatLng(parseFloat(place.x), parseFloat(place.y)),
     image: image,
   });
 

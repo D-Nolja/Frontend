@@ -12,6 +12,7 @@
         :place="place"
         :number="index + 1"
         cardColor="blue"
+        @click="showPlace(place)"
       />
     </div>
   </div>
@@ -19,6 +20,12 @@
 
 <script setup>
 import VPlaceCardSmall from "@/components/Common/cards/VPlaceCardSmall.vue";
+import { defineEmits, defineProps } from "vue";
+
+const emit = defineEmits(["markPlace"]);
+const showPlace = (place) => {
+  emit("markPlace", place);
+};
 
 defineProps({
   dayPlan: {

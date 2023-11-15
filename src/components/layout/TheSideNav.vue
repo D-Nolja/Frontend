@@ -1,29 +1,74 @@
 <script setup>
 import VButton from "@/components/common/VBtn.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
-const days = ref([1, 2, 3]);
-
+const clickedButton = ref(null);
+const clickedAllButton = ref(true);
 const router = useRouter();
 
-const navigate = (path) => {
+const navigate = (path, day = null) => {
+  if (path === "/plan/all") {
+    clickedAllButton.value = true;
+    clickedButton.value = null; // Reset day buttons when "전체일정" is clicked
+  } else {
+    clickedAllButton.value = false;
+    clickedButton.value = day;
+  }
+
+  console.log("cab : ", clickedAllButton.value);
+  console.log("cb : ", clickedButton.value);
+
   router.push(path);
 };
+
+const allButtonColor = computed(() =>
+  clickedAllButton.value ? "blue" : "white"
+);
+
+const testDays = computed(() => {
+  const tmpDays = [];
+
+  for (let i = 1; i <= 3; i++) {
+    tmpDays.push({
+      day: i,
+      color: clickedButton.value == i ? "blue" : "white",
+    });
+  }
+  console.log(tmpDays);
+
+  return tmpDays;
+});
+
+const moveMain = () => {
+  router.push({ name: "home" });
+};
 </script>
-ㄴ
+
 <template>
   <nav class="sideNav">
     <div>
-      <img src="../../assets/img/avatar.svg" alt="icon" id="logo" />
-      <VButton text="전체일정" @click="navigate('/plan/all')" class="v-btn" />
+      <img
+        src="../../assets/img/avatar.svg"
+        alt="icon"
+        id="logo"
+        @click="moveMain"
+      />
       <VButton
-        v-for="day in days"
-        :key="day"
-        :text="`${day}일차`"
-        color="white"
+        :key="`all-${clickedAllButton.value}`"
+        text="전체일정"
+        @click="navigate('/plan/all')"
+        class="v-btn"
+        :color="allButtonColor"
+      />
+
+      <VButton
+        v-for="dayItem in testDays"
+        :key="dayItem.day"
+        :text="`${dayItem.day}일차`"
+        :color="dayItem.color"
         size="small"
-        @click="navigate(`/plan/${day}`)"
+        @click.prevent="navigate(`/plan/${dayItem.day}`, dayItem.day)"
         class="v-btn"
       />
     </div>

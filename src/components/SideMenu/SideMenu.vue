@@ -15,6 +15,7 @@
           v-for="dayPlan in filterdDayPlans"
           :key="dayPlan.number"
           :dayPlan="dayPlan"
+          @mark-place="handleMarkPlace"
         />
       </div>
     </div>
@@ -29,6 +30,11 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import { watchEffect, computed } from "vue";
 
+const emit = defineEmits("markPlace");
+function handleMarkPlace(place) {
+  console.log("planView", place);
+  emit("markPlace", place);
+}
 const route = useRoute();
 const day = ref("all");
 watchEffect(() => {
@@ -37,7 +43,6 @@ watchEffect(() => {
   } else {
     day.value = "all";
   }
-  console.log("day : ", day.value);
 });
 
 const filterdDayPlans = computed(() => {
@@ -58,7 +63,7 @@ const places = ref([
     y: "126.56835909631332",
     address: "도로명 주소1",
     tel: "010-1234-1234",
-    openTime: "11:30 ~ 16:00",
+    openopenTime: "11:30 ~ 16:00",
     info: "반려동물 동반 가능 / 무료",
   },
   {
@@ -68,7 +73,7 @@ const places = ref([
     y: "126.70801347099405",
     address: "도로명 주소1",
     tel: "010-9876-9876",
-    openTime: "12:30 ~ 15:00",
+    openopenTime: "12:30 ~ 15:00",
     info: "반려동물 동반 가능 / 무료",
   },
   {
@@ -78,7 +83,7 @@ const places = ref([
     y: "126.60445492699344",
     address: "도로명 주소1",
     tel: "010-9876-9876",
-    openTime: "12:30 ~ 15:00",
+    openopenTime: "12:30 ~ 15:00",
     info: "반려동물 동반 가능 / 무료",
   },
   {
@@ -88,7 +93,7 @@ const places = ref([
     y: "126.32352822201112",
     address: "도로명 주소1",
     tel: "010-9876-9876",
-    openTime: "12:30 ~ 15:00",
+    openopenTime: "12:30 ~ 15:00",
     info: "반려동물 동반 가능 / 무료",
   },
 ]);
@@ -97,50 +102,17 @@ const dayPlans = ref([
   {
     number: 1,
     date: 12.05,
-    places: [
-      {
-        name: "혜인식탁",
-        cate: "맛집",
-        time: "11:30 ~ 16:00",
-      },
-      {
-        name: "원빈식탁",
-        cate: "맛집",
-        time: "11:30 ~ 16:00",
-      },
-    ],
+    places: places,
   },
   {
     number: 2,
     date: 12.06,
-    places: [
-      {
-        name: "혜인식탁",
-        cate: "맛집",
-        time: "11:30 ~ 16:00",
-      },
-      {
-        name: "원빈식탁",
-        cate: "맛집",
-        time: "11:30 ~ 16:00",
-      },
-    ],
+    places: places,
   },
   {
     number: 3,
     date: 12.07,
-    places: [
-      {
-        name: "혜인식탁",
-        cate: "맛집",
-        time: "11:30 ~ 16:00",
-      },
-      {
-        name: "원빈식탁",
-        cate: "맛집",
-        time: "11:30 ~ 16:00",
-      },
-    ],
+    places: places,
   },
 ]);
 
