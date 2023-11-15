@@ -49,7 +49,8 @@ const places = ref([
 
 const map = ref(null);
 const bounds = new kakao.maps.LatLngBounds();
-const markerImgSrc = "";
+const markerImgSrc =
+  "https://github.com/D-Nolja/Frontend/blob/main/src/assets/img/marker.svg?raw=true";
 
 // Lifecycle Hooks
 onMounted(() => {
@@ -63,8 +64,7 @@ function loadKakaoMaps() {
   } else {
     const script = document.createElement("script");
     script.onload = () => kakao.maps.load(initMap);
-    script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=YOUR_KAKAO_API_KEY";
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=7aa7a6f8809715f984d7d5db26e6293a`;
     document.head.appendChild(script);
   }
 }
@@ -74,6 +74,7 @@ function initMap() {
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
     level: 9,
+    zoomable: true,
   };
 
   map.value = new kakao.maps.Map(container, options);
@@ -82,10 +83,10 @@ function initMap() {
   map.value.setBounds(bounds);
 }
 
-var markerImgSize = new kakao.maps.Size(22, 26),
+var markerImgSize = new kakao.maps.Size(50, 50),
   markerImgOptions = {
-    spriteOrigin: new kakao.maps.Point(10, 0),
-    spriteSize: new kakao.maps.Size(36, 98),
+    spriteOrigin: new kakao.maps.Point(0, 0),
+    spriteSize: new kakao.maps.Size(30, 55),
   };
 // 마커이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수입니다
 function createMarkerImage(src, size, options) {
@@ -102,15 +103,45 @@ function placeSearch() {
       markerImgSize,
       markerImgOptions
     );
+
     displayMarker(place, markerImage);
   });
 }
 
+function showOverlay(overlay) {
+  // Toggle the visibility of the overlay
+  if (overlay.getMap()) {
+    overlay.setMap(null); // Hide the overlay
+  } else {
+    overlay.setMap(map.value); // Show the overlay
+  }
+}
+
+// const content = `<div>뜨냐??</div>`;
+let currentOverlay = null;
 function displayMarker(place, image) {
-  new kakao.maps.Marker({
+  var marker = new kakao.maps.Marker({
     map: map.value,
-    position: new kakao.maps.LatLng(parseFloat(place.x), parseFloat(place.y)),
+    position: new kakao.maps.LatLng(place.x, place.y),
     image: image,
+  });
+
+  const content = `<div>${place.name}</div>`;
+  var customOverlay = new kakao.maps.CustomOverlay({
+    map: null, // 처음에는 보이지 않게 null로 초기화
+    position: marker.getPosition(),
+    content: content,
+  });
+
+  kakao.maps.event.addListener(marker, "click", function () {
+    // Close the currently opened overlay
+    if (currentOverlay) {
+      currentOverlay.setMap(null);
+    }
+
+    // Show the new overlay
+    showOverlay(customOverlay);
+    currentOverlay = customOverlay; // Update the currently opened overlay
   });
 }
 </script>
@@ -119,6 +150,6 @@ function displayMarker(place, image) {
 #map {
   width: 100%;
   height: 100vh;
-  z-index: -1;
+  z-index: 0;
 }
 </style>
