@@ -19,10 +19,9 @@ const props = defineProps({
 
 
 
-console.log(props.color)
+// console.log(props.color)
 
 if (props.color === "white") {
-    console.log("d")
     btnColor.value = "#fff";
     fontColor.value = "#333"
 }
@@ -31,17 +30,15 @@ if (props.color === "white") {
 if(props.size === "small"){
     btnSize.value = "3rem";
 }
-// text : String,
-//     color : String, 
-//     size : String,
+
 </script>
 
 <template>
-<Button :style="{backgroundColor : btnColor , color : fontColor, height:btnSize} ">{{ text }}</Button>
+<button :style="{backgroundColor : btnColor , color : fontColor, height:btnSize} ">{{ text }}</button>
 </template>
 
 <style scoped>
-Button {
+button {
     width: 6rem;
     height: 4rem;
     border-radius: 10px;
