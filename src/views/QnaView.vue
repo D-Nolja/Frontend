@@ -1,13 +1,13 @@
 <script setup>
 import TheHeader from "@/components/layout/TheHeader.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
-import MyPage from "@/components/MyPage/MyPageContents.vue";
+import QnaContents from "../components/QnaPage/QnaContents.vue";
 </script>
 
 <template>
   <div class="contents-container">
     <the-header></the-header>
-    <MyPage />
+    <QnaContents />
     <the-footer></the-footer>
   </div>
 </template>
