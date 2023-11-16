@@ -29,6 +29,7 @@ watch(
   (newVal) => {
     console.log("clickedPlace prop 변경됨:", newVal);
     // 새로운 마커 이미지 생성
+    // markerImageSrc = "";
     const markerImage = createMarkerImage(
       markerImgSrc,
       markerImgSize,
@@ -85,7 +86,7 @@ const places = ref([
 
 const map = ref(null);
 const bounds = new kakao.maps.LatLngBounds();
-const markerImgSrc =
+let markerImgSrc =
   "https://github.com/D-Nolja/Frontend/blob/main/src/assets/img/marker.svg?raw=true";
 
 // Lifecycle Hooks

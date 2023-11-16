@@ -102,17 +102,50 @@ const dayPlans = ref([
   {
     number: 1,
     date: 12.05,
-    places: places,
+    places: [
+      {
+        name: "혜인식탁",
+        type: "맛집",
+        x: "33.24833404783013",
+        y: "126.56835909631332",
+        address: "도로명 주소1",
+        tel: "010-1234-1234",
+        openopenTime: "11:30 ~ 16:00",
+        info: "반려동물 동반 가능 / 무료",
+      },
+    ],
   },
   {
     number: 2,
     date: 12.06,
-    places: places,
+    places: [
+      {
+        name: "원빈식탁",
+        type: "맛집",
+        x: "33.27874670832252",
+        y: "126.70801347099405",
+        address: "도로명 주소1",
+        tel: "010-9876-9876",
+        openopenTime: "12:30 ~ 15:00",
+        info: "반려동물 동반 가능 / 무료",
+      },
+    ],
   },
   {
     number: 3,
     date: 12.07,
-    places: places,
+    places: [
+      {
+        name: "은서식탁",
+        type: "맛집",
+        x: "33.2488301865394",
+        y: "126.32352822201112",
+        address: "도로명 주소1",
+        tel: "010-9876-9876",
+        openopenTime: "12:30 ~ 15:00",
+        info: "반려동물 동반 가능 / 무료",
+      },
+    ],
   },
 ]);
 
@@ -168,10 +201,10 @@ onUnmounted(() => {
 
 <style scoped>
 .side-menu {
-  width: calc(300px + 300px); /* 초기 너비 (고정 섹션 + 스크롤 섹션) */
-  max-width: 900px; /* 최대 너비 */
+  width: calc(300px + 300px); /* 고정 + 스크롤 */
+  max-width: 900px;
   height: 100vh;
-  display: flex; /* 내부 섹션들을 가로로 정렬 */
+  display: flex;
   flex-direction: column;
   background-color: #fff;
   border-right: 1.5px solid #eaeaea;
@@ -195,9 +228,9 @@ onUnmounted(() => {
 }
 
 .scrollable-section {
-  width: 600px; /* 스크롤 섹션의 초기 너비 */
-  display: flex; /* 섹션들을 가로로 정렬 */
-  overflow-x: auto; /* 가로 스크롤 허용 */
+  width: 300px;
+  display: flex;
+  overflow-x: auto;
 }
 
 .dragging {
