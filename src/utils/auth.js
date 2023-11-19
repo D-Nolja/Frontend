@@ -8,7 +8,8 @@ function getAuthInstance() {
   });
 
   // Request 발생 시 적용할 내용.
-  authInstance.defaults.headers.common["Authorization"] = "";
+  let accessToken = sessionStorage.getItem("accessToken");
+  authInstance.defaults.headers.common["Authorization"] = accessToken;
   authInstance.defaults.headers.post["Content-Type"] = "application/json";
   authInstance.defaults.headers.put["Content-Type"] = "application/json";
 

@@ -26,7 +26,7 @@ const logout = () => {
   try {
     userLogout();
     changeHeaderState();
-    router.push({ name: "login" });
+    // router.push({ name: "login" });
   } catch (error) {
     console.log("logout failed", error);
   }

@@ -1,6 +1,18 @@
 <script setup>
 import VButtonSubmit from "../Common/VButtonSubmit.vue";
 import VInput from "../Common/VInput.vue";
+import { useUserStore } from "@/stores/user.js";
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+const userStore = useUserStore();
+const { userInfo } = storeToRefs(userStore);
+console.log(userInfo.value);
+
+const isEditable = ref(true);
+
+const changeEiditStatus = () => {
+  isEditable.value = !isEditable.value;
+};
 </script>
 
 <template>
@@ -19,14 +31,29 @@ import VInput from "../Common/VInput.vue";
     </div>
     <label for="nickname">
       <p>닉네임</p>
-      <VInput txt="Enter email or user name" id="nickname" />
+      <VInput
+        txt="Enter email or user name"
+        id="nickname"
+        v-model="userInfo.username"
+        :disabled="isEditable"
+      />
     </label>
     <label for="email">
       <p>이메일</p>
-      <VInput txt="Password" id="email" />
+      <VInput
+        txt="Password"
+        id="email"
+        v-model="userInfo.email"
+        :disabled="isEditable"
+      />
     </label>
-    <VButtonSubmit txt="회원 탈퇴" color="white" class="submitBtn" />
-    <VButtonSubmit txt="수정" class="submitBtn" />
+    <template v-if="isEditable">
+      <VButtonSubmit txt="회원 탈퇴" color="white" class="submitBtn" />
+      <VButtonSubmit txt="수정" class="submitBtn" @click="changeEiditStatus" />
+    </template>
+    <template v-else>
+      <VButtonSubmit txt="완료" class="submitBtn" @click="changeEiditStatus" />
+    </template>
   </div>
 </template>
 

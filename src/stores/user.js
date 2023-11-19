@@ -8,7 +8,7 @@ import {
   join,
   // modify,
   // searchUserList,
-  // searchUserDetail,
+  searchUserDetail,
   // deleteUser,
 } from "@/api/auth.js";
 import axios from "axios";
@@ -16,7 +16,7 @@ import { jwtDecode } from "jwt-decode";
 
 export const useUserStore = defineStore("userStore", () => {
   const isLogin = ref(false);
-
+  const userInfo = ref({ username: "jim", email: "j@gmail.com" });
   const userJoin = async (joinUser) => {
     console.log("joinUser : ", joinUser);
     await join(
@@ -68,15 +68,25 @@ export const useUserStore = defineStore("userStore", () => {
   const getUserInfo = (token) => {
     let decodeToken = jwtDecode(token);
     console.log("decodeToken ", decodeToken);
-    let userEmail = decodeToken.email;
-    console.log("userEmail ", userEmail);
+    let userId = decodeToken.email;
+    searchUserDetail(
+      userId,
+      (response) => {
+        let { data } = response;
+        console.log("data ", data);
+        // userInfo.value = data;
+      },
+      (error) => {
+        console.log("error : ", error);
+      }
+    );
   };
 
   const userLogout = async () => {
     await logout(
       () => {
         isLogin.value = false;
-        // loginUser null 로 만들어야 하는데 지금 store에 유저 정보가 없네...?
+        userInfo.value = null;
       },
       (error) => {
         console.log("에러 ! ", error);
@@ -90,5 +100,5 @@ export const useUserStore = defineStore("userStore", () => {
     );
   };
 
-  return { isLogin, userLogin, userLogout, getUserInfo, userJoin };
+  return { userInfo, isLogin, userLogin, userLogout, getUserInfo, userJoin };
 });
