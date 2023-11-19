@@ -1,62 +1,78 @@
-<script setup>
-import { ref } from "vue";
-import { watchEffect } from "vue";
-const btnColor = ref("#4285F4");
-const btnSize = ref();
-const fontColor = ref("#fff");
-
-const props = defineProps({
-  size: {
-    type: String,
-    default() {
-      "default";
-    },
-  },
-  color: String,
-  text: String,
-});
-
-// console.log(props.color)
-
-watchEffect(() => {
-  console.log(props.color);
-  if (props.color === "white") {
-    btnColor.value = "#fff";
-    fontColor.value = "#333";
-    console.log(props.color);
-  } else {
-    btnColor.value = "#4285F4";
-    fontColor.value = "#fff";
-  }
-
-  if (props.size === "small") {
-    btnSize.value = "3rem";
-  }
-});
-</script>
-
 <template>
-  <button
-    :style="{ backgroundColor: btnColor, color: fontColor, height: btnSize }"
-  >
-    {{ text }}
-  </button>
+  <a-dropdown>
+    <div class="dropdownBtn" @click.prevent="openDropdown">
+      {{ selectedName }}
+      <DownOutlined />
+    </div>
+    <template #overlay>
+      <a-menu @click="handleMenuItemClick">
+        <a-menu-item v-for="item in items" :key="item.id">
+          <a>{{ item.name }}</a>
+        </a-menu-item>
+      </a-menu>
+    </template>
+  </a-dropdown>
 </template>
 
-<style scoped>
-button {
-  width: 6rem;
-  height: 4rem;
-  border-radius: 10px;
-  background: #4285f4;
-  border: none;
+<script setup>
+import { ref } from "vue";
+
+const props = defineProps({
+  name: String,
+  items: Array,
+});
+
+const selectedName = ref(props.name);
+
+function handleMenuItemClick(event) {
+  console.log(event.key);
+  const clickedItem = props.items.find((item) => item.id === event.key);
+
+  console.log("clickedItem ", clickedItem);
+  if (clickedItem) {
+    selectedName.value = clickedItem.name;
+  }
+}
+
+function openDropdown() {}
+</script>
+
+<style>
+.dropdownBtn {
+  width: 85px;
+  height: 30px;
+  border: 1px solid #e2e2e2;
+  padding: 3px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 1px;
   text-align: center;
-  font-size: 1.17944rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.72888rem;
-  letter-spacing: 0.03538rem;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
-  margin: 5px 0;
+  line-height: 22px;
+}
+
+.dropdownBtn .ant-dropdown-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.dropdownBtn:hover {
+  background-color: #f5f5f5;
+}
+
+.a-menu {
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.a-menu-item a {
+  color: #333;
+}
+
+.a-menu-item a:hover {
+  color: #0056b3;
 }
 </style>
