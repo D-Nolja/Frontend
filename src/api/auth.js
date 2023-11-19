@@ -32,6 +32,10 @@ async function deleteUser(success, fail) {
   await auth.delete(`/users`).then(success).catch(fail);
 }
 
+async function uploadProfile(param, config, success, fail) {
+  await auth.post(`/image/user`, param, config).then(success).catch(fail);
+}
+
 export {
   login,
   logout,
@@ -40,4 +44,5 @@ export {
   searchUserList,
   searchUserDetail,
   deleteUser,
+  uploadProfile,
 };
