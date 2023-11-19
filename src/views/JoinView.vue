@@ -1,15 +1,14 @@
 <script setup>
 import TheHeader from "@/components/layout/TheHeader.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
-import VMain from "../components/MainPage/VMain.vue";
+import VJoinBox from "../components/Auth/VJoinBox.vue";
 </script>
 
 <template>
   <div class="contents-container">
     <the-header></the-header>
 
-    <VMain />
-
+    <VJoinBox />
     <the-footer></the-footer>
   </div>
 </template>
