@@ -4,8 +4,8 @@
       <div id="sst1">
         <p>장소 추가</p>
         <div id="sst1-dropdown">
-          <VDropdown name="거리 순" :items="distance" />
           <VDropdown name="카테고리" :items="fcl" />
+          <VDropdown name="거리 순" :items="distance" />
         </div>
       </div>
       <input
