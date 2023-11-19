@@ -4,8 +4,8 @@
       <div id="sst1">
         <p>장소 추가</p>
         <div id="sst1-dropdown">
-          <div>드롭다운1</div>
-          <div>드롭다운2</div>
+          <VDropdown name="거리 순" :items="distance" />
+          <VDropdown name="카테고리" :items="fcl" />
         </div>
       </div>
       <input
@@ -32,7 +32,65 @@
 
 <script setup>
 import VPlaceCardBig from "@/components/Common/cards/VPlaceCardBig.vue";
+import VDropdown from "../Common/VDropdown.vue";
 
+const fcl = [
+  { id: 0, name: "동물병원" },
+  { id: 1, name: "동물약국" },
+  { id: 2, name: "미용" },
+  { id: 3, name: "반려동물용품" },
+];
+const spot = [
+  {
+    id: 0,
+    name: "박물관",
+  },
+  {
+    id: 1,
+    name: "여행지",
+  },
+  {
+    id: 2,
+    name: "미술관",
+  },
+  {
+    id: 3,
+    name: "문예회관",
+  },
+  {
+    id: 4,
+    name: "음식점/카페",
+  },
+  {
+    id: 5,
+    name: "관광지",
+  },
+];
+
+const stay = [{ id: 0, name: "숙박업소" }];
+
+const distance = [
+  {
+    id: 0,
+    name: "상관없음",
+  },
+  {
+    id: 3,
+    name: "3km 이내 ",
+  },
+  {
+    id: 5,
+    name: "5km 이내 ",
+  },
+  {
+    id: 10,
+    name: "10km 이내 ",
+  },
+  {
+    id: 20,
+    name: "20km 이내 ",
+  },
+];
 defineProps({
   places: {
     type: Array,
@@ -86,7 +144,7 @@ defineProps({
   justify-content: space-between;
   display: flex;
   align-items: center;
-  padding: 0 5px;
+  padding-left: 5px;
   padding-bottom: 5px;
 }
 
@@ -103,6 +161,7 @@ defineProps({
 
 #sst1-dropdown {
   display: flex;
+  justify-content: space-around;
 }
 #ss-input {
   border-radius: 10px;
