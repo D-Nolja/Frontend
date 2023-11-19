@@ -24,11 +24,10 @@ const loginUser = ref({
 const login = async () => {
   try {
     await userLogin(loginUser.value);
-    let token = sessionStorage.getItem("accessToken");
 
     if (isLogin.value) {
       changeHeaderState();
-      getUserInfo(token);
+      getUserInfo();
       router.push({ name: "home" });
     } else {
       loginUser.value.password = "";

@@ -14,8 +14,6 @@
 const props = defineProps({
   cardTxt: Object,
 });
-
-console.log(props.cardTxt.iconSrc);
 </script>
 
 <style scoped>

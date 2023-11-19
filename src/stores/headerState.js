@@ -32,8 +32,6 @@ export const useHeaderStateStore = defineStore("headerStateStore", () => {
       ...item,
       show: !item.show,
     }));
-
-    console.log(headerItemList.value);
   };
 
   return {

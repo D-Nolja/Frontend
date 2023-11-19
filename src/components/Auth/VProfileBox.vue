@@ -2,17 +2,34 @@
 import VButtonSubmit from "../Common/VButtonSubmit.vue";
 import VInput from "../Common/VInput.vue";
 import { useUserStore } from "@/stores/user.js";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 const userStore = useUserStore();
-const { userInfo } = storeToRefs(userStore);
-const { sendProfile } = userStore;
-console.log(userInfo.value);
+const { userInfo, modifiedUserInfo, profileImg } = storeToRefs(userStore);
+const { sendProfile, modifyUserInfo } = userStore;
 
 const isEditable = ref(true);
 const fileImgSrc = ref(null);
-const changeEiditStatus = () => {
+
+onMounted(() => {
+  fileImgSrc.value = userInfo.value.img;
+});
+const changeEdit = () => {
   isEditable.value = !isEditable.value;
+};
+
+const changeSaveEdit = async () => {
+  isEditable.value = !isEditable.value;
+
+  try {
+    console.log("before modifiedUserInfo!! : ", modifiedUserInfo.value);
+    modifiedUserInfo.value.username = userInfo.value.username;
+    modifiedUserInfo.value.img = profileImg.value;
+    console.log("after modifiedUserInfo!! : ", modifiedUserInfo.value);
+    await modifyUserInfo();
+  } catch (error) {
+    console.log("회원정보 수정 에러");
+  }
 };
 
 const uploadFile = (e) => {
@@ -32,6 +49,7 @@ const uploadFile = (e) => {
 </script>
 
 <template>
+  ``
   <div class="contents-container">
     <div id="img-upload-container">
       <label for="image-upload">
@@ -43,8 +61,6 @@ const uploadFile = (e) => {
           @change="uploadFile"
           :disabled="isEditable"
         />
-        <!-- accept : 이미지 파일만 사용할 수 있도록 제한-->
-        <!-- <img src="@/assets/img/upload.svg" alt="" id="image-upload-svg" /> -->
         <img :src="fileImgSrc" alt="" id="image-upload-svg" />
       </label>
     </div>
@@ -68,10 +84,10 @@ const uploadFile = (e) => {
     </label>
     <template v-if="isEditable">
       <VButtonSubmit txt="회원 탈퇴" color="white" class="submitBtn" />
-      <VButtonSubmit txt="수정" class="submitBtn" @click="changeEiditStatus" />
+      <VButtonSubmit txt="수정" class="submitBtn" @click="changeEdit" />
     </template>
     <template v-else>
-      <VButtonSubmit txt="완료" class="submitBtn" @click="changeEiditStatus" />
+      <VButtonSubmit txt="완료" class="submitBtn" @click="changeSaveEdit" />
     </template>
   </div>
 </template>

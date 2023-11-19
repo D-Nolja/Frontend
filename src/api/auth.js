@@ -17,19 +17,19 @@ async function join(param, success, fail) {
 }
 
 async function modify(param, success, fail) {
-  await auth.put(`/users`, param).then(success).catch(fail);
+  await auth.put(`/user`, param).then(success).catch(fail);
 }
 
 async function searchUserList(success, fail) {
-  await auth.get(`/users`).then(success).catch(fail);
+  await auth.get(`/user`).then(success).catch(fail);
 }
 
-async function searchUserDetail(user_id, success, fail) {
-  await auth.get(`/users/${user_id}`).then(success).catch(fail);
+async function searchUserDetail(success, fail) {
+  await auth.get(`/user`).then(success).catch(fail);
 }
 
 async function deleteUser(success, fail) {
-  await auth.delete(`/users`).then(success).catch(fail);
+  await auth.delete(`/user`).then(success).catch(fail);
 }
 
 async function uploadProfile(param, config, success, fail) {

@@ -9,7 +9,7 @@ const { headerItemList } = storeToRefs(headerStateStore);
 const { changeHeaderState } = headerStateStore;
 
 const userStore = useUserStore();
-const { userLogout } = userStore;
+const { userLogout, getUserInfo } = userStore;
 
 const router = useRouter();
 
@@ -20,11 +20,10 @@ const movePlan = () => {
   console.log("plan!");
   router.push("plan/all");
 };
-const logout = () => {
-  console.log("로그아웃");
-
+const logout = async () => {
   try {
-    userLogout();
+    console.log("로그아웃");
+    await userLogout();
     changeHeaderState();
     // router.push({ name: "login" });
   } catch (error) {
@@ -42,7 +41,12 @@ const moveJoin = () => {
   router.push({ name: "join" });
 };
 const moveMyPage = () => {
-  router.push({ name: "myPage" });
+  try {
+    getUserInfo();
+    router.push({ name: "myPage" });
+  } catch (error) {
+    console.log("userInfo를 불러오지 못했어");
+  }
 };
 
 const clickMethods = {
