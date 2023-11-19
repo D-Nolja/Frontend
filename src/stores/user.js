@@ -67,12 +67,11 @@ export const useUserStore = defineStore("userStore", () => {
     );
   };
 
-  const getUserInfo = (token) => {
-    let decodeToken = jwtDecode(token);
-    console.log("decodeToken ", decodeToken);
-    let userId = decodeToken.email;
+  const getUserInfo = () => {
+    // let decodeToken = jwtDecode(token);
+    // console.log("decodeToken ", decodeToken);
+
     searchUserDetail(
-      userId,
       (response) => {
         let { data } = response;
         console.log("data ", data);
