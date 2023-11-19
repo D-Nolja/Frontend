@@ -17,6 +17,9 @@ const joinUser = ref({
 
 const join = async () => {
   try {
+    console.log("jb : ", joinUser.value);
+
+    // 이메일 유효성 체크
     userJoin(joinUser.value);
   } catch (error) {
     console.log("VJoinBox 회원가입 실패");
