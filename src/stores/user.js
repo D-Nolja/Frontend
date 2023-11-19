@@ -10,6 +10,7 @@ import {
   // searchUserList,
   searchUserDetail,
   // deleteUser,
+  uploadProfile,
 } from "@/api/auth.js";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -17,6 +18,7 @@ import { jwtDecode } from "jwt-decode";
 export const useUserStore = defineStore("userStore", () => {
   const isLogin = ref(false);
   const userInfo = ref({ username: "jim", email: "j@gmail.com" });
+
   const userJoin = async (joinUser) => {
     console.log("joinUser : ", joinUser);
     await join(
@@ -53,7 +55,7 @@ export const useUserStore = defineStore("userStore", () => {
       (error) => {
         if (axios.isAxiosError(error) && error.response) {
           isLogin.value = false;
-          console.log("에러 ! ", error.response);
+          console.log("로그인 에러 ! ", error.response);
           let { data } = error.response;
           console.log(data);
           if (data.code == 9999) {
@@ -77,7 +79,7 @@ export const useUserStore = defineStore("userStore", () => {
         // userInfo.value = data;
       },
       (error) => {
-        console.log("error : ", error);
+        console.log("유저 정보 조회 error : ", error);
       }
     );
   };
@@ -89,7 +91,7 @@ export const useUserStore = defineStore("userStore", () => {
         userInfo.value = null;
       },
       (error) => {
-        console.log("에러 ! ", error);
+        console.log("로그아웃 에러 ! ", error);
         if (axios.isAxiosError(error) && error.response) {
           console.log("Response data:", error.response.data);
           console.log("Response headers:", error.response.headers);
@@ -100,5 +102,36 @@ export const useUserStore = defineStore("userStore", () => {
     );
   };
 
-  return { userInfo, isLogin, userLogin, userLogout, getUserInfo, userJoin };
+  const sendProfile = async (file) => {
+    let formData = new FormData();
+    formData.append("img", file);
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    await uploadProfile(
+      formData,
+      config,
+      (response) => {
+        console.log("파일 업로드 성공");
+
+        console.log("file upload : ", response);
+      },
+      (error) => {
+        console.log("프로필 업로드 에러 : ", error.message);
+      }
+    );
+  };
+
+  return {
+    userInfo,
+    isLogin,
+    userLogin,
+    userLogout,
+    getUserInfo,
+    userJoin,
+    sendProfile,
+  };
 });

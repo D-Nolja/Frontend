@@ -6,12 +6,28 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 const userStore = useUserStore();
 const { userInfo } = storeToRefs(userStore);
+const { sendProfile } = userStore;
 console.log(userInfo.value);
 
 const isEditable = ref(true);
-
+const fileImgSrc = ref(null);
 const changeEiditStatus = () => {
   isEditable.value = !isEditable.value;
+};
+
+const uploadFile = (e) => {
+  let file = e.target.files[0];
+  // console.log("file : ", file.name);
+  let fileName = file.name;
+  if (
+    fileName.endsWith(".png") ||
+    fileName.endsWith(".jpg") ||
+    fileName.endsWith(".jpeg")
+  ) {
+    console.log("fileImgSrc : ", fileImgSrc);
+    sendProfile(file);
+    fileImgSrc.value = URL.createObjectURL(file);
+  }
 };
 </script>
 
@@ -24,9 +40,11 @@ const changeEiditStatus = () => {
           name="image-upload"
           id="image-upload"
           accept="image/*"
+          @change="uploadFile"
         />
         <!-- accept : 이미지 파일만 사용할 수 있도록 제한-->
-        <img src="@/assets/img/upload.svg" alt="" id="image-upload-svg" />
+        <!-- <img src="@/assets/img/upload.svg" alt="" id="image-upload-svg" /> -->
+        <img :src="fileImgSrc" alt="" id="image-upload-svg" />
       </label>
     </div>
     <label for="nickname">
