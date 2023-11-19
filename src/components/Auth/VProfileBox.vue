@@ -41,6 +41,7 @@ const uploadFile = (e) => {
           id="image-upload"
           accept="image/*"
           @change="uploadFile"
+          :disabled="isEditable"
         />
         <!-- accept : 이미지 파일만 사용할 수 있도록 제한-->
         <!-- <img src="@/assets/img/upload.svg" alt="" id="image-upload-svg" /> -->
@@ -62,7 +63,7 @@ const uploadFile = (e) => {
         txt="Password"
         id="email"
         v-model="userInfo.email"
-        :disabled="isEditable"
+        disabled="true"
       />
     </label>
     <template v-if="isEditable">
