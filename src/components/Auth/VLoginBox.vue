@@ -24,12 +24,12 @@ const loginUser = ref({
 const login = async () => {
   try {
     await userLogin(loginUser.value);
-    // let token = sessionStorage.getItem("accessToken");
+    let token = sessionStorage.getItem("accessToken");
 
     if (isLogin.value) {
       changeHeaderState();
+      getUserInfo(token);
       router.push({ name: "home" });
-      // getUserInfo(token);
     } else {
       loginUser.value.password = "";
       loginUser.value.email = "";
