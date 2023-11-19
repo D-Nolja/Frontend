@@ -6,9 +6,13 @@
       data-aos="fade-up"
       data-aos-duration="2000"
     >
-      <VMainCard data-aos="zoom-in" data-aos-duration="1500" />
-      <VMainCard data-aos="zoom-in" data-aos-duration="1500" />
-      <VMainCard data-aos="zoom-in" data-aos-duration="1500" />
+      <VMainCard
+        v-for="cardTxt in mainCardTxt"
+        :key="cardTxt.title"
+        :cardTxt="cardTxt"
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+      />
     </div>
     <div
       class="main-card2-container"
@@ -37,6 +41,24 @@
 <script setup>
 import VHero from "./VHero.vue";
 import VMainCard from "./VMainCard.vue";
+
+const mainCardTxt = [
+  {
+    iconSrc: "/mainCardIcon/mc_icon1.svg",
+    title: "Pick-up Date",
+    txt: "당신과 꼬리 흔드는 친구가 즐길 수 있는 완벽한 시간을 알려주세요",
+  },
+  {
+    iconSrc: "/mainCardIcon/mc_icon2.svg",
+    title: "Choose Location",
+    txt: "해변 산책로부터 반려견이 뛰어놀 수 있는 공원까지, 당신과 반려견을 위한 특별한 장소를 선택해 보세요",
+  },
+  {
+    iconSrc: "/mainCardIcon/mc_icon3.svg",
+    title: "Book your Places",
+    txt: "모든 준비가 끝났어요. 여행 일정을 확인하고, 꿈에 그리던 여행을 예약하세요. ",
+  },
+];
 </script>
 
 <style scoped>
