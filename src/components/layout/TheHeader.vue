@@ -1,25 +1,63 @@
 <script setup>
+import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
+import { useHeaderStateStore } from "@/stores/headerState.js";
+import { useUserStore } from "@/stores/user.js";
+
+const headerStateStore = useHeaderStateStore();
+const { headerItemList } = storeToRefs(headerStateStore);
+const { changeHeaderState } = headerStateStore;
+
+const userStore = useUserStore();
+const { userLogout } = userStore;
 
 const router = useRouter();
 
+const moveMain = () => {
+  router.push({ name: "home" });
+};
 const movePlan = () => {
-  router.push({ path: "plan/all" });
-  111;
+  console.log("plan!");
+  router.push("plan/all");
 };
-const moveMyPage = () => {
-  console.log("mypage");
-  router.push({ name: "myPage" });
+const logout = () => {
+  console.log("로그아웃");
+
+  try {
+    userLogout();
+    changeHeaderState();
+    router.push({ name: "login" });
+  } catch (error) {
+    console.log("logout failed", error);
+  }
 };
+
 const moveQna = () => {
   router.push({ name: "qna" });
 };
 const moveLogin = () => {
   router.push({ name: "login" });
 };
+const moveJoin = () => {
+  router.push({ name: "join" });
+};
+const moveMyPage = () => {
+  router.push({ name: "myPage" });
+};
 
-const moveMain = () => {
-  router.push({ name: "home" });
+const clickMethods = {
+  moveQna,
+  moveLogin,
+  moveJoin,
+  logout,
+  movePlan,
+  moveMyPage,
+};
+
+const handleClick = (clickName) => {
+  if (clickMethods[clickName]) {
+    clickMethods[clickName]();
+  }
 };
 </script>
 
@@ -30,10 +68,11 @@ const moveMain = () => {
         <img src="../../assets/img/avatar.svg" alt="" srcset="" />
       </div>
       <div class="nav-btn-container">
-        <div @click="movePlan">여행계획</div>
-        <div @click="moveMyPage">마이페이지</div>
-        <div @click="moveQna">Q&A</div>
-        <div @click="moveLogin">로그인</div>
+        <template v-for="item in headerItemList" :key="item.routerName">
+          <div v-if="item.show" @click="handleClick(item.clickName)">
+            {{ item.name }}
+          </div>
+        </template>
       </div>
     </div>
   </div>

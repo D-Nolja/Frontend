@@ -4,6 +4,7 @@
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
+const { VITE_APP_KAKAO_API_KEY } = import.meta.env;
 
 const props = defineProps({
   clickedPlace: {
@@ -101,7 +102,7 @@ function loadKakaoMaps() {
   } else {
     const script = document.createElement("script");
     script.onload = () => kakao.maps.load(initMap);
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=7aa7a6f8809715f984d7d5db26e6293a`;
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${VITE_APP_KAKAO_API_KEY}`;
     document.head.appendChild(script);
   }
 }
