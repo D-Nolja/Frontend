@@ -22,19 +22,20 @@ onMounted(() => {
 watchEffect(() => {
   // places가 변경될 때 마다 실행됩니다.
   if (mapLoaded.value && getPlacesData.value) {
-    markers = [];
+    
     clearMarkers(); // 이전 마커들을 지웁니다.
+  
     places.value = getPlacesData.value;
     placeSearch(); // 새로운 마커들을 표시합니다.
   }
 });
 
-let markers = [];
+let markers = ref([]);
 function clearMarkers() {
-  markers.forEach((marker) => {
+  markers.value.forEach((marker) => {
     marker.setMap(null); // 마커를 지도에서 제거
   });
-  markers = []; // 마커 배열을 비움
+  markers.value = []; // 마커 배열을 비움
 }
 
 const initMap = () => {
@@ -79,8 +80,8 @@ function displayMarker(place, bounds) {
   let marker = new kakao.maps.Marker({
     position: markerPosition,
   });
-
-  markers.push(marker);
+  console.log(marker);
+  markers.value.push(marker);
   marker.setMap(map.value);
   bounds.extend(markerPosition); // 마커 위치를 bounds에 추가
 }
