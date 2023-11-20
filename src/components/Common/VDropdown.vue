@@ -20,8 +20,9 @@ import { storeToRefs } from "pinia";
 import { ref } from "vue";
 
 const placeStore = usePlaceStore();
-const { searchParams } = storeToRefs(placeStore);
-const { getPlacesCategory } = placeStore;
+const { searchParams, getCurrentLoc, currentLatLng } = storeToRefs(placeStore);
+const { getPlacesCategory, updateCurrentLocation, getPlacesShortest } =
+  placeStore;
 
 const props = defineProps({
   name: String,
@@ -35,23 +36,37 @@ function handleMenuItemClick(event) {
   const clickedItem = props.items.find((item) => item.id === event.key);
 
   console.log("clickedItem ", clickedItem);
-  // searchParam 설정
 
   if (clickedItem) {
     selectedName.value = clickedItem.name;
   }
-
   selectMethod(clickedItem);
 }
 
-function selectMethod(clickedItem) {
+async function selectMethod(clickedItem) {
   if (clickedItem.type == 0) {
     searchParams.value.category =
       clickedItem.name == "전체" ? null : clickedItem.name;
-
     console.log("search ", searchParams.value);
+
     try {
-      getPlacesCategory();
+      await getPlacesCategory();
+    } catch (error) {
+      console.log(error);
+    }
+  } else if (clickedItem.type == 1) {
+    await updateCurrentLocation();
+
+    // searchParams.value.limit = parseFloat(clickedItem.id);
+    // searchParams.value.x = currentLatLng.value.x;
+    // searchParams.value.y = currentLatLng.value.y;
+
+    searchParams.value.x = 126.6456514;
+    searchParams.value.y = 33.473645;
+    console.log("파람파람파람 ", searchParams.value);
+
+    try {
+      await getPlacesShortest();
     } catch (error) {
       console.log(error);
     }

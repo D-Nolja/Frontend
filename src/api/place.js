@@ -49,7 +49,13 @@ limit (거리제한)
 maxCount (검색 결과 최대 개수)
 */
 async function searchPlacesShortest(param, success, fail) {
-  await placeInstance.get(`/shortest`).then(success).catch(fail);
+  console.log("파파파파람 ", param);
+  await placeInstance
+    .get(
+      `shortest?x=${param.x}&y=${param.y}&limit=${param.limit}&maxCount=${param.maxCount}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 // 검색어+카테고리

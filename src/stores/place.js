@@ -28,15 +28,22 @@ export const usePlaceStore = defineStore("headerStateStore", () => {
       img: "https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20191221_26%2F1576910573697wAjVI_JPEG%2FV_DGwIxmBV_x7kCpgxFKVzci.jpg",
     },
   ]); // 배열값
+
+  // default value
   const searchParams = ref({
     x: "",
     y: "",
-    limit: "",
-    maxcount: "",
+    limit: 3,
+    maxCount: 5,
     category: "",
     keyword: "",
     pageNo: 1,
     sizePerPage: 5,
+  });
+
+  const currentLatLng = ref({
+    x: null,
+    y: null,
   });
 
   /*
@@ -62,7 +69,31 @@ keyWord
 category
 */
 
-  // dumy value
+  const getCurrentLoc = async () => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latLng = {
+            x: position.coords.longitude,
+            y: position.coords.latitude,
+          };
+          resolve(latLng);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  };
+
+  const updateCurrentLocation = async () => {
+    try {
+      const latLng = await getCurrentLoc();
+      currentLatLng.value = latLng;
+    } catch (error) {
+      console.error("위치 정보를 가져오는 데 실패했습니다.", error);
+    }
+  };
 
   const getPlacesData = computed(() => {
     return places.value;
@@ -111,9 +142,21 @@ category
 
   const getPlacesShortest = async () => {
     await searchPlacesShortest(
-      "",
+      searchParams.value,
       (response) => {
         console.log("[최단거리] 시설조회 ", response);
+        let { data } = response;
+        console.log("data ", data);
+        console.log("data 길이 ", data.result.length);
+
+        let arrays = data.result;
+        let temp = [];
+        arrays.forEach((array) => {
+          temp.push(array.targetLocation);
+        });
+
+        console.log("temp : ", temp);
+        places.value = temp;
       },
       (error) => {
         console.log("getPlacesShortest ", error);
@@ -171,6 +214,7 @@ category
 
   return {
     // places,
+    currentLatLng,
     searchParams,
     getPlacesData,
     getPlacesAll,
@@ -181,5 +225,7 @@ category
     getPlacesCnS,
     getPlacesKnS,
     getPlacesKnCnS,
+    getCurrentLoc,
+    updateCurrentLocation,
   };
 });
