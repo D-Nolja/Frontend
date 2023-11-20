@@ -40,10 +40,11 @@ const placeStore = usePlaceStore();
 const { places } = storeToRefs(placeStore);
 
 const fcl = [
-  { id: 0, name: "동물병원" },
-  { id: 1, name: "동물약국" },
-  { id: 2, name: "미용" },
-  { id: 3, name: "반려동물용품" },
+  { id: 0, name: "전체" },
+  { id: 1, name: "동물병원" },
+  { id: 2, name: "동물약국" },
+  { id: 3, name: "미용" },
+  { id: 4, name: "반려동물용품" },
 ];
 const spot = [
   {
