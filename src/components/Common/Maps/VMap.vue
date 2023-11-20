@@ -22,6 +22,7 @@ onMounted(() => {
 watchEffect(() => {
   // places가 변경될 때 마다 실행됩니다.
   if (mapLoaded.value && getPlacesData.value) {
+    markers = [];
     clearMarkers(); // 이전 마커들을 지웁니다.
     places.value = getPlacesData.value;
     placeSearch(); // 새로운 마커들을 표시합니다.
