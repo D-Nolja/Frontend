@@ -3,12 +3,13 @@
 </template>
 
 <script setup>
-import { usePlaceStore } from "../../../stores/place";
+import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
 import { ref, onMounted, watch } from "vue";
 const { VITE_APP_KAKAO_API_KEY } = import.meta.env;
 const placeStore = usePlaceStore();
-const { places } = storeToRefs(placeStore);
+let { places } = storeToRefs(placeStore);
+console.log("!! ", places.value);
 
 let map = ref(null);
 
@@ -69,6 +70,7 @@ const loadMap = () => {
 // }
 
 function placeSearch() {
+  console.log(places.value);
   places.value.forEach((place) => {
     console.log(place.y, place.x);
 

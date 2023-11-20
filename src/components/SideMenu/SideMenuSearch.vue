@@ -35,15 +35,27 @@ import VPlaceCardBig from "@/components/Common/cards/VPlaceCardBig.vue";
 import VDropdown from "../Common/VDropdown.vue";
 import { usePlaceStore } from "@/stores/place.js";
 import { storeToRefs } from "pinia";
+import { onMounted } from "vue";
 
 const placeStore = usePlaceStore();
-const { places } = storeToRefs(placeStore);
+const { places, searchParams } = storeToRefs(placeStore);
+const {
+  getPlacesAll,
+  // getPlacesKeyword,
+  // getPlacesCategory,
+  // getPlacesShortest,
+  // getPlacesKnC,
+  // getPlacesCnS,
+  // getPlacesKnS,
+  // getPlacesKnCnS,
+} = placeStore;
 
 const fcl = [
-  { id: 0, name: "동물병원" },
-  { id: 1, name: "동물약국" },
-  { id: 2, name: "미용" },
-  { id: 3, name: "반려동물용품" },
+  { id: 0, name: "전체" },
+  { id: 1, name: "동물병원" },
+  { id: 2, name: "동물약국" },
+  { id: 3, name: "미용" },
+  { id: 4, name: "반려동물용품" },
 ];
 const spot = [
   {
@@ -96,6 +108,15 @@ const distance = [
     name: "20km 이내 ",
   },
 ];
+
+onMounted(async () => {
+  // 전체 검색
+  try {
+    await getPlacesAll();
+  } catch (error) {
+    console.log("search error ", error);
+  }
+});
 </script>
 
 <style>
