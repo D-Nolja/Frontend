@@ -21,7 +21,6 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   width: 29.5vw;
-  height: 300px;
   background: #fff;
   box-shadow: 0px 7px 140px 0px rgba(175, 173, 181, 0.1);
   border-radius: 1.9375rem;

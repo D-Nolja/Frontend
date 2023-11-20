@@ -23,7 +23,7 @@ function getBackgroundStyle(imageUrl) {
   return {
     backgroundImage: `url(${imageUrl})`,
     backgroundSize: "cover", // 또는 필요에 따라 다른 스타일 설정
-    backgroundPosition: "center",
+    backgroundPosition: "top",
   };
 }
 </script>
@@ -31,8 +31,8 @@ function getBackgroundStyle(imageUrl) {
 <style scoped>
 .main-card2-container {
   width: 92vw;
-  height: 430px;
-  object-fit: cover;
+  height: 405px;
+
   border-radius: 1.9375rem;
 }
 </style>

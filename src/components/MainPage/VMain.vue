@@ -1,21 +1,25 @@
 <template>
   <div class="contents-container">
     <VHero id="main-hero" data-aos="fade-up" data-aos-duration="3000" />
-    <div
-      class="main-card1-container"
-      data-aos="fade-up"
-      data-aos-duration="2000"
-    >
+    <div class="main-card1-container">
       <VMainCard
-        v-for="cardTxt in mainCardTxt"
+        v-for="(cardTxt, index) in mainCardTxt"
         :key="cardTxt.title"
         :cardTxt="cardTxt"
-        data-aos="zoom-in"
-        data-aos-duration="1500"
+        data-aos="fade-up"
+        :data-aos-delay="index * 500"
+        data-aos-easing="linear"
+        data-aos-duration="1000"
       />
     </div>
-    <VBanner />
-    <VNews />
+    <VBanner data-aos="slide-up" data-aos-duration="1000" />
+
+    <VNews
+      data-aos="slide-left"
+      data-aos-easing="linear"
+      data-aos-duration="2000"
+      class="news"
+    />
   </div>
 </template>
 
@@ -56,21 +60,6 @@ const mainCardTxt = [
   display: flex;
   width: 92vw;
   justify-content: space-between;
-  margin: 50px 0;
-}
-
-.main-card2-container,
-.main-card3-container,
-.main-card4-container {
-  width: 92vw;
-  height: 780px;
-  border-radius: 1.9375rem;
-  background-color: #f7f8f9;
-  margin-bottom: 50px;
-  color: rgb(255, 171, 179);
-  font-weight: bold;
-  font-size: 60px;
-  text-align: center;
-  line-height: 780px;
+  margin: 50px 0 60px 0;
 }
 </style>
