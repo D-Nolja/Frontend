@@ -35,7 +35,7 @@ import VPlaceCardBig from "@/components/Common/cards/VPlaceCardBig.vue";
 import VDropdown from "../Common/VDropdown.vue";
 import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 const placeStore = usePlaceStore();
 let { getPlacesData  } = storeToRefs(placeStore);
@@ -51,6 +51,7 @@ const {
   // getPlacesKnCnS,
 } = placeStore;
 
+
 onMounted(async()=>{
   try {
     console.log("검색");
@@ -59,18 +60,23 @@ onMounted(async()=>{
   } catch (error) {
     console.log("search error ", error);
   }
+
   console.log("!! ", getPlacesData.value);
 })
 
 
+watch(() => {
+  places.value = getPlacesData.value;
+
+})
 
 // 얘네도 따로 빼야
 const fcl = [
-  { id: 0, name: "전체" },
-  { id: 1, name: "동물병원" },
-  { id: 2, name: "동물약국" },
-  { id: 3, name: "미용" },
-  { id: 4, name: "반려동물용품" },
+  { type:0,  id: 0, name: "전체" },
+  { type:0, id: 1, name: "동물병원" },
+  { type:0, id: 2, name: "동물약국" },
+  { type:0, id: 3, name: "미용" },
+  { type:0, id: 4, name: "반려동물용품" },
 ];
 const spot = [
   {

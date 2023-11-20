@@ -28,17 +28,30 @@ export const usePlaceStore = defineStore("headerStateStore", () => {
       img: "https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20191221_26%2F1576910573697wAjVI_JPEG%2FV_DGwIxmBV_x7kCpgxFKVzci.jpg",
     },
   ]); // 배열값
-  const searchParams = ref(null);
+  const searchParams = ref({
+    x: "",
+    y: "",
+    limit: "",
+    maxcount: "",
+    category: "",
+    keyword: "",
+    pageNo: 1,
+    sizePerPage: 5,
+  });
 
   /*
 1)
 {
   x : "",
   y : "",
-  limit : "".
+  limit : "",
   maxcount : "",
   category : "",
-  keyword : ""
+  keyword : "",
+  pageNo : "",
+  sizePerPag : "",
+  keyWord : "",
+  category : "".
 }
 
 2) 
@@ -50,8 +63,6 @@ category
 */
 
   // dumy value
-
-  let param = searchParams.value;
 
   const getPlacesData = computed(() => {
     return places.value;
@@ -72,9 +83,8 @@ category
   };
 
   const getPlacesKeyword = async () => {
-    param = " ";
     await searchPlacesKeyword(
-      param,
+      "",
       (response) => {
         console.log("[검색어] 시설조회 ", response);
       },
@@ -85,11 +95,13 @@ category
   };
 
   const getPlacesCategory = async () => {
-    param = " ";
     await searchPlacesCategory(
-      param,
+      searchParams.value,
       (response) => {
         console.log("[카테고리] 시설조회 ", response);
+        let { data } = response;
+        places.value = data.info.searchResult;
+        console.log("places : ", places.value);
       },
       (error) => {
         console.log("getPlacesCategory ", error);
@@ -98,9 +110,8 @@ category
   };
 
   const getPlacesShortest = async () => {
-    param = " ";
     await searchPlacesShortest(
-      param,
+      "",
       (response) => {
         console.log("[최단거리] 시설조회 ", response);
       },
@@ -111,9 +122,8 @@ category
   };
 
   const getPlacesKnC = async () => {
-    param = " ";
     await searchPlacesKnC(
-      param,
+      "",
       (response) => {
         console.log("[검색어+카테고리] 시설조회 ", response);
       },
@@ -124,9 +134,8 @@ category
   };
 
   const getPlacesCnS = async () => {
-    param = " ";
     await searchPlacesCnS(
-      param,
+      "",
       (response) => {
         console.log("[카테고리+최단거리] 시설조회 ", response);
       },
@@ -137,9 +146,8 @@ category
   };
 
   const getPlacesKnS = async () => {
-    param = " ";
     await searchPlacesKnS(
-      param,
+      "",
       (response) => {
         console.log("[검색어+카테고리] 시설조회 ", response);
       },
@@ -150,9 +158,8 @@ category
   };
 
   const getPlacesKnCnS = async () => {
-    param = " ";
     await searchPlacesKnCnS(
-      param,
+      "",
       (response) => {
         console.log("[검색어+카테고리+최단거리] 시설조회 ", response);
       },

@@ -15,7 +15,14 @@
 </template>
 
 <script setup>
+import { usePlaceStore } from "@/stores/place.js";
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
+
+
+const placeStore = usePlaceStore();
+const { searchParams } = storeToRefs(placeStore);
+const {getPlacesCategory} = placeStore;
 
 const props = defineProps({
   name: String,
@@ -25,12 +32,31 @@ const props = defineProps({
 const selectedName = ref(props.name);
 
 function handleMenuItemClick(event) {
-  console.log(event.key);
+  console.log("!!! " , event);
   const clickedItem = props.items.find((item) => item.id === event.key);
 
   console.log("clickedItem ", clickedItem);
+  // searchParam 설정
+
+
   if (clickedItem) {
     selectedName.value = clickedItem.name;
+  }
+
+  checkType(clickedItem)
+}
+
+
+
+function checkType(clickedItem){
+  if(clickedItem.type == 0){
+    searchParams.value.category = clickedItem.name;
+    console.log(searchParams.value)
+    try {
+    getPlacesCategory();
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

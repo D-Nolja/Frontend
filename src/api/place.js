@@ -23,7 +23,12 @@ sizePerPage
 category
  */
 async function searchPlacesCategory(param, success, fail) {
-  await placeInstance.get(`/shortest`).then(success).catch(fail);
+  await placeInstance
+    .get(
+      `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&category=${param.category}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 // 최단거리
