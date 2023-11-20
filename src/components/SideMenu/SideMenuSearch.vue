@@ -33,6 +33,11 @@
 <script setup>
 import VPlaceCardBig from "@/components/Common/cards/VPlaceCardBig.vue";
 import VDropdown from "../Common/VDropdown.vue";
+import { usePlaceStore } from "@/stores/place.js";
+import { storeToRefs } from "pinia";
+
+const placeStore = usePlaceStore();
+const { places } = storeToRefs(placeStore);
 
 const fcl = [
   { id: 0, name: "동물병원" },
@@ -91,35 +96,6 @@ const distance = [
     name: "20km 이내 ",
   },
 ];
-defineProps({
-  places: {
-    type: Array,
-    default() {
-      return [
-        {
-          name: "혜인식탁",
-          type: "맛집",
-          x: "위도1",
-          y: "경도1",
-          address: "도로명 주소1",
-          tel: "010-1234-1234",
-          openTime: "11:30 ~ 16:00",
-          info: "반려동물 동반 가능 / 무료",
-        },
-        {
-          name: "원빈식탁",
-          type: "맛집",
-          x: "위도1",
-          y: "경도1",
-          address: "도로명 주소1",
-          tel: "010-9876-9876",
-          openTime: "12:30 ~ 15:00",
-          info: "반려동물 동반 가능 / 무료",
-        },
-      ];
-    },
-  },
-});
 </script>
 
 <style>
