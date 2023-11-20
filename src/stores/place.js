@@ -66,11 +66,10 @@ category
     },
   ];
 
-  let param = null;
+  let param = searchParams.value;
+
   const getPlacesAll = async () => {
-    param = " ";
     await searchPlacesAll(
-      param,
       (response) => {
         console.log("전체 조회 ", response);
       },

@@ -1,12 +1,23 @@
-import { getPlaceInstance } from "../utils/place";
-
-const placeInstance = getPlaceInstance();
-
-// param값에 따라 파라미터 수정해야해!!!
+import { getAuthInstance } from "@/utils/auth.js";
+const placeInstance = getAuthInstance();
 
 // 전체
-async function searchPlacesAll(param, success, fail) {
-  await placeInstance.get(`/location`).then(success).catch(fail);
+// async function searchPlacesAll(success, fail) {
+//   await placeInstance
+//     .get(`/location?keyword=제주&pageNo=1&sizePerPage=5`)
+//     .then(success)
+//     .catch(fail);
+// }
+
+async function searchPlacesAll() {
+  try {
+    const response = await placeInstance.get(
+      `/location?keyword=제주&pageNo=1&sizePerPage=5`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // 검색어
@@ -98,3 +109,5 @@ export {
   searchPlacesKnS,
   searchPlacesKnCnS,
 };
+
+// param값에 따라 파라미터 수정해야해!!!
