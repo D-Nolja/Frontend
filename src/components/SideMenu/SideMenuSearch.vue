@@ -106,22 +106,27 @@ const stay = [{ id: 0, name: "숙박업소" }];
 
 const distance = [
   {
+    type: 1,
     id: 0,
     name: "상관없음",
   },
   {
+    type: 1,
     id: 3,
     name: "3km 이내 ",
   },
   {
+    type: 1,
     id: 5,
     name: "5km 이내 ",
   },
   {
+    type: 1,
     id: 10,
     name: "10km 이내 ",
   },
   {
+    type: 1,
     id: 20,
     name: "20km 이내 ",
   },
