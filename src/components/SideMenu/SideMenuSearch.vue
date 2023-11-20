@@ -38,7 +38,7 @@ import { storeToRefs } from "pinia";
 import { onMounted, ref, watch } from "vue";
 
 const placeStore = usePlaceStore();
-let { getPlacesData  } = storeToRefs(placeStore);
+let { getPlacesData } = storeToRefs(placeStore);
 let places = ref(null);
 const {
   getPlacesAll,
@@ -51,32 +51,29 @@ const {
   // getPlacesKnCnS,
 } = placeStore;
 
-
-onMounted(async()=>{
+onMounted(async () => {
   try {
     console.log("검색");
     await getPlacesAll();
-    places.value = getPlacesData.value; 
+    places.value = getPlacesData.value;
   } catch (error) {
     console.log("search error ", error);
   }
 
   console.log("!! ", getPlacesData.value);
-})
-
+});
 
 watch(() => {
   places.value = getPlacesData.value;
-
-})
+});
 
 // 얘네도 따로 빼야
 const fcl = [
-  { type:0,  id: 0, name: "전체" },
-  { type:0, id: 1, name: "동물병원" },
-  { type:0, id: 2, name: "동물약국" },
-  { type:0, id: 3, name: "미용" },
-  { type:0, id: 4, name: "반려동물용품" },
+  { type: 0, id: 0, name: "전체" },
+  { type: 0, id: 1, name: "동물병원" },
+  { type: 0, id: 2, name: "동물약국" },
+  { type: 0, id: 3, name: "미용" },
+  { type: 0, id: 4, name: "반려동물용품" },
 ];
 const spot = [
   {
@@ -129,8 +126,6 @@ const distance = [
     name: "20km 이내 ",
   },
 ];
-
-
 </script>
 
 <style>

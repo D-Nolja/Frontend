@@ -23,12 +23,22 @@ sizePerPage
 category
  */
 async function searchPlacesCategory(param, success, fail) {
-  await placeInstance
-    .get(
-      `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&category=${param.category}`
-    )
-    .then(success)
-    .catch(fail);
+  if (param.category == null) {
+    console.log("category null 값임.");
+    await placeInstance
+      .get(
+        `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}`
+      )
+      .then(success)
+      .catch(fail);
+  } else {
+    await placeInstance
+      .get(
+        `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&category=${param.category}`
+      )
+      .then(success)
+      .catch(fail);
+  }
 }
 
 // 최단거리
