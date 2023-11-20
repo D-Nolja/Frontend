@@ -25,10 +25,14 @@
 <script setup>
 import SideMenuSelect from "../SideMenu/SideMenuSelect.vue";
 import SideMenuSearch from "../SideMenu/SideMenuSearch.vue";
+import { usePlaceStore } from "@/stores/place.js";
+import { storeToRefs } from "pinia";
 import { ref, onMounted, onUnmounted } from "vue";
-
 import { useRoute } from "vue-router";
 import { watchEffect, computed } from "vue";
+
+const placeStore = usePlaceStore();
+const { places } = storeToRefs(placeStore);
 
 const emit = defineEmits("markPlace");
 function handleMarkPlace(place) {
@@ -55,48 +59,48 @@ const filterdDayPlans = computed(() => {
   }
 });
 
-const places = ref([
-  {
-    name: "혜인식탁",
-    type: "맛집",
-    x: "33.24833404783013",
-    y: "126.56835909631332",
-    address: "도로명 주소1",
-    tel: "010-1234-1234",
-    openopenTime: "11:30 ~ 16:00",
-    info: "반려동물 동반 가능 / 무료",
-  },
-  {
-    name: "원빈식탁",
-    type: "맛집",
-    x: "33.27874670832252",
-    y: "126.70801347099405",
-    address: "도로명 주소1",
-    tel: "010-9876-9876",
-    openopenTime: "12:30 ~ 15:00",
-    info: "반려동물 동반 가능 / 무료",
-  },
-  {
-    name: "형민식탁",
-    type: "맛집",
-    x: "33.239221362414035",
-    y: "126.60445492699344",
-    address: "도로명 주소1",
-    tel: "010-9876-9876",
-    openopenTime: "12:30 ~ 15:00",
-    info: "반려동물 동반 가능 / 무료",
-  },
-  {
-    name: "은서식탁",
-    type: "맛집",
-    x: "33.2488301865394",
-    y: "126.32352822201112",
-    address: "도로명 주소1",
-    tel: "010-9876-9876",
-    openopenTime: "12:30 ~ 15:00",
-    info: "반려동물 동반 가능 / 무료",
-  },
-]);
+// const places = ref([
+//   {
+//     name: "혜인식탁",
+//     type: "맛집",
+//     x: "33.24833404783013",
+//     y: "126.56835909631332",
+//     address: "도로명 주소1",
+//     tel: "010-1234-1234",
+//     openopenTime: "11:30 ~ 16:00",
+//     info: "반려동물 동반 가능 / 무료",
+//   },
+//   {
+//     name: "원빈식탁",
+//     type: "맛집",
+//     x: "33.27874670832252",
+//     y: "126.70801347099405",
+//     address: "도로명 주소1",
+//     tel: "010-9876-9876",
+//     openopenTime: "12:30 ~ 15:00",
+//     info: "반려동물 동반 가능 / 무료",
+//   },
+//   {
+//     name: "형민식탁",
+//     type: "맛집",
+//     x: "33.239221362414035",
+//     y: "126.60445492699344",
+//     address: "도로명 주소1",
+//     tel: "010-9876-9876",
+//     openopenTime: "12:30 ~ 15:00",
+//     info: "반려동물 동반 가능 / 무료",
+//   },
+//   {
+//     name: "은서식탁",
+//     type: "맛집",
+//     x: "33.2488301865394",
+//     y: "126.32352822201112",
+//     address: "도로명 주소1",
+//     tel: "010-9876-9876",
+//     openopenTime: "12:30 ~ 15:00",
+//     info: "반려동물 동반 가능 / 무료",
+//   },
+// ]);
 
 const dayPlans = ref([
   {

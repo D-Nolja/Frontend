@@ -35,8 +35,6 @@ const testDays = computed(() => {
       color: clickedButton.value == i ? "blue" : "white",
     });
   }
-  console.log(tmpDays);
-
   return tmpDays;
 });
 

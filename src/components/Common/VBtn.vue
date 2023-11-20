@@ -19,11 +19,9 @@ const props = defineProps({
 // console.log(props.color)
 
 watchEffect(() => {
-  console.log(props.color);
   if (props.color === "white") {
     btnColor.value = "#fff";
     fontColor.value = "#333";
-    console.log(props.color);
   } else {
     btnColor.value = "#4285F4";
     fontColor.value = "#fff";
