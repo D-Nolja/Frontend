@@ -5,11 +5,12 @@
 <script setup>
 import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, watchEffect } from "vue";
 const { VITE_APP_KAKAO_API_KEY } = import.meta.env;
 const placeStore = usePlaceStore();
-let { places } = storeToRefs(placeStore);
-console.log("!! ", places.value);
+// let { places } = storeToRefs(placeStore);
+let { getPlacesData  } = storeToRefs(placeStore);
+// console.log("!! ", getPlacesData);
 
 let map = ref(null);
 
@@ -18,6 +19,14 @@ onMounted(() => {
   placeSearch();
   // testMarker();
 });
+
+
+watch(()=>{
+  console.log("watch ", getPlacesData.value)
+  placeSearch();
+}) 
+
+
 
 const initMap = () => {
   const container = document.getElementById("map");
@@ -70,8 +79,8 @@ const loadMap = () => {
 // }
 
 function placeSearch() {
-  console.log(places.value);
-  places.value.forEach((place) => {
+  console.log("placeSearch ", getPlacesData.value)
+  getPlacesData.value.forEach((place) => {
     console.log(place.y, place.x);
 
     // let markerImage = createMarkerImgOptions();

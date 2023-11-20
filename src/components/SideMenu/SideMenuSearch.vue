@@ -33,12 +33,26 @@
 <script setup>
 import VPlaceCardBig from "@/components/Common/cards/VPlaceCardBig.vue";
 import VDropdown from "../Common/VDropdown.vue";
-import { usePlaceStore } from "@/stores/place.js";
+import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
 const placeStore = usePlaceStore();
-const { places, searchParams } = storeToRefs(placeStore);
+let { getPlacesData  } = storeToRefs(placeStore);
+let places = ref(null);
+
+onMounted(async()=>{
+  try {
+    console.log("검색")
+    await getPlacesAll();
+  } catch (error) {
+    console.log("search error ", error);
+  }
+
+  console.log("!! ", getPlacesData.value);
+  places.value = getPlacesData.value; 
+})
+
 const {
   getPlacesAll,
   // getPlacesKeyword,
@@ -50,6 +64,8 @@ const {
   // getPlacesKnCnS,
 } = placeStore;
 
+
+// 얘네도 따로 빼야
 const fcl = [
   { id: 0, name: "전체" },
   { id: 1, name: "동물병원" },
@@ -109,14 +125,7 @@ const distance = [
   },
 ];
 
-onMounted(async () => {
-  // 전체 검색
-  try {
-    await getPlacesAll();
-  } catch (error) {
-    console.log("search error ", error);
-  }
-});
+
 </script>
 
 <style>

@@ -2,22 +2,8 @@ import { getAuthInstance } from "@/utils/auth.js";
 const placeInstance = getAuthInstance();
 
 // 전체
-// async function searchPlacesAll(success, fail) {
-//   await placeInstance
-//     .get(`/location?keyword=제주&pageNo=1&sizePerPage=5`)
-//     .then(success)
-//     .catch(fail);
-// }
-
-async function searchPlacesAll() {
-  try {
-    const response = await placeInstance.get(
-      `/location?keyword=제주&pageNo=1&sizePerPage=5`
-    );
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+async function searchPlacesAll(success, fail) {
+  await placeInstance.get(`/location`).then(success).catch(fail);
 }
 
 // 검색어
