@@ -40,19 +40,6 @@ import { onMounted, ref } from "vue";
 const placeStore = usePlaceStore();
 let { getPlacesData  } = storeToRefs(placeStore);
 let places = ref(null);
-
-onMounted(async()=>{
-  try {
-    console.log("검색")
-    await getPlacesAll();
-  } catch (error) {
-    console.log("search error ", error);
-  }
-
-  console.log("!! ", getPlacesData.value);
-  places.value = getPlacesData.value; 
-})
-
 const {
   getPlacesAll,
   // getPlacesKeyword,
@@ -63,6 +50,18 @@ const {
   // getPlacesKnS,
   // getPlacesKnCnS,
 } = placeStore;
+
+onMounted(async()=>{
+  try {
+    console.log("검색");
+    await getPlacesAll();
+    places.value = getPlacesData.value; 
+  } catch (error) {
+    console.log("search error ", error);
+  }
+  console.log("!! ", getPlacesData.value);
+})
+
 
 
 // 얘네도 따로 빼야

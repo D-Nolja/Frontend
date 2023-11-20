@@ -8,26 +8,24 @@ import { storeToRefs } from "pinia";
 import { ref, onMounted, watch, watchEffect } from "vue";
 const { VITE_APP_KAKAO_API_KEY } = import.meta.env;
 const placeStore = usePlaceStore();
-// let { places } = storeToRefs(placeStore);
 let { getPlacesData  } = storeToRefs(placeStore);
-// console.log("!! ", getPlacesData);
-
+let places = ref(null);
 let map = ref(null);
 
 onMounted(() => {
+
   loadMap();
+  places.value = getPlacesData.value;
+  console.log("vmap ", places.value)
   placeSearch();
   // testMarker();
 });
 
 
-watch(()=>{
-  console.log("watch ", getPlacesData.value)
+watchEffect(()=>{
+  places.value = getPlacesData.value;
   placeSearch();
-}) 
-
-
-
+})
 const initMap = () => {
   const container = document.getElementById("map");
   const options = {
@@ -79,13 +77,11 @@ const loadMap = () => {
 // }
 
 function placeSearch() {
-  console.log("placeSearch ", getPlacesData.value)
-  getPlacesData.value.forEach((place) => {
+  console.log("placeSearch ", places.value)
+  places.value.forEach((place) => {
     console.log(place.y, place.x);
-
     // let markerImage = createMarkerImgOptions();
     // displayMarker(place, markerImage);
-
     displayMarker(place);
   });
 }
@@ -107,28 +103,11 @@ function displayMarker(place) {
 //   marker.setMap(map.value);
 // }
 
-// const props = defineProps({
-//   clickedPlace: {
-//     type: Object,
-//     default() {
-//       return {
-//         name: "형민식탁",
-//         type: "맛집",
-//         x: "33.239221362414035",
-//         y: "126.60445492699344",
-//         address: "도로명 주소1",
-//         tel: "010-9876-9876",
-//         openTime: "12:30 ~ 15:00",
-//         info: "반려동물 동반 가능 / 무료",
-//       };
-//     },
-//   },
-// });
 
 // watch(
 //   () => props.clickedPlace,
 //   (newVal) => {
-//     console.log("clickedPlace prop 변경됨:", newVal);
+//     console.log("clickedPlace props 변경됨:", newVal);
 
 //     const markerImage = createMarkerImage(
 //       markerImgSrc,
