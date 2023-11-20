@@ -14,34 +14,16 @@
         data-aos-duration="1500"
       />
     </div>
-    <div
-      class="main-card2-container"
-      data-aos="fade-left"
-      data-aos-duration="3000"
-    >
-      뭐
-    </div>
-    <div
-      class="main-card3-container"
-      data-aos="fade-right"
-      data-aos-duration="3000"
-    >
-      넣을지
-    </div>
-    <div
-      class="main-card4-container"
-      data-aos="fade-up"
-      data-aos-duration="3000"
-    >
-      모르겠어요..
-    </div>
+    <VBanner />
+    <VNews />
   </div>
 </template>
 
 <script setup>
 import VHero from "./VHero.vue";
 import VMainCard from "./VMainCard.vue";
-
+import VBanner from "./VBanner.vue";
+import VNews from "./VNews.vue";
 const mainCardTxt = [
   {
     iconSrc: "/mainCardIcon/mc_icon1.svg",
