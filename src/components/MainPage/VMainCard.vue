@@ -21,33 +21,32 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   width: 29.5vw;
-  height: 350px;
+  height: 300px;
   background: #fff;
-  box-shadow: 0px 5.6px 140px 0px rgba(175, 173, 181, 0.1);
+  box-shadow: 0px 7px 140px 0px rgba(175, 173, 181, 0.1);
   border-radius: 1.9375rem;
-  padding: 20px;
+  padding: 25px;
+  color: #444;
 }
 
 #mc-icon {
   border-radius: 50%;
-  background-color: #f9f9f9;
-  width: 86.8px;
-  height: 86.8px;
+  /* background-color: #f9f9f9; */
+  width: 85px;
+  height: 85px;
   text-align: center;
   line-height: 86.8px;
-  color: #dcdcdc;
   margin-bottom: 20px;
 }
 
 #mc-title {
-  color: #c8c8c8;
   font-size: 28px;
-  font-weight: 400;
-  padding-bottom: 10px;
+  font-weight: 600;
+  padding: 10px 0;
 }
 
 #mc-sub-title {
-  color: #c8c8c8;
+  padding: 5px 0;
   font-size: 18px;
   font-weight: 400;
   line-height: 25px; /* 45.36px */
