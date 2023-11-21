@@ -29,22 +29,12 @@ sizePerPage
 category
  */
 async function searchPlacesCategory(param, success, fail) {
-  if (param.category == null) {
-    console.log("category null 값임.");
-    await placeInstance
-      .get(
-        `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}`
-      )
-      .then(success)
-      .catch(fail);
-  } else {
-    await placeInstance
-      .get(
-        `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&category=${param.category}`
-      )
-      .then(success)
-      .catch(fail);
-  }
+  await placeInstance
+    .get(
+      `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 // 최단거리
@@ -72,7 +62,12 @@ keyWord
 category
  */
 async function searchPlacesKnC(param, success, fail) {
-  await placeInstance.get(`/shortest`).then(success).catch(fail);
+  await placeInstance
+    .get(
+      `/location?keyword=${param.keyword}&currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&category=${param.category}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 // 카테고리+최단거리
@@ -107,7 +102,13 @@ maxCount
 keyword
 */
 async function searchPlacesKnS(param, success, fail) {
-  await placeInstance.get(`/shortest`).then(success).catch(fail);
+  console.log("kns ", param);
+  await placeInstance
+    .get(
+      `shortest?x=${param.x}&y=${param.y}&limit=${param.limit}&maxCount=${param.maxCount}&keyword=${param.keyword}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 // 검색어+카테고리+최단거리
@@ -121,6 +122,7 @@ keyword
 */
 
 async function searchPlacesKnCnS(param, success, fail) {
+  console.log("kns param ", param);
   await placeInstance
     .get(
       `/shortest?x=${param.x}&y=${param.y}&limit=${param.limit * 10}&maxCount=${

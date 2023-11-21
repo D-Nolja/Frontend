@@ -17,21 +17,36 @@
 <script setup>
 import { usePlaceStore } from "@/stores/place.js";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const placeStore = usePlaceStore();
 const { searchParams, getCurrentLoc, currentLatLng } = storeToRefs(placeStore);
+
+
+
 const {
   getPlacesCategory,
   updateCurrentLocation,
   getPlacesShortest,
   getPlacesCnS,
   getPlacesKnCnS,
+
+  selectSearchMethod,
 } = placeStore;
+
+
 
 const props = defineProps({
   name: String,
   items: Array,
+});
+
+onMounted(() => {
+  searchParams.value.category = null;
+  searchParams.value.keyword = null;
+  searchParams.value.limit = null;
+
+  console.log("start ", searchParams.value);
 });
 
 const selectedName = ref(props.name);
@@ -49,21 +64,17 @@ function handleMenuItemClick(event) {
 }
 
 async function selectMethod(clickedItem) {
+  console.log("clicked!!!! in selectMethod");
   if (clickedItem.type == 0) {
     searchParams.value.category =
       clickedItem.name == "전체" ? null : clickedItem.name;
     console.log("search ", searchParams.value);
-
-    try {
-      await getPlacesCategory();
-    } catch (error) {
-      console.log(error);
-    }
   } else if (clickedItem.type == 1) {
+    console.log("거리거리거리거리");
     await updateCurrentLocation();
 
     // 현재 위치 중심 (제주도에서만 사용 가능)
-    // searchParams.value.limit = parseFloat(clickedItem.id);
+    searchParams.value.limit = parseFloat(clickedItem.id);
     // searchParams.value.x = currentLatLng.value.x;
     // searchParams.value.y = currentLatLng.value.y;
 
@@ -71,29 +82,15 @@ async function selectMethod(clickedItem) {
     searchParams.value.y = 33.473645;
     console.log("파람파람파람 ", searchParams.value);
 
-    startSearch();
+    // startSearch();
   }
+
 }
 
-const startSearch = async () => {
-  try {
-    if (
-      searchParams.value.category == "" ||
-      searchParams.value.category == null
-    ) {
-      await getPlacesShortest();
-    } else if (
-      searchParams.value.keyword == "" ||
-      searchParams.value.keyword == null
-    ) {
-      await getPlacesCnS();
-    } else {
-      await getPlacesKnCnS();
-    }
-  } catch (error) {
-    console.log("keyword 포함 search error ", error);
-  }
-};
+
+
+
+
 
 function openDropdown() {}
 </script>
