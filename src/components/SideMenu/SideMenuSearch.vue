@@ -8,25 +8,15 @@
           <VDropdown name="거리 순" :items="distance" />
         </div>
       </div>
-      <input
-        type="text"
-        placeholder="관련 검색어를 입력해보세요"
-        id="ss-input"
-      />
-      <label id="ss-checkbox"
-        ><input type="checkbox" name="parking" />
-        <p>주차 가능</p></label
-      >
+      <input type="text" placeholder="관련 검색어를 입력해보세요" id="ss-input" />
+      <label id="ss-checkbox"><input type="checkbox" name="parking" />
+        <p>주차 가능</p>
+      </label>
     </div>
 
     <div class="fixed-section" id="section1">
-      <VPlaceCardBig
-        v-for="place in places"
-        :key="place"
-        :place="place"
-        cardColor="blue"
-        @click.prevent="getClickedPlace"
-      />
+      <VPlaceCardBig v-for="place in places" :key="place.id" :place="place" cardColor="blue"
+        @click.prevent="getClickedPlace" />
     </div>
   </div>
 </template>
@@ -200,6 +190,7 @@ const distance = [
   display: flex;
   justify-content: space-around;
 }
+
 #ss-input {
   border-radius: 10px;
   background-color: #fff;
@@ -229,8 +220,10 @@ const distance = [
 }
 
 .fixed-section {
-  width: 300px; /* 고정 섹션의 너비 */
-  flex-shrink: 0; /* 섹션 크기 유지 */
+  width: 300px;
+  /* 고정 섹션의 너비 */
+  flex-shrink: 0;
+  /* 섹션 크기 유지 */
   display: flex;
   flex-direction: column;
   align-items: center;

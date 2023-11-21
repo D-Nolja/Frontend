@@ -1,4 +1,5 @@
 <script setup>
+
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useHeaderStateStore } from "@/stores/headerState.js";
@@ -12,6 +13,8 @@ const userStore = useUserStore();
 const { userLogout, getUserInfo } = userStore;
 
 const router = useRouter();
+
+
 
 const moveMain = () => {
   router.push({ name: "home" });
