@@ -31,7 +31,8 @@ const login = async () => {
     if (isLogin.value) {
       changeHeaderState(isLogin.value);
       router.push({ name: "home" });
-      // await initializeStore();
+
+      await initializeStore();
     } else {
       loginUser.value.password = "";
       loginUser.value.email = "";
