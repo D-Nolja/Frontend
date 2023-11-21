@@ -5,30 +5,39 @@
 <script setup>
 import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
-import { ref, onMounted, watchEffect } from "vue";
+import { ref, onMounted, watchEffect, watch } from "vue";
 const { VITE_APP_KAKAO_API_KEY } = import.meta.env;
 const placeStore = usePlaceStore();
 let { searchPlaces, clickedPlace } = storeToRefs(placeStore);
 let places = ref(null);
 let map = ref(null);
 let mapLoaded = ref(false);
+let changeClicked = ref(false);
 
 onMounted(() => {
-  if (searchPlaces.value != null) {
+  if (searchPlaces != null) {
+    // clickedPlace.value = null;
     loadMap();
   }
 });
 
-watchEffect(() => {
-  if (mapLoaded.value && searchPlaces.value) {
-    console.log("!!");
-
+watch(searchPlaces, (newValue, oldValue) => {
+  if (mapLoaded.value && newValue != oldValue) {
     clearMarkers();
-
-    places.value = searchPlaces.value;
+    places.value = newValue;
+    console.log("값은 바뀔까?");
+    console.log("안바뀌는게 이상함", places.value);
     placeSearch();
   }
-});
+}, { immediate: true })
+
+watch(clickedPlace, (newValue, oldValue) => {
+  if (mapLoaded.value && newValue != oldValue) {
+    changeClicked.value = true;
+    clearMarkers();
+    placeSearch();
+  }
+}, { immediate: true })
 
 let markers = ref([]);
 function clearMarkers() {
@@ -64,21 +73,24 @@ function placeSearch() {
   if (!places.value || places.value.length === 0 || !map.value) return; // 비어있는 경우 처리
 
   const bounds = new kakao.maps.LatLngBounds(); // bounds 초기화
-
-  if (clickedPlace.value != null) {
-    for (const place of places.value) {
-      if (place.id == clickedPlace.value.id) {
-        console.log("안녕");
-        displayMarker(place, bounds);
+  if (changeClicked.value == true) {
+    for (let i = 0; i < places.value.length; i++) {
+      let target = places.value[i];
+      if (target.id == clickedPlace.value.id) {
+        console.log("target ", target)
+        displayMarker(target, bounds);
         break;
       }
+
     }
   } else {
+    console.log("여기는..?")
     places.value.forEach((place) => {
       displayMarker(place, bounds);
     });
   }
 
+  changeClicked.value = false;
   if (map.value) {
     map.value.setBounds(bounds); // 지도의 경계를 설정
   }
@@ -125,23 +137,7 @@ function displayMarker(place, bounds) {
 //   marker.setMap(map.value);
 // }
 
-// watch(
-//   () => props.clickedPlace,
-//   (newVal) => {
-//     console.log("clickedPlace props 변경됨:", newVal);
 
-//     const markerImage = createMarkerImage(
-//       markerImgSrc,
-//       markerImgSize,
-//       markerImgOptions
-//     );
-
-//     displayMarker(newVal, markerImage);
-//   },
-//   { deep: true }
-// );
-
-// const bounds = new kakao.maps.LatLngBounds();
 </script>
 
 <style scoped>
