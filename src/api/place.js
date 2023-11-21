@@ -3,6 +3,7 @@ const placeInstance = getAuthInstance();
 
 // 전체
 async function searchPlacesAll(success, fail) {
+  console.log("token ", sessionStorage.getItem("accessToken"));
   await placeInstance.get(`/location`).then(success).catch(fail);
 }
 

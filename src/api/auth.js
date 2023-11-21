@@ -3,13 +3,13 @@ import { getAuthInstance } from "@/utils/auth.js";
 const auth = getAuthInstance();
 
 async function login(param, success, fail) {
+  console.log("로그인");
   await auth.post(`/login`, param).then(success).catch(fail);
 }
 
 async function logout(success, fail) {
-  await auth.get(`/logout`).then(success).catch(fail);
+  await auth.post(`/logout`).then(success).catch(fail);
 }
-
 // tokenRegeneration 넣어야 해.
 
 async function join(param, success, fail) {

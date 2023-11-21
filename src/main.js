@@ -16,6 +16,7 @@ import App from "./App.vue";
 import router from "./router";
 
 // Store 임포트
+import { storeToRefs } from "pinia";
 import { usePlaceStore } from "@/stores/place.js";
 import { useHeaderStateStore } from "@/stores/headerState.js";
 import { useUserStore } from "@/stores/user.js";
@@ -34,13 +35,11 @@ app.use(Antd);
 const userStore = useUserStore();
 const placeStore = usePlaceStore();
 const headerStateStore = useHeaderStateStore();
-
+const { isLogin } = storeToRefs(userStore);
 // Store 초기화 및 로그인 상태 확인
 userStore.checkInitialLoginState();
-// headerStateStore.initializeStore();
+headerStateStore.changeHeaderState(isLogin.value);
 
 // 애플리케이션 마운트 및 AOS 초기화
-placeStore.initializeStore().then(() => {
-  app.mount("#app");
-  app.AOS = new AOS.init();
-});
+app.mount("#app");
+app.AOS = new AOS.init();

@@ -69,8 +69,8 @@ export const useUserStore = defineStore("userStore", () => {
     );
   };
 
-  const getUserInfo = () => {
-    searchUserDetail(
+  const getUserInfo = async () => {
+    await searchUserDetail(
       (response) => {
         let { data } = response;
         userInfo.value = data.info;
