@@ -8,6 +8,15 @@ import { RouterView } from "vue-router";
 // import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
 // import VButton f∏rom './components/VButton.vue';
 // import PlanView from './views/PlanView.vue';
+import { onMounted } from "vue";
+import {useHeaderStateStore} from "@/stores/headerState.js";
+import { storeToRefs } from "pinia";
+const headerStateStore = useHeaderStateStore();
+// const {headerItemList} = storeToRefs(headerStateStore);
+
+// onMounted(()=>{
+//   console.log(headerItemList);
+// })
 </script>
 
 <template>

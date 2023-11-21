@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref, watch, watchEffect } from "vue";
+import { ref, onMounted } from "vue";
 import {
   searchPlacesAll,
   searchPlacesKeyword,
@@ -11,43 +11,45 @@ import {
   searchPlacesKnCnS,
 } from "@/api/place.js";
 
-export const usePlaceStore = defineStore("headerStateStore", () => {
-  const searchPlaces = ref([
-    {
-      id: 1,
-      name: "24시동물병원",
-      category: "fcl",
-      type: "동물병원",
-      x: 126.530033,
-      y: 33.49271794,
-      address: "제주특별자치도 제주시 도남동  연삼로353",
-      tel: "647022475",
-      openTime: "월~금 09:00~19:00",
-      parking: "N",
-      info: "모두 가능",
-      img: "https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20191221_26%2F1576910573697wAjVI_JPEG%2FV_DGwIxmBV_x7kCpgxFKVzci.jpg",
-    },
-  ]); // 배열값
-  const clickedPlace = ref(null);
+export const usePlaceStore = defineStore(
+  "placeStore",
+  () => {
+    const searchPlaces = ref([
+      {
+        id: 1,
+        name: "24시동물병원",
+        category: "fcl",
+        type: "동물병원",
+        x: 126.530033,
+        y: 33.49271794,
+        address: "제주특별자치도 제주시 도남동  연삼로353",
+        tel: "647022475",
+        openTime: "월~금 09:00~19:00",
+        parking: "N",
+        info: "모두 가능",
+        img: "https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20191221_26%2F1576910573697wAjVI_JPEG%2FV_DGwIxmBV_x7kCpgxFKVzci.jpg",
+      },
+    ]); // 배열값
+    const clickedPlace = ref(null);
 
-  // default value
-  const searchParams = ref({
-    x: "",
-    y: "",
-    limit: 3,
-    maxCount: 5,
-    category: "",
-    keyword: "",
-    pageNo: 1,
-    sizePerPage: 5,
-  });
+    // default value
+    const searchParams = ref({
+      x: "",
+      y: "",
+      limit: 3,
+      maxCount: 5,
+      category: "",
+      keyword: "",
+      pageNo: 1,
+      sizePerPage: 5,
+    });
 
-  const currentLatLng = ref({
-    x: null,
-    y: null,
-  });
+    const currentLatLng = ref({
+      x: null,
+      y: null,
+    });
 
-  /*
+    /*
 1)
 {
   x : "",
@@ -70,160 +72,167 @@ keyWord
 category
 */
 
-  const getCurrentLoc = async () => {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const latLng = {
-            x: position.coords.longitude,
-            y: position.coords.latitude,
-          };
-          resolve(latLng);
+    const initializeStore = async () => {
+      await getPlacesAll();
+    };
+
+    const getCurrentLoc = async () => {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const latLng = {
+              x: position.coords.longitude,
+              y: position.coords.latitude,
+            };
+            resolve(latLng);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    };
+
+    const updateCurrentLocation = async () => {
+      try {
+        const latLng = await getCurrentLoc();
+        currentLatLng.value = latLng;
+      } catch (error) {
+        console.error("위치 정보를 가져오는 데 실패했습니다.", error);
+      }
+    };
+
+    const getPlacesAll = async () => {
+      console.log("getPlacesAll");
+      await searchPlacesAll(
+        (response) => {
+          console.log("전체 조회 ", response);
+          let { data } = response;
+          searchPlaces.value = data.info.searchResult;
         },
         (error) => {
-          reject(error);
+          console.log("getAllPlaces ", error);
         }
       );
-    });
-  };
+    };
 
-  const updateCurrentLocation = async () => {
-    try {
-      const latLng = await getCurrentLoc();
-      currentLatLng.value = latLng;
-    } catch (error) {
-      console.error("위치 정보를 가져오는 데 실패했습니다.", error);
-    }
-  };
+    const getPlacesKeyword = async () => {
+      await searchPlacesKeyword(
+        "",
+        (response) => {
+          console.log("[검색어] 시설조회 ", response);
+        },
+        (error) => {
+          console.log("getPlacesKeyword ", error);
+        }
+      );
+    };
 
-  const getPlacesAll = async () => {
-    console.log("getPlacesAll");
-    await searchPlacesAll(
-      (response) => {
-        console.log("전체 조회 ", response);
-        let { data } = response;
-        searchPlaces.value = data.info.searchResult;
-      },
-      (error) => {
-        console.log("getAllPlaces ", error);
-      }
-    );
-  };
+    const getPlacesCategory = async () => {
+      await searchPlacesCategory(
+        searchParams.value,
+        (response) => {
+          console.log("[카테고리] 시설조회 ", response);
+          let { data } = response;
+          searchPlaces.value = data.info.searchResult;
+          console.log("places : ", searchPlaces.value);
+        },
+        (error) => {
+          console.log("getPlacesCategory ", error);
+        }
+      );
+    };
 
-  const getPlacesKeyword = async () => {
-    await searchPlacesKeyword(
-      "",
-      (response) => {
-        console.log("[검색어] 시설조회 ", response);
-      },
-      (error) => {
-        console.log("getPlacesKeyword ", error);
-      }
-    );
-  };
+    const getPlacesShortest = async () => {
+      await searchPlacesShortest(
+        searchParams.value,
+        (response) => {
+          console.log("[최단거리] 시설조회 ", response);
+          let { data } = response;
+          console.log("data ", data);
+          console.log("data 길이 ", data.result.length);
 
-  const getPlacesCategory = async () => {
-    await searchPlacesCategory(
-      searchParams.value,
-      (response) => {
-        console.log("[카테고리] 시설조회 ", response);
-        let { data } = response;
-        searchPlaces.value = data.info.searchResult;
-        console.log("places : ", searchPlaces.value);
-      },
-      (error) => {
-        console.log("getPlacesCategory ", error);
-      }
-    );
-  };
+          let arrays = data.result;
+          let temp = [];
+          arrays.forEach((array) => {
+            temp.push(array.targetLocation);
+          });
 
-  const getPlacesShortest = async () => {
-    await searchPlacesShortest(
-      searchParams.value,
-      (response) => {
-        console.log("[최단거리] 시설조회 ", response);
-        let { data } = response;
-        console.log("data ", data);
-        console.log("data 길이 ", data.result.length);
+          console.log("temp : ", temp);
+          searchPlaces.value = temp;
+        },
+        (error) => {
+          console.log("getPlacesShortest ", error);
+        }
+      );
+    };
 
-        let arrays = data.result;
-        let temp = [];
-        arrays.forEach((array) => {
-          temp.push(array.targetLocation);
-        });
+    const getPlacesKnC = async () => {
+      await searchPlacesKnC(
+        "",
+        (response) => {
+          console.log("[검색어+카테고리] 시설조회 ", response);
+        },
+        (error) => {
+          console.log("getPlacesKnC ", error);
+        }
+      );
+    };
 
-        console.log("temp : ", temp);
-        searchPlaces.value = temp;
-      },
-      (error) => {
-        console.log("getPlacesShortest ", error);
-      }
-    );
-  };
+    const getPlacesCnS = async () => {
+      await searchPlacesCnS(
+        "",
+        (response) => {
+          console.log("[카테고리+최단거리] 시설조회 ", response);
+        },
+        (error) => {
+          console.log("getPlacesCnS ", error);
+        }
+      );
+    };
 
-  const getPlacesKnC = async () => {
-    await searchPlacesKnC(
-      "",
-      (response) => {
-        console.log("[검색어+카테고리] 시설조회 ", response);
-      },
-      (error) => {
-        console.log("getPlacesKnC ", error);
-      }
-    );
-  };
+    const getPlacesKnS = async () => {
+      await searchPlacesKnS(
+        "",
+        (response) => {
+          console.log("[검색어+카테고리] 시설조회 ", response);
+        },
+        (error) => {
+          console.log("getPlacesKnS ", error);
+        }
+      );
+    };
 
-  const getPlacesCnS = async () => {
-    await searchPlacesCnS(
-      "",
-      (response) => {
-        console.log("[카테고리+최단거리] 시설조회 ", response);
-      },
-      (error) => {
-        console.log("getPlacesCnS ", error);
-      }
-    );
-  };
+    const getPlacesKnCnS = async () => {
+      await searchPlacesKnCnS(
+        "",
+        (response) => {
+          console.log("[검색어+카테고리+최단거리] 시설조회 ", response);
+        },
+        (error) => {
+          console.log("getPlacesKnCnS ", error);
+        }
+      );
+    };
 
-  const getPlacesKnS = async () => {
-    await searchPlacesKnS(
-      "",
-      (response) => {
-        console.log("[검색어+카테고리] 시설조회 ", response);
-      },
-      (error) => {
-        console.log("getPlacesKnS ", error);
-      }
-    );
-  };
-
-  const getPlacesKnCnS = async () => {
-    await searchPlacesKnCnS(
-      "",
-      (response) => {
-        console.log("[검색어+카테고리+최단거리] 시설조회 ", response);
-      },
-      (error) => {
-        console.log("getPlacesKnCnS ", error);
-      }
-    );
-  };
-
-  return {
-    // places,
-    currentLatLng,
-    searchParams,
-    searchPlaces,
-    getPlacesAll,
-    getPlacesKeyword,
-    getPlacesCategory,
-    getPlacesShortest,
-    getPlacesKnC,
-    getPlacesCnS,
-    getPlacesKnS,
-    getPlacesKnCnS,
-    getCurrentLoc,
-    updateCurrentLocation,
-    clickedPlace,
-  };
-});
+    return {
+      // places,
+      currentLatLng,
+      searchParams,
+      searchPlaces,
+      getPlacesAll,
+      getPlacesKeyword,
+      getPlacesCategory,
+      getPlacesShortest,
+      getPlacesKnC,
+      getPlacesCnS,
+      getPlacesKnS,
+      getPlacesKnCnS,
+      getCurrentLoc,
+      updateCurrentLocation,
+      clickedPlace,
+      initializeStore,
+    };
+  },
+  { persist: true }
+);
