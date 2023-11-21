@@ -15,9 +15,9 @@
     <VBanner data-aos="slide-up" data-aos-duration="1000" />
 
     <VNews
-      data-aos="slide-left"
+      data-aos="fade-left"
       data-aos-easing="linear"
-      data-aos-duration="1500"
+      data-aos-duration="2000"
       class="news"
     />
   </div>
