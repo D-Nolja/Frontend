@@ -21,8 +21,13 @@ import { ref } from "vue";
 
 const placeStore = usePlaceStore();
 const { searchParams, getCurrentLoc, currentLatLng } = storeToRefs(placeStore);
-const { getPlacesCategory, updateCurrentLocation, getPlacesShortest, getPlacesCnS, getPlacesKnCnS } =
-  placeStore;
+const {
+  getPlacesCategory,
+  updateCurrentLocation,
+  getPlacesShortest,
+  getPlacesCnS,
+  getPlacesKnCnS,
+} = placeStore;
 
 const props = defineProps({
   name: String,
@@ -68,15 +73,19 @@ async function selectMethod(clickedItem) {
 
     startSearch();
   }
-
-
 }
 
 const startSearch = async () => {
   try {
-    if (searchParams.value.category == "" || searchParams.value.category == null) {
+    if (
+      searchParams.value.category == "" ||
+      searchParams.value.category == null
+    ) {
       await getPlacesShortest();
-    } else if (searchParams.value.keyword == "" || searchParams.value.keyword == null) {
+    } else if (
+      searchParams.value.keyword == "" ||
+      searchParams.value.keyword == null
+    ) {
       await getPlacesCnS();
     } else {
       await getPlacesKnCnS();
@@ -84,9 +93,9 @@ const startSearch = async () => {
   } catch (error) {
     console.log("keyword 포함 search error ", error);
   }
-}
+};
 
-function openDropdown() { }
+function openDropdown() {}
 </script>
 
 <style>
