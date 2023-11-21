@@ -19,13 +19,19 @@
     </div>
 
     <div class="fixed-section" id="section1">
+
       <VPlaceCardBig v-for="place in places" :key="place.id" :place="place" cardColor="blue"
         @click.prevent="getClickedPlace" />
+
+      <div id="pagination-container">
+        <VPagination />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import VPagination from "@/components/Common/VPagination.vue"
 import VPlaceCardBig from "@/components/Common/cards/VPlaceCardBig.vue";
 import VDropdown from "../Common/VDropdown.vue";
 import { usePlaceStore } from "@/stores/place";
@@ -227,7 +233,7 @@ const distance = [
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  margin-right: ;
+  margin-right: 3px;
 }
 
 #ss-input {
@@ -271,5 +277,12 @@ const distance = [
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#pagination-container {
+  width: 270px;
+  text-align: center;
+  position: absolute;
+  bottom: 5%;
 }
 </style>
