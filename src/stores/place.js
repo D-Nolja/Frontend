@@ -34,14 +34,14 @@ export const usePlaceStore = defineStore(
 
     // default value
     const searchParams = ref({
-      x: "",
-      y: "",
-      limit: 3,
-      maxCount: 5,
-      category: "",
-      keyword: "",
-      pageNo: 1,
-      sizePerPage: 5,
+      x: "", // 현재 위치의 경도
+      y: "", // 현재 위치의 위도
+      limit: 3, // 거리
+      maxCount: 5, //원하는 개수 출력
+      category: "", // 카테고리
+      keyword: "", // 키워드
+      pageNo: 1, // 페이지 번호
+      sizePerPage: 5, // 페이지당 조회 결과 수
     });
 
     const currentLatLng = ref({
@@ -49,6 +49,7 @@ export const usePlaceStore = defineStore(
       y: null,
     });
 
+    const totalPageCount = ref(5);
     /*
 1)
 {
@@ -109,6 +110,7 @@ category
           console.log("전체 조회 ", response);
           let { data } = response;
           searchPlaces.value = data.info.searchResult;
+          totalPageCount.value = data.info.totalPageCount;
         },
         (error) => {
           console.log("getAllPlaces ", error);
@@ -123,6 +125,7 @@ category
           console.log("[검색어] 시설조회 ", response);
           let { data } = response;
           searchPlaces.value = data.info.searchResult;
+          totalPageCount.value = data.info.totalPageCount;
         },
         (error) => {
           console.log("getPlacesKeyword ", error);
@@ -137,7 +140,12 @@ category
           console.log("[카테고리] 시설조회 ", response);
           let { data } = response;
           searchPlaces.value = data.info.searchResult;
-          console.log("places : ", searchPlaces.value);
+          console.log("[카테고리] 시설조회  places : ", searchPlaces.value);
+          console.log(
+            "[카테고리] 시설조회  totalPageCount ",
+            data.info.totalPageCount
+          );
+          totalPageCount.value = data.info.totalPageCount;
         },
         (error) => {
           console.log("getPlacesCategory ", error);
@@ -153,7 +161,7 @@ category
           let { data } = response;
           console.log("data ", data);
           console.log("data 길이 ", data.result.length);
-
+          totalPageCount.value = 5;
           let arrays = data.result;
           let temp = [];
           arrays.forEach((array) => {
@@ -194,6 +202,7 @@ category
           });
 
           searchPlaces.value = temp;
+          totalPageCount.value = 5;
         },
         (error) => {
           console.log("getPlacesCnS ", error);
@@ -218,6 +227,7 @@ category
         searchParams.value,
         (response) => {
           console.log("[검색어+카테고리+최단거리] 시설조회 ", response);
+          // totalPageCount.value = data.info.totalPageCount;
         },
         (error) => {
           console.log("getPlacesKnCnS ", error);
@@ -242,6 +252,7 @@ category
       updateCurrentLocation,
       clickedPlace,
       initializeStore,
+      totalPageCount,
     };
   },
   { persist: true }

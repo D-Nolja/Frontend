@@ -42,21 +42,8 @@ if (props.cardColor === "red") {
 
 <template>
   <div id="card-container">
-    <svg
-      width="17"
-      height="19"
-      viewBox="0 0 17 19"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect
-        x="-7"
-        y="-5"
-        width="23.9719"
-        height="23.2043"
-        rx="11.6021"
-        :fill="badgeColor"
-      />
+    <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="-7" y="-5" width="23.9719" height="23.2043" rx="11.6021" :fill="badgeColor" />
     </svg>
 
     <div id="place-container">
@@ -84,7 +71,7 @@ svg {
   margin: 5px;
   padding: 0 10px 5px 0;
   width: 250px;
-  height: 12vh;
+  height: 12.5vh;
   border-radius: 12px;
   background-color: #fff;
   box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.08) !important;
@@ -110,7 +97,7 @@ svg {
 }
 
 #place-text-container {
-  margin-right: 10px;
+  margin-right: 7px;
 }
 
 #place-info {
@@ -158,7 +145,7 @@ svg {
   font-size: 0.7rem;
   font-style: normal;
   font-weight: 400;
-  margin-right: 10px;
+  margin-right: 3px;
   line-height: normal;
   margin-bottom: 0;
 }
