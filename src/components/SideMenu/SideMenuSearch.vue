@@ -8,7 +8,11 @@
           <VDropdown name="거리 순" :items="distance" />
         </div>
       </div>
-      <input type="text" placeholder="관련 검색어를 입력해보세요" id="ss-input" />
+      <div class="search-input-container">
+        <input type="text" placeholder="관련 검색어를 입력해보세요" id="ss-input" @keyup.enter="searchKeyword" />
+        <img class="search-icon" src="../../assets/img/search.svg" alt="검색" srcset="" @click="searchKeyword">
+      </div>
+
       <label id="ss-checkbox"><input type="checkbox" name="parking" />
         <p>주차 가능</p>
       </label>
@@ -29,11 +33,11 @@ import { storeToRefs } from "pinia";
 import { onMounted, ref, watch } from "vue";
 
 const placeStore = usePlaceStore();
-let { searchPlaces, clickedPlace } = storeToRefs(placeStore);
+let { searchPlaces, clickedPlace, searchParams } = storeToRefs(placeStore);
 let places = ref(null);
 const {
   getPlacesAll,
-  // getPlacesKeyword,
+  getPlacesKeyword,
   // getPlacesCategory,
   // getPlacesShortest,
   // getPlacesKnC,
@@ -58,6 +62,20 @@ watch(() => {
   }
 });
 
+const searchKeyword = async (event) => {
+  let target = event.currentTarget.value;
+  console.log("검색어 입력", target);
+  event.currentTarget.value = "";
+
+  try {
+    searchParams.value.keyword = target;
+    console.log("searchParams ", searchParams.value);
+    await getPlacesKeyword(target);
+  } catch (error) {
+    console.log(error);
+  }
+
+}
 const getClickedPlace = (event) => {
   // console.log("card clicked ", event.currentTarget);
 
@@ -83,6 +101,10 @@ const getClickedPlace = (event) => {
     }
   });
 };
+
+
+
+
 // 얘네도 따로 빼야
 const fcl = [
   { type: 0, id: 0, name: "전체" },
@@ -191,18 +213,40 @@ const distance = [
   justify-content: space-around;
 }
 
+.search-input-container {
+  position: relative;
+  /* 컨테이너에 relative 포지셔닝 */
+  display: inline-block;
+  /* 인라인 블록 요소로 설정 */
+  width: 250px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  margin-right: ;
+}
+
 #ss-input {
   border-radius: 10px;
   background-color: #fff;
   color: #b7b7b7;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0.05rem;
   width: 250px;
   height: 2.625rem;
   border: none;
-  padding-left: 7px;
+  padding-right: 30px;
+  padding-left: 10px;
+}
+
+#ss-input:focus {
+  color: #333;
 }
 
 #ss-checkbox {

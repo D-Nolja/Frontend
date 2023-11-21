@@ -13,7 +13,12 @@ sizePerPage
 keyWord
  */
 async function searchPlacesKeyword(param, success, fail) {
-  await placeInstance.get("/location").then(success).catch(fail);
+  await placeInstance
+    .get(
+      `/location?keyword=${param.keyword}&currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 // 카테고리
@@ -77,8 +82,19 @@ limit
 maxCount
 category
 */
+
+// D-nolja-prod.eba-pk7qjxkg.ap-northeast-2.elasticbeanstalk.com/shortest?x=126.6456514&y=33.473645&limit=3&maxCount=5&category=카페
+
 async function searchPlacesCnS(param, success, fail) {
-  await placeInstance.get(`/shortest`).then(success).catch(fail);
+  console.log("searchPlacesCnS", param.category);
+  await placeInstance
+    .get(
+      `/shortest?x=${param.x}&y=${param.y}&limit=${param.limit * 10}&maxCount=${
+        param.maxCount
+      }&category=${param.category}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 // 검색어+최단거리
@@ -102,8 +118,16 @@ maxCount
 category
 keyword
 */
+
 async function searchPlacesKnCnS(param, success, fail) {
-  await placeInstance.get(`/shortest`).then(success).catch(fail);
+  await placeInstance
+    .get(
+      `/shortest?x=${param.x}&y=${param.y}&limit=${param.limit * 10}&maxCount=${
+        param.maxCount
+      }&keyword=${param.keyword}&category=${param.category}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 export {

@@ -5,18 +5,11 @@
       <p id="plan-date">2023.12.04 ~ 2023.</p>
     </div>
     <div id="plan-title-container">
-      <side-menu-search
-        v-if="day === 'all'"
-        :places="places"
-      ></side-menu-search>
+      <side-menu-search v-if="day === 'all'" :places="places"></side-menu-search>
 
       <div class="scrollable-section" @mousedown="startDrag">
-        <SideMenuSelect
-          v-for="dayPlan in filterdDayPlans"
-          :key="dayPlan.number"
-          :dayPlan="dayPlan"
-          @mark-place="handleMarkPlace"
-        />
+        <SideMenuSelect v-for="dayPlan in filterdDayPlans" :key="dayPlan.number" :dayPlan="dayPlan"
+          @mark-place="handleMarkPlace" />
       </div>
     </div>
   </div>
@@ -205,7 +198,8 @@ onUnmounted(() => {
 
 <style scoped>
 .side-menu {
-  width: calc(300px + 300px); /* 고정 + 스크롤 */
+  width: calc(300px + 300px);
+  /* 고정 + 스크롤 */
   max-width: 900px;
   height: 100vh;
   display: flex;

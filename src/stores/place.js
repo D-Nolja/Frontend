@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import {
   searchPlacesAll,
   searchPlacesKeyword,
@@ -118,9 +118,11 @@ category
 
     const getPlacesKeyword = async () => {
       await searchPlacesKeyword(
-        "",
+        searchParams.value,
         (response) => {
           console.log("[검색어] 시설조회 ", response);
+          let { data } = response;
+          searchPlaces.value = data.info.searchResult;
         },
         (error) => {
           console.log("getPlacesKeyword ", error);
@@ -181,9 +183,17 @@ category
 
     const getPlacesCnS = async () => {
       await searchPlacesCnS(
-        "",
+        searchParams.value,
         (response) => {
           console.log("[카테고리+최단거리] 시설조회 ", response);
+          let { data } = response;
+          let arrays = data.result;
+          let temp = [];
+          arrays.forEach((array) => {
+            temp.push(array.targetLocation);
+          });
+
+          searchPlaces.value = temp;
         },
         (error) => {
           console.log("getPlacesCnS ", error);
@@ -205,7 +215,7 @@ category
 
     const getPlacesKnCnS = async () => {
       await searchPlacesKnCnS(
-        "",
+        searchParams.value,
         (response) => {
           console.log("[검색어+카테고리+최단거리] 시설조회 ", response);
         },
