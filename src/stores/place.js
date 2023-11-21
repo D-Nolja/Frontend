@@ -49,29 +49,54 @@ export const usePlaceStore = defineStore(
       y: null,
     });
 
-    const totalPageCount = ref(5);
-    /*
-1)
-{
-  x : "",
-  y : "",
-  limit : "",
-  maxcount : "",
-  category : "",
-  keyword : "",
-  pageNo : "",
-  sizePerPag : "",
-  keyWord : "",
-  category : "".
-}
+    // 검색 메소드 선택하는 부분 start
+    function checkNull(word) {
+      if (word == "" || word == null || word == undefined) {
+        return false;
+      }
+      return true;
+    }
 
-2) 
-// 최단거리 안 구할 때
-pageNo
-sizePerPage
-keyWord
-category
-*/
+    const selectSearchMethod = async (param) => {
+      let sCate = param.category; // 카테고리
+      let sKeyword = param.keyword; // 키워드(검색어)
+      let sLimit = param.limit; //
+
+      let statusCate = checkNull(sCate);
+      let statusKeyword = checkNull(sKeyword);
+      let statusLimit = checkNull(sLimit);
+
+      console.log("checkNull", statusCate, statusKeyword, statusLimit);
+      if (statusCate && !statusKeyword && !statusLimit) {
+        console.log("cate");
+        await getPlacesCategory();
+      } else if (!statusCate && statusKeyword && !statusLimit) {
+        console.log("keyword");
+        await getPlacesKeyword();
+      } else if (!statusCate && !statusKeyword && statusLimit) {
+        console.log("shortest");
+        await getPlacesShortest();
+      } else if (statusCate && statusKeyword && !statusLimit) {
+        console.log("cate + keyword");
+        await getPlacesKnC();
+      } else if (statusCate && !statusKeyword && statusLimit) {
+        console.log("cate + shortest");
+        await getPlacesCnS();
+      } else if (!statusCate && statusKeyword && statusLimit) {
+        console.log("keyword + shortest");
+        await getPlacesKnS();
+      } else if (!statusCate && !statusKeyword && !statusLimit) {
+        console.log("all");
+        await getPlacesAll();
+      } else if (statusCate && statusKeyword && statusLimit) {
+        console.log("cate + keyword + shortest");
+        await getPlacesKnCnS();
+      }
+    };
+
+    // end
+
+    const totalPageCount = ref(5);
 
     const initializeStore = async () => {
       await getPlacesAll();
@@ -179,10 +204,13 @@ category
 
     const getPlacesKnC = async () => {
       await searchPlacesKnC(
-        "",
+        searchParams.value,
         (response) => {
           console.log("[검색어+카테고리] 시설조회 ", response);
+          let { data } = response;
+          searchPlaces.value = data.info.searchResult;
         },
+
         (error) => {
           console.log("getPlacesKnC ", error);
         }
@@ -212,9 +240,21 @@ category
 
     const getPlacesKnS = async () => {
       await searchPlacesKnS(
-        "",
+        searchParams.value,
         (response) => {
           console.log("[검색어+카테고리] 시설조회 ", response);
+          let { data } = response;
+          console.log("data ", data);
+          console.log("data 길이 ", data.result.length);
+          totalPageCount.value = 5;
+          let arrays = data.result;
+          let temp = [];
+          arrays.forEach((array) => {
+            temp.push(array.targetLocation);
+          });
+
+          console.log("temp : ", temp);
+          searchPlaces.value = temp;
         },
         (error) => {
           console.log("getPlacesKnS ", error);
@@ -228,6 +268,18 @@ category
         (response) => {
           console.log("[검색어+카테고리+최단거리] 시설조회 ", response);
           // totalPageCount.value = data.info.totalPageCount;
+          let { data } = response;
+          console.log("data ", data);
+          console.log("data 길이 ", data.result.length);
+          totalPageCount.value = 5;
+          let arrays = data.result;
+          let temp = [];
+          arrays.forEach((array) => {
+            temp.push(array.targetLocation);
+          });
+
+          console.log("temp : ", temp);
+          searchPlaces.value = temp;
         },
         (error) => {
           console.log("getPlacesKnCnS ", error);
@@ -236,7 +288,7 @@ category
     };
 
     return {
-      // places,
+      selectSearchMethod,
       currentLatLng,
       searchParams,
       searchPlaces,

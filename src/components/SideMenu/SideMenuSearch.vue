@@ -9,19 +9,34 @@
         </div>
       </div>
       <div class="search-input-container">
-        <input type="text" placeholder="관련 검색어를 입력해보세요" id="ss-input" @keyup.enter="searchKeyword" />
-        <img class="search-icon" src="../../assets/img/search.svg" alt="검색" srcset="" @click="searchKeyword">
+        <input
+          type="text"
+          placeholder="관련 검색어를 입력해보세요"
+          id="ss-input"
+          @keyup.enter="searchKeyword"
+        />
+        <img
+          class="search-icon"
+          src="../../assets/img/search.svg"
+          alt="검색"
+          srcset=""
+        />
       </div>
 
-      <label id="ss-checkbox"><input type="checkbox" name="parking" />
+      <label id="ss-checkbox"
+        ><input type="checkbox" name="parking" />
         <p>주차 가능</p>
       </label>
     </div>
 
     <div class="fixed-section" id="section1">
-
-      <VPlaceCardBig v-for="place in places" :key="place.id" :place="place" cardColor="blue"
-        @click.prevent="getClickedPlace" />
+      <VPlaceCardBig
+        v-for="place in places"
+        :key="place.id"
+        :place="place"
+        cardColor="blue"
+        @click.prevent="getClickedPlace"
+      />
 
       <div id="pagination-container">
         <VPagination />
@@ -31,7 +46,7 @@
 </template>
 
 <script setup>
-import VPagination from "@/components/Common/VPagination.vue"
+import VPagination from "@/components/Common/VPagination.vue";
 import VPlaceCardBig from "@/components/Common/cards/VPlaceCardBig.vue";
 import VDropdown from "../Common/VDropdown.vue";
 import { usePlaceStore } from "@/stores/place";
@@ -50,6 +65,7 @@ const {
   // getPlacesCnS,
   // getPlacesKnS,
   // getPlacesKnCnS,
+  selectSearchMethod,
 } = placeStore;
 
 onMounted(async () => {
@@ -70,18 +86,11 @@ watch(() => {
 
 const searchKeyword = async (event) => {
   let target = event.currentTarget.value;
-  console.log("검색어 입력", target);
-  event.currentTarget.value = "";
-
-  try {
-    searchParams.value.keyword = target;
-    console.log("searchParams ", searchParams.value);
-    await getPlacesKeyword(target);
-  } catch (error) {
-    console.log(error);
-  }
-
-}
+  console.log("검색어 입력", event.currentTarget.value);
+  searchParams.value.keyword = target;
+  console.log("searchParams ", searchParams.value);
+  selectSearchMethod(searchParams.value);
+};
 const getClickedPlace = (event) => {
   // console.log("card clicked ", event.currentTarget);
 
@@ -107,9 +116,6 @@ const getClickedPlace = (event) => {
     }
   });
 };
-
-
-
 
 // 얘네도 따로 빼야
 const fcl = [
