@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { computed, ref, watch, watchEffect } from "vue";
 import {
   searchPlacesAll,
   searchPlacesKeyword,
@@ -12,7 +12,7 @@ import {
 } from "@/api/place.js";
 
 export const usePlaceStore = defineStore("headerStateStore", () => {
-  const places = ref([
+  const searchPlaces = ref([
     {
       id: 1,
       name: "24시동물병원",
@@ -28,6 +28,7 @@ export const usePlaceStore = defineStore("headerStateStore", () => {
       img: "https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20191221_26%2F1576910573697wAjVI_JPEG%2FV_DGwIxmBV_x7kCpgxFKVzci.jpg",
     },
   ]); // 배열값
+  const clickedPlace = ref(null);
 
   // default value
   const searchParams = ref({
@@ -95,17 +96,13 @@ category
     }
   };
 
-  const getPlacesData = computed(() => {
-    return places.value;
-  });
-
   const getPlacesAll = async () => {
     console.log("getPlacesAll");
     await searchPlacesAll(
       (response) => {
         console.log("전체 조회 ", response);
         let { data } = response;
-        places.value = data.info.searchResult;
+        searchPlaces.value = data.info.searchResult;
       },
       (error) => {
         console.log("getAllPlaces ", error);
@@ -131,8 +128,8 @@ category
       (response) => {
         console.log("[카테고리] 시설조회 ", response);
         let { data } = response;
-        places.value = data.info.searchResult;
-        console.log("places : ", places.value);
+        searchPlaces.value = data.info.searchResult;
+        console.log("places : ", searchPlaces.value);
       },
       (error) => {
         console.log("getPlacesCategory ", error);
@@ -156,7 +153,7 @@ category
         });
 
         console.log("temp : ", temp);
-        places.value = temp;
+        searchPlaces.value = temp;
       },
       (error) => {
         console.log("getPlacesShortest ", error);
@@ -216,7 +213,7 @@ category
     // places,
     currentLatLng,
     searchParams,
-    getPlacesData,
+    searchPlaces,
     getPlacesAll,
     getPlacesKeyword,
     getPlacesCategory,
@@ -227,5 +224,6 @@ category
     getPlacesKnCnS,
     getCurrentLoc,
     updateCurrentLocation,
+    clickedPlace,
   };
 });

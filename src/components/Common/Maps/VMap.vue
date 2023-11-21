@@ -8,41 +8,41 @@ import { storeToRefs } from "pinia";
 import { ref, onMounted, watchEffect } from "vue";
 const { VITE_APP_KAKAO_API_KEY } = import.meta.env;
 const placeStore = usePlaceStore();
-let { getPlacesData } = storeToRefs(placeStore);
+let { searchPlaces, clickedPlace } = storeToRefs(placeStore);
 let places = ref(null);
 let map = ref(null);
 let mapLoaded = ref(false);
 
 onMounted(() => {
-  loadMap();
-
-  // testMarker();
+  if (searchPlaces.value != null) {
+    loadMap();
+  }
 });
 
 watchEffect(() => {
-  // places가 변경될 때 마다 실행됩니다.
-  if (mapLoaded.value && getPlacesData.value) {
-    
-    clearMarkers(); // 이전 마커들을 지웁니다.
-  
-    places.value = getPlacesData.value;
-    placeSearch(); // 새로운 마커들을 표시합니다.
+  if (mapLoaded.value && searchPlaces.value) {
+    console.log("!!");
+
+    clearMarkers();
+
+    places.value = searchPlaces.value;
+    placeSearch();
   }
 });
 
 let markers = ref([]);
 function clearMarkers() {
   markers.value.forEach((marker) => {
-    marker.setMap(null); // 마커를 지도에서 제거
+    marker.setMap(null);
   });
-  markers.value = []; // 마커 배열을 비움
+  markers.value = [];
 }
 
 const initMap = () => {
   const container = document.getElementById("map");
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
-    level: 5,
+    level: 7,
   };
   map.value = new kakao.maps.Map(container, options);
   mapLoaded.value = true;
@@ -65,10 +65,19 @@ function placeSearch() {
 
   const bounds = new kakao.maps.LatLngBounds(); // bounds 초기화
 
-  console.log("placeSearch ", places.value);
-  places.value.forEach((place) => {
-    displayMarker(place, bounds);
-  });
+  if (clickedPlace.value != null) {
+    for (const place of places.value) {
+      if (place.id == clickedPlace.value.id) {
+        console.log("안녕");
+        displayMarker(place, bounds);
+        break;
+      }
+    }
+  } else {
+    places.value.forEach((place) => {
+      displayMarker(place, bounds);
+    });
+  }
 
   if (map.value) {
     map.value.setBounds(bounds); // 지도의 경계를 설정
@@ -80,19 +89,11 @@ function displayMarker(place, bounds) {
   let marker = new kakao.maps.Marker({
     position: markerPosition,
   });
-  console.log(marker);
+
   markers.value.push(marker);
   marker.setMap(map.value);
   bounds.extend(markerPosition); // 마커 위치를 bounds에 추가
 }
-
-// const testMarker = () => {
-//   const markerPosition = new kakao.maps.LatLng(33.48325376, 126.482645);
-//   var marker = new kakao.maps.Marker({
-//     position: markerPosition,
-//   });
-//   marker.setMap(map.value);
-// };
 
 // function createMarkerImage(src, size, options) {
 //   var markerImage = new kakao.maps.MarkerImage(src, size, options);

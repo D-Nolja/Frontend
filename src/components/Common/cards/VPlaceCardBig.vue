@@ -61,7 +61,7 @@ if (props.cardColor === "red") {
 
     <div id="place-container">
       <div id="place-text-container">
-        <div id="place-name">{{ place.name }}</div>
+        <div id="place-name" :data-id="place.id">{{ place.name }}</div>
         <div id="place-subInfo">
           <div id="place-ssubInfo">
             <p id="place-cate">{{ place.type }}</p>
@@ -84,7 +84,7 @@ svg {
   margin: 5px;
   padding: 0 10px 5px 0;
   width: 250px;
-  height: 120px;
+  height: 12vh;
   border-radius: 12px;
   background-color: #fff;
   box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.08) !important;
