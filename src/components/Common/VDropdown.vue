@@ -21,13 +21,20 @@ import { ref, onMounted } from "vue";
 
 const placeStore = usePlaceStore();
 const { searchParams, getCurrentLoc, currentLatLng } = storeToRefs(placeStore);
+
+
+
 const {
   getPlacesCategory,
   updateCurrentLocation,
   getPlacesShortest,
   getPlacesCnS,
   getPlacesKnCnS,
+
+  selectSearchMethod,
 } = placeStore;
+
+
 
 const props = defineProps({
   name: String,
@@ -98,6 +105,13 @@ const startSearch = async () => {
     console.log("keyword 포함 search error ", error);
   }
 };
+
+}
+
+
+
+
+
 
 function openDropdown() {}
 </script>
