@@ -21,7 +21,7 @@ import { ref } from "vue";
 
 const placeStore = usePlaceStore();
 const { searchParams, getCurrentLoc, currentLatLng } = storeToRefs(placeStore);
-const { getPlacesCategory, updateCurrentLocation, getPlacesShortest } =
+const { getPlacesCategory, updateCurrentLocation, getPlacesShortest, getPlacesCnS, getPlacesKnCnS } =
   placeStore;
 
 const props = defineProps({
@@ -57,6 +57,7 @@ async function selectMethod(clickedItem) {
   } else if (clickedItem.type == 1) {
     await updateCurrentLocation();
 
+    // 현재 위치 중심 (제주도에서만 사용 가능)
     // searchParams.value.limit = parseFloat(clickedItem.id);
     // searchParams.value.x = currentLatLng.value.x;
     // searchParams.value.y = currentLatLng.value.y;
@@ -65,15 +66,27 @@ async function selectMethod(clickedItem) {
     searchParams.value.y = 33.473645;
     console.log("파람파람파람 ", searchParams.value);
 
-    try {
+    startSearch();
+  }
+
+
+}
+
+const startSearch = async () => {
+  try {
+    if (searchParams.value.category == "" || searchParams.value.category == null) {
       await getPlacesShortest();
-    } catch (error) {
-      console.log(error);
+    } else if (searchParams.value.keyword == "" || searchParams.value.keyword == null) {
+      await getPlacesCnS();
+    } else {
+      await getPlacesKnCnS();
     }
+  } catch (error) {
+    console.log("keyword 포함 search error ", error);
   }
 }
 
-function openDropdown() {}
+function openDropdown() { }
 </script>
 
 <style>

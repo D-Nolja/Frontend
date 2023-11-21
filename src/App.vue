@@ -8,33 +8,21 @@ import { RouterView } from "vue-router";
 // import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
 // import VButton f∏rom './components/VButton.vue';
 // import PlanView from './views/PlanView.vue';
-import { onMounted } from "vue";
-import {useHeaderStateStore} from "@/stores/headerState.js";
-import { storeToRefs } from "pinia";
-const headerStateStore = useHeaderStateStore();
-// const {headerItemList} = storeToRefs(headerStateStore);
 
-// onMounted(()=>{
-//   console.log(headerItemList);
-// })
 </script>
 
 <template>
   <!-- <main-view></main-view> -->
 
-<!-- <TheHeader/>
-  <TheFooter/> -->
-<!-- <PlanList/> -->
-<!-- <VPlaceCardBig cardColor="blue"/>  -->
-<!-- <VTab/> -->
-<!-- <VButton  text="hi"/> -->
+  <!-- <TheHeader/>
+    <TheFooter/> -->
+  <!-- <PlanList/> -->
+  <!-- <VPlaceCardBig cardColor="blue"/>  -->
+  <!-- <VTab/> -->
+  <!-- <VButton  text="hi"/> -->
   <!-- <plan-view></plan-view> -->
 
   <router-view></router-view>
-
-
 </template>
 
-<style scoped>
- 
-</style>
+<style scoped></style>
