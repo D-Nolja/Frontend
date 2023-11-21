@@ -21,19 +21,20 @@ import { ref, onMounted } from "vue";
 
 const placeStore = usePlaceStore();
 const { searchParams, getCurrentLoc, currentLatLng } = storeToRefs(placeStore);
-<<<<<<< Updated upstream
-const { getPlacesCategory, updateCurrentLocation, getPlacesShortest, getPlacesCnS, getPlacesKnCnS } =
-  placeStore;
-=======
+
+
+
 const {
   getPlacesCategory,
   updateCurrentLocation,
   getPlacesShortest,
   getPlacesCnS,
   getPlacesKnCnS,
+
   selectSearchMethod,
 } = placeStore;
->>>>>>> Stashed changes
+
+
 
 const props = defineProps({
   name: String,
@@ -83,50 +84,15 @@ async function selectMethod(clickedItem) {
 
     // startSearch();
   }
-<<<<<<< Updated upstream
-
 
 }
 
-const startSearch = async () => {
-  try {
-    if (searchParams.value.category == "" || searchParams.value.category == null) {
-      await getPlacesShortest();
-    } else if (searchParams.value.keyword == "" || searchParams.value.keyword == null) {
-      await getPlacesCnS();
-    } else {
-      await getPlacesKnCnS();
-    }
-  } catch (error) {
-    console.log("keyword 포함 search error ", error);
-  }
-}
-=======
-  selectSearchMethod(searchParams.value);
-}
 
-// const startSearch = async () => {
-//   try {
-//     if (
-//       searchParams.value.category == "" ||
-//       searchParams.value.category == null
-//     ) {
-//       await getPlacesShortest();
-//     } else if (
-//       searchParams.value.keyword == "" ||
-//       searchParams.value.keyword == null
-//     ) {
-//       await getPlacesCnS();
-//     } else {
-//       await getPlacesKnCnS();
-//     }
-//   } catch (error) {
-//     console.log("keyword 포함 search error ", error);
-//   }
-// };
->>>>>>> Stashed changes
 
-function openDropdown() { }
+
+
+
+function openDropdown() {}
 </script>
 
 <style>

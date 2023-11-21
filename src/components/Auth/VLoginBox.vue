@@ -5,13 +5,17 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user.js";
+import { usePlaceStore } from "@/stores/place.js";
 import { useHeaderStateStore } from "@/stores/headerState.js";
+
 
 const router = useRouter();
 // 스토어 인스턴스 생성
 const headerStateStore = useHeaderStateStore();
 const { changeHeaderState } = headerStateStore;
 
+const placeStore = usePlaceStore();
+const { initializeStore } = placeStore;
 const userStore = useUserStore();
 const { isLogin } = storeToRefs(userStore);
 const { userLogin, getUserInfo } = userStore;
@@ -26,9 +30,9 @@ const login = async () => {
     await userLogin(loginUser.value);
 
     if (isLogin.value) {
-      changeHeaderState();
-      getUserInfo();
+      changeHeaderState(isLogin.value);
       router.push({ name: "home" });
+      await initializeStore();
     } else {
       loginUser.value.password = "";
       loginUser.value.email = "";
@@ -53,21 +57,9 @@ const login = async () => {
       <p id="continue-text">or continue with</p>
 
       <div id="icons">
-        <img
-          src="../../assets/img/loginIcon/kakao.svg"
-          alt="kakaoIcon"
-          srcset=""
-        />
-        <img
-          src="../../assets/img/loginIcon/naver.svg"
-          alt="naverIcon"
-          srcset=""
-        />
-        <img
-          src="../../assets/img/loginIcon/google.svg"
-          alt="googleIcon"
-          srcset=""
-        />
+        <img src="../../assets/img/loginIcon/kakao.svg" alt="kakaoIcon" srcset="" />
+        <img src="../../assets/img/loginIcon/naver.svg" alt="naverIcon" srcset="" />
+        <img src="../../assets/img/loginIcon/google.svg" alt="googleIcon" srcset="" />
       </div>
     </form>
   </div>
@@ -90,6 +82,7 @@ const login = async () => {
 .contents-container::-webkit-scrollbar {
   display: none;
 }
+
 #loginBox-title {
   color: #333;
   font-family: Poppins;
@@ -170,14 +163,15 @@ input:not(#login-btn):focus {
 
 #login-btn {
   /* Existing styles... */
-  transition: transform 0.1s ease, background-color 0.2s ease; /* Smooth transition for transform and background-color */
+  transition: transform 0.1s ease, background-color 0.2s ease;
+  /* Smooth transition for transform and background-color */
 }
 
 #login-btn:active {
-  transform: scale(
-    0.95
-  ); /* Slightly reduce the scale to give a pressed effect */
-  background-color: #729fdd; /* Optional: Change color to indicate it's active/pressed */
+  transform: scale(0.95);
+  /* Slightly reduce the scale to give a pressed effect */
+  background-color: #729fdd;
+  /* Optional: Change color to indicate it's active/pressed */
 }
 
 #icons {
@@ -191,10 +185,12 @@ input:not(#login-btn):focus {
 
 #icons img {
   /* 기존 스타일... */
-  transition: transform 0.3s ease; /* 부드러운 변환 효과 */
+  transition: transform 0.3s ease;
+  /* 부드러운 변환 효과 */
 }
 
 #icons img:active {
-  transform: scale(1.15); /* 클릭 시 이미지 크기를 10% 증가 */
+  transform: scale(1.15);
+  /* 클릭 시 이미지 크기를 10% 증가 */
 }
 </style>

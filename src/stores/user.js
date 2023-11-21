@@ -49,7 +49,6 @@ export const useUserStore = defineStore("userStore", () => {
           console.log(accessToken);
 
           // 2. accessToken, refreshToken sessionStorage 에 저장
-          sessionStorage.clear();
           sessionStorage.setItem("accessToken", accessToken);
           sessionStorage.setItem("refreshToken", refreshToken);
           isLogin.value = true;
@@ -70,8 +69,8 @@ export const useUserStore = defineStore("userStore", () => {
     );
   };
 
-  const getUserInfo = () => {
-    searchUserDetail(
+  const getUserInfo = async () => {
+    await searchUserDetail(
       (response) => {
         let { data } = response;
         userInfo.value = data.info;
@@ -91,6 +90,7 @@ export const useUserStore = defineStore("userStore", () => {
         userInfo.value = null;
         console.log("logout mInfo ", modifiedUserInfo.value);
         console.log("logout info ", userInfo.value);
+        sessionStorage.clear();
       },
       (error) => {
         console.log("로그아웃 에러 ! ", error);
@@ -102,6 +102,17 @@ export const useUserStore = defineStore("userStore", () => {
         }
       }
     );
+  };
+
+  const checkInitialLoginState = () => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    console.log("accessToken 있어요");
+    if (accessToken) {
+      isLogin.value = true;
+      console.log("isLogin ", isLogin.value);
+      // 필요하다면 여기에서 사용자 정보를 다시 로드
+      getUserInfo();
+    }
   };
 
   const modifyUserInfo = async () => {
@@ -167,5 +178,6 @@ export const useUserStore = defineStore("userStore", () => {
     modifyUserInfo,
     profileImg,
     modifiedUserInfo,
+    checkInitialLoginState,
   };
 });
