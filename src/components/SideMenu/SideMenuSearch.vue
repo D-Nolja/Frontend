@@ -25,6 +25,7 @@
         :key="place"
         :place="place"
         cardColor="blue"
+        @click.prevent="getClickedPlace"
       />
     </div>
   </div>
@@ -38,7 +39,7 @@ import { storeToRefs } from "pinia";
 import { onMounted, ref, watch } from "vue";
 
 const placeStore = usePlaceStore();
-let { getPlacesData } = storeToRefs(placeStore);
+let { searchPlaces, clickedPlace } = storeToRefs(placeStore);
 let places = ref(null);
 const {
   getPlacesAll,
@@ -53,20 +54,45 @@ const {
 
 onMounted(async () => {
   try {
-    console.log("검색");
     await getPlacesAll();
-    places.value = getPlacesData.value;
+
+    places.value = searchPlaces.value;
   } catch (error) {
     console.log("search error ", error);
   }
-
-  console.log("!! ", getPlacesData.value);
 });
 
 watch(() => {
-  places.value = getPlacesData.value;
+  if (searchPlaces.value != null) {
+    places.value = searchPlaces.value;
+  }
 });
 
+const getClickedPlace = (event) => {
+  // console.log("card clicked ", event.currentTarget);
+
+  // const el = event.currentTarget;
+  // console.log(el);
+
+  // let placeName = event.currentTarget.querySelector("#place-name").textContent;
+  let id = event.currentTarget
+    .querySelector("#place-name")
+    .getAttribute("data-id");
+  console.log("id : ", id);
+  // let placeCate = event.currentTarget.querySelector("#place-cate").textContent;
+  // let placeTime = event.currentTarget.querySelector("#place-time").textContent;
+  // let placeDescription =
+  //   event.currentTarget.querySelector("#place-description").textContent;
+  // console.log(placeName, placeCate, placeTime, placeDescription);
+
+  places.value.forEach((place) => {
+    if (place.id == id) {
+      clickedPlace.value = place;
+
+      return;
+    }
+  });
+};
 // 얘네도 따로 빼야
 const fcl = [
   { type: 0, id: 0, name: "전체" },
