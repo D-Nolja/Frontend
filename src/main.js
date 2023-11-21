@@ -33,7 +33,6 @@ app.use(Antd);
 
 // Store 인스턴스 생성
 const userStore = useUserStore();
-const placeStore = usePlaceStore();
 const headerStateStore = useHeaderStateStore();
 const { isLogin } = storeToRefs(userStore);
 // Store 초기화 및 로그인 상태 확인

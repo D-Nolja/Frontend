@@ -7,9 +7,9 @@ async function login(param, success, fail) {
   await auth.post(`/login`, param).then(success).catch(fail);
 }
 
-async function logout(success, fail) {
-  await auth.post(`/logout`).then(success).catch(fail);
-}
+// async function logout(success, fail) {
+//   await auth.post(`/logout`).then(success).catch(fail);
+// }
 // tokenRegeneration 넣어야 해.
 
 async function join(param, success, fail) {
@@ -38,7 +38,6 @@ async function uploadProfile(param, config, success, fail) {
 
 export {
   login,
-  logout,
   join,
   modify,
   searchUserList,
