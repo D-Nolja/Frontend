@@ -1,20 +1,18 @@
 <script setup>
-
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useHeaderStateStore } from "@/stores/headerState.js";
 import { useUserStore } from "@/stores/user.js";
 
 const headerStateStore = useHeaderStateStore();
-const { headerItemList, isLogin } = storeToRefs(headerStateStore);
-const { changeHeaderState } = headerStateStore;
-
 const userStore = useUserStore();
+
+let { headerItemList } = storeToRefs(headerStateStore);
+let { isLogin } = storeToRefs(userStore);
+const { changeHeaderState } = headerStateStore;
 const { userLogout, getUserInfo } = userStore;
 
 const router = useRouter();
-
-
 
 const moveMain = () => {
   router.push({ name: "home" });
@@ -27,8 +25,9 @@ const logout = async () => {
   try {
     console.log("로그아웃");
     await userLogout();
+
     changeHeaderState(isLogin.value);
-    // router.push({ name: "login" });
+    router.push({ name: "login" });
   } catch (error) {
     console.log("logout failed", error);
   }
@@ -128,9 +127,7 @@ const handleClick = (clickName) => {
   /* 더 세밀하고 부드러운 그림자 효과 */
   border-bottom: 1px solid #eaeaea;
   /* 하단 경계선 유지 */
-  background: linear-gradient(to right,
-      #fefefe,
-      #fff);
+  background: linear-gradient(to right, #fefefe, #fff);
   /* 그라디언트 배경 유지 */
 }
 

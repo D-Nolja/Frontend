@@ -1,15 +1,15 @@
 <template>
   <div class="contents-container">
-    <VHero id="main-hero" data-aos="fade-up" data-aos-duration="3000" />
+    <VHero id="main-hero" data-aos="fade-up" data-aos-duration="1500" />
     <div class="main-card1-container">
       <VMainCard
         v-for="(cardTxt, index) in mainCardTxt"
         :key="cardTxt.title"
         :cardTxt="cardTxt"
         data-aos="fade-up"
-        :data-aos-delay="index * 500"
+        :data-aos-delay="index * 300"
         data-aos-easing="linear"
-        data-aos-duration="1000"
+        data-aos-duration="300"
       />
     </div>
     <VBanner data-aos="slide-up" data-aos-duration="1000" />
@@ -17,7 +17,7 @@
     <VNews
       data-aos="slide-left"
       data-aos-easing="linear"
-      data-aos-duration="2000"
+      data-aos-duration="1500"
       class="news"
     />
   </div>

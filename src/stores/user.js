@@ -4,7 +4,6 @@ import { httpStatusCode } from "@/utils/http-status.js";
 import { ref } from "vue";
 import {
   login,
-  logout,
   join,
   modify,
   // searchUserList,
@@ -13,7 +12,6 @@ import {
   uploadProfile,
 } from "@/api/auth.js";
 import axios from "axios";
-// import { jwtDecode } from "jwt-decode";
 
 export const useUserStore = defineStore("userStore", () => {
   const isLogin = ref(false);
@@ -82,26 +80,14 @@ export const useUserStore = defineStore("userStore", () => {
     );
   };
 
-  const userLogout = async () => {
-    await logout(
-      () => {
-        isLogin.value = false;
-        modifiedUserInfo.value = null;
-        userInfo.value = null;
-        console.log("logout mInfo ", modifiedUserInfo.value);
-        console.log("logout info ", userInfo.value);
-        sessionStorage.clear();
-      },
-      (error) => {
-        console.log("로그아웃 에러 ! ", error);
-        if (axios.isAxiosError(error) && error.response) {
-          console.log("Response data:", error.response.data);
-          console.log("Response headers:", error.response.headers);
-        } else {
-          console.error("Unexpected error:", error);
-        }
-      }
-    );
+  const userLogout = () => {
+    isLogin.value = false;
+    modifiedUserInfo.value = null;
+    userInfo.value = null;
+    sessionStorage.clear();
+
+    console.log("logout info ", userInfo.value);
+    console.log("isLogin value", isLogin.value);
   };
 
   const checkInitialLoginState = () => {

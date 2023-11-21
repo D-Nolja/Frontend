@@ -8,7 +8,6 @@ import { useUserStore } from "@/stores/user.js";
 import { usePlaceStore } from "@/stores/place.js";
 import { useHeaderStateStore } from "@/stores/headerState.js";
 
-
 const router = useRouter();
 // 스토어 인스턴스 생성
 const headerStateStore = useHeaderStateStore();
@@ -32,7 +31,7 @@ const login = async () => {
     if (isLogin.value) {
       changeHeaderState(isLogin.value);
       router.push({ name: "home" });
-      await initializeStore();
+      // await initializeStore();
     } else {
       loginUser.value.password = "";
       loginUser.value.email = "";
@@ -57,9 +56,21 @@ const login = async () => {
       <p id="continue-text">or continue with</p>
 
       <div id="icons">
-        <img src="../../assets/img/loginIcon/kakao.svg" alt="kakaoIcon" srcset="" />
-        <img src="../../assets/img/loginIcon/naver.svg" alt="naverIcon" srcset="" />
-        <img src="../../assets/img/loginIcon/google.svg" alt="googleIcon" srcset="" />
+        <img
+          src="../../assets/img/loginIcon/kakao.svg"
+          alt="kakaoIcon"
+          srcset=""
+        />
+        <img
+          src="../../assets/img/loginIcon/naver.svg"
+          alt="naverIcon"
+          srcset=""
+        />
+        <img
+          src="../../assets/img/loginIcon/google.svg"
+          alt="googleIcon"
+          srcset=""
+        />
       </div>
     </form>
   </div>
