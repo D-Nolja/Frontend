@@ -20,22 +20,15 @@ import { storeToRefs } from "pinia";
 import { ref, onMounted } from "vue";
 
 const placeStore = usePlaceStore();
-const { searchParams, getCurrentLoc, currentLatLng } = storeToRefs(placeStore);
 
-const {
-  getPlacesCategory,
-  updateCurrentLocation,
-  getPlacesShortest,
-  getPlacesCnS,
-  getPlacesKnCnS,
-
-  selectSearchMethod,
-} = placeStore;
+const { updateCurrentLocation, selectSearchMethod } = placeStore;
 
 const props = defineProps({
   name: String,
   items: Array,
 });
+
+const { searchParams } = storeToRefs(placeStore);
 
 onMounted(() => {
   searchParams.value.category = null;
@@ -78,6 +71,7 @@ async function selectMethod(clickedItem) {
     searchParams.value.y = 33.473645;
     console.log("파람파람파람 ", searchParams.value);
   }
+  selectSearchMethod(searchParams.value);
 }
 
 function openDropdown() {}
