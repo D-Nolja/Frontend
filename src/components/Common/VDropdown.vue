@@ -22,8 +22,6 @@ import { ref, onMounted } from "vue";
 const placeStore = usePlaceStore();
 const { searchParams, getCurrentLoc, currentLatLng } = storeToRefs(placeStore);
 
-
-
 const {
   getPlacesCategory,
   updateCurrentLocation,
@@ -33,8 +31,6 @@ const {
 
   selectSearchMethod,
 } = placeStore;
-
-
 
 const props = defineProps({
   name: String,
@@ -81,37 +77,8 @@ async function selectMethod(clickedItem) {
     searchParams.value.x = 126.6456514;
     searchParams.value.y = 33.473645;
     console.log("파람파람파람 ", searchParams.value);
-
-    // startSearch();
   }
 }
-
-const startSearch = async () => {
-  try {
-    if (
-      searchParams.value.category == "" ||
-      searchParams.value.category == null
-    ) {
-      await getPlacesShortest();
-    } else if (
-      searchParams.value.keyword == "" ||
-      searchParams.value.keyword == null
-    ) {
-      await getPlacesCnS();
-    } else {
-      await getPlacesKnCnS();
-    }
-  } catch (error) {
-    console.log("keyword 포함 search error ", error);
-  }
-};
-
-}
-
-
-
-
-
 
 function openDropdown() {}
 </script>
