@@ -9,7 +9,7 @@ import { RouterView } from "vue-router";
 // import VButton f∏rom './components/VButton.vue';
 // import PlanView from './views/PlanView.vue';
 // import VModal from "./components/Common/VModal.vue";
-// import ReviewView from "./views/ReviewView.vue";
+import ReviewView from "./views/ReviewView.vue";
 import ReviewWriteView from "./views/ReviewWriteView.vue";
 </script>
 
@@ -28,6 +28,7 @@ import ReviewWriteView from "./views/ReviewWriteView.vue";
   </div> -->
   <!-- <review-view></review-view> -->
   <ReviewWriteView />
+
   <!-- <router-view></router-view> -->
 </template>
 

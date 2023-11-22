@@ -3,6 +3,7 @@ import "ant-design-vue/dist/reset.css";
 import "./assets/main.css";
 import "@/assets/text-truncate-util.css";
 import "aos/dist/aos.css";
+import "swiper/swiper-bundle.css";
 
 // Vue 및 라이브러리 임포트
 import { createApp } from "vue";
