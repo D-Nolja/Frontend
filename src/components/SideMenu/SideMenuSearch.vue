@@ -4,7 +4,7 @@
       <div id="sst1">
         <p>장소 추가</p>
         <div id="sst1-dropdown">
-          <VDropdown name="카테고리" :items="fcl" />
+          <VDropdown name="카테고리" :items="nowStage" />
           <VDropdown name="거리 순" :items="distance" />
         </div>
       </div>
@@ -65,7 +65,8 @@ import { onMounted, ref, watch } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
 
 const placeStore = usePlaceStore();
-let { searchPlaces, clickedPlace, searchParams } = storeToRefs(placeStore);
+let { searchPlaces, clickedPlace, searchParams, stage } =
+  storeToRefs(placeStore);
 let places = ref([]);
 const { getPlacesAll, selectSearchMethod } = placeStore;
 
@@ -99,67 +100,59 @@ const searchKeyword = async (event) => {
   selectSearchMethod(searchParams.value);
 };
 const getClickedPlace = (event) => {
-  // console.log("card clicked ", event.currentTarget);
-
-  // const el = event.currentTarget;
-  // console.log(el);
-
-  // let placeName = event.currentTarget.querySelector("#place-name").textContent;
   let id = event.currentTarget
     .querySelector("#place-name")
     .getAttribute("data-id");
   console.log("id : ", id);
-  // let placeCate = event.currentTarget.querySelector("#place-cate").textContent;
-  // let placeTime = event.currentTarget.querySelector("#place-time").textContent;
-  // let placeDescription =
-  //   event.currentTarget.querySelector("#place-description").textContent;
-  // console.log(placeName, placeCate, placeTime, placeDescription);
 
   places.value.forEach((place) => {
     if (place.id == id) {
       clickedPlace.value = place;
-
       return;
     }
   });
 };
 
-// 얘네도 따로 빼야
-const fcl = [
-  { type: 0, id: 0, name: "전체" },
-  { type: 0, id: 1, name: "동물병원" },
-  { type: 0, id: 2, name: "동물약국" },
-  { type: 0, id: 3, name: "미용" },
-  { type: 0, id: 4, name: "반려동물용품" },
-];
-const spot = [
-  {
-    id: 0,
-    name: "박물관",
-  },
-  {
-    id: 1,
-    name: "여행지",
-  },
-  {
-    id: 2,
-    name: "미술관",
-  },
-  {
-    id: 3,
-    name: "문예회관",
-  },
-  {
-    id: 4,
-    name: "음식점/카페",
-  },
-  {
-    id: 5,
-    name: "관광지",
-  },
-];
+// const stages = ["fcl", "spot", "stay"];
 
-const stay = [{ id: 0, name: "숙박업소" }];
+const stages = ref([
+  [
+    { type: 0, id: 0, name: "전체" },
+    { type: 0, id: 1, name: "동물병원" },
+    { type: 0, id: 2, name: "동물약국" },
+    { type: 0, id: 3, name: "미용" },
+    { type: 0, id: 4, name: "반려동물용품" },
+  ],
+  [
+    {
+      id: 0,
+      name: "박물관",
+    },
+    {
+      id: 1,
+      name: "여행지",
+    },
+    {
+      id: 2,
+      name: "미술관",
+    },
+    {
+      id: 3,
+      name: "문예회관",
+    },
+    {
+      id: 4,
+      name: "음식점/카페",
+    },
+    {
+      id: 5,
+      name: "관광지",
+    },
+  ],
+  [{ id: 0, name: "숙박업소" }],
+]);
+
+// const stay = [{ id: 0, name: "숙박업소" }];
 
 const distance = [
   {
@@ -188,9 +181,28 @@ const distance = [
     name: "20km 이내 ",
   },
 ];
+
+const nowStage = ref(null);
+onMounted(() => {
+  nowStage.value = stages.value[stage.value];
+  console.log("stage", stage.value);
+  console.log("nowStage", nowStage.value);
+});
+
+watch(() => {
+  nowStage.value = stages.value[stage.value];
+  console.log("stage", stage.value);
+  console.log("nowStage", nowStage.value);
+});
+
+watch(stage, (newValue, oldValue) => {
+  if (newValue !== oldValue) {
+    nowStage.value = stages.value[stage.value];
+  }
+});
 </script>
 
-<style>
+<style scoped>
 #search-section {
   width: 270px;
   margin: 0 15px;

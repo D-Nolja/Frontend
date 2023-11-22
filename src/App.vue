@@ -12,6 +12,7 @@ import { RouterView } from "vue-router";
 // import ReviewView from "./views/ReviewView.vue";
 // import ReviewWriteView from "./views/ReviewWriteView.vue";
 // import VDragGroup from "./components/Common/VDragGroup.vue";
+import ModalTest from "./components/Common/ModalTest.vue";
 </script>
 
 <template>
@@ -30,7 +31,7 @@ import { RouterView } from "vue-router";
   <!-- <review-view></review-view> -->
   <!-- <ReviewWriteView /> -->
   <!-- <VDragGroup /> -->
-
+  <!-- <ModalTest /> -->
   <router-view></router-view>
 </template>
 

@@ -4,11 +4,8 @@ import SideMenu from "@/components/SideMenu/SideMenu.vue";
 import VMap from "@/components/Common/Maps/VMap.vue";
 
 import { ref } from "vue";
+
 const clickedPlace = ref(null);
-function handleMarkPlace(place) {
-  console.log("planView", place);
-  clickedPlace.value = place;
-}
 </script>
 
 <template>
