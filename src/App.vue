@@ -8,7 +8,8 @@ import { RouterView } from "vue-router";
 // import VPlaceCardSmall from './components/VPlaceCardSmall.vue';
 // import VButton f∏rom './components/VButton.vue';
 // import PlanView from './views/PlanView.vue';
-
+// import VModal from "./components/Common/VModal.vue";
+import ReviewView from "./views/ReviewView.vue";
 </script>
 
 <template>
@@ -21,8 +22,11 @@ import { RouterView } from "vue-router";
   <!-- <VTab/> -->
   <!-- <VButton  text="hi"/> -->
   <!-- <plan-view></plan-view> -->
-
-  <router-view></router-view>
+  <!-- <div id="modal-container">
+    <v-modal></v-modal>
+  </div> -->
+  <review-view></review-view>
+  <!-- <router-view></router-view> -->
 </template>
 
 <style scoped></style>
