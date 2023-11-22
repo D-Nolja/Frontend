@@ -29,7 +29,10 @@
       </label>
     </div>
 
+    <!-- 드래그 영역 -->
     <div class="fixed-section" id="section1">
+      <div v-if="places.length === 0">로딩 중</div>
+
       <VPlaceCardBig
         v-for="place in places"
         :key="place.id"
@@ -55,18 +58,8 @@ import { onMounted, ref, watch } from "vue";
 
 const placeStore = usePlaceStore();
 let { searchPlaces, clickedPlace, searchParams } = storeToRefs(placeStore);
-let places = ref(null);
-const {
-  getPlacesAll,
-  getPlacesKeyword,
-  // getPlacesCategory,
-  // getPlacesShortest,
-  // getPlacesKnC,
-  // getPlacesCnS,
-  // getPlacesKnS,
-  // getPlacesKnCnS,
-  selectSearchMethod,
-} = placeStore;
+let places = ref([]);
+const { getPlacesAll, selectSearchMethod } = placeStore;
 
 onMounted(async () => {
   try {
