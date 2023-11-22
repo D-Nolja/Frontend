@@ -30,7 +30,7 @@ const join = async () => {
   }
 };
 
-const uploadFile = (e) => {
+const uploadFile = async (e) => {
   let file = e.target.files[0];
   // console.log("file : ", file.name);
   let fileName = file.name;
@@ -40,7 +40,7 @@ const uploadFile = (e) => {
     fileName.endsWith(".jpeg")
   ) {
     console.log("fileImgSrc : ", fileImgSrc);
-    sendProfile(file);
+    await sendProfile(file);
     fileImgSrc.value = URL.createObjectURL(file);
   }
 };

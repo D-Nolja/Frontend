@@ -27,7 +27,7 @@ export const useHeaderStateStore = defineStore("headerStateStore", () => {
   ]);
 
   const changeHeaderState = (status) => {
-    if (status) {
+    if (!status) {
       headerItemList.value = [
         { name: "Q&A", show: true, routerName: "qna", clickName: "moveQna" },
         {

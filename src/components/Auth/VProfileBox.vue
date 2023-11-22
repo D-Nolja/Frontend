@@ -49,7 +49,6 @@ const uploadFile = (e) => {
 </script>
 
 <template>
-  ``
   <div class="contents-container">
     <div id="img-upload-container">
       <label for="image-upload">
