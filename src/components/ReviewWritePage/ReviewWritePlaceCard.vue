@@ -14,7 +14,6 @@
 </template>
 
 <script setup>
-import VButtonSubmit from "@/components/Common/VButtonSubmit.vue";
 import VTimeline from "@/components/Common/VTimelineWrite.vue";
 import VMap from "@/components/Common/Maps/VMap.vue";
 const props = defineProps({
