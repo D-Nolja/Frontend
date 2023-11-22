@@ -35,7 +35,7 @@ onMounted(() => {
   searchParams.value.keyword = null;
   searchParams.value.limit = null;
 
-  console.log("start ", searchParams.value);
+  // console.log("start ", searchParams.value);
 });
 
 const selectedName = ref(props.name);

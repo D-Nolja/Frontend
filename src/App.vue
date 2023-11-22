@@ -9,8 +9,9 @@ import { RouterView } from "vue-router";
 // import VButton f∏rom './components/VButton.vue';
 // import PlanView from './views/PlanView.vue';
 // import VModal from "./components/Common/VModal.vue";
-import ReviewView from "./views/ReviewView.vue";
-import ReviewWriteView from "./views/ReviewWriteView.vue";
+// import ReviewView from "./views/ReviewView.vue";
+// import ReviewWriteView from "./views/ReviewWriteView.vue";
+import VDragGroup from "./components/Common/VDragGroup.vue";
 </script>
 
 <template>
@@ -27,7 +28,8 @@ import ReviewWriteView from "./views/ReviewWriteView.vue";
     <v-modal></v-modal>
   </div> -->
   <!-- <review-view></review-view> -->
-  <ReviewWriteView />
+  <!-- <ReviewWriteView /> -->
+  <VDragGroup />
 
   <!-- <router-view></router-view> -->
 </template>
