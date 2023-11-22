@@ -1,11 +1,13 @@
 <template>
   <div class="contents-container">
+    <ReviewAll />
     <ReviewPlaces />
   </div>
 </template>
 
 <script setup>
 import ReviewPlaces from "./ReviewPlaces.vue";
+import ReviewAll from "./ReviewAll.vue";
 </script>
 
 <style scoped>
@@ -13,6 +15,6 @@ import ReviewPlaces from "./ReviewPlaces.vue";
   min-height: 70vh;
   width: 100%;
   align-items: center;
-  margin: 80px auto;
+  margin: 90px auto;
 }
 </style>

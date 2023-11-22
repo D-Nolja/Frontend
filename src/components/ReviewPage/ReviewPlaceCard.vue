@@ -30,9 +30,9 @@ import VMap from "@/components/Common/Maps/VMap.vue";
   color: #000;
   text-align: left;
 
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.55594rem; /* 113.161% */
   letter-spacing: 0.04125rem;
   margin: 20px 0 0 0;
