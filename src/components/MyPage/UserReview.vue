@@ -2,17 +2,15 @@
   <div class="review-card-container">
     <UserReviewItem />
     <UserReviewItem />
-</div>
- 
+  </div>
 </template>
 
 <script setup>
-import UserReviewItem from "../MyPage/Item/userReviewitem.vue"
-
+import UserReviewItem from "../MyPage/Item/userReviewitem.vue";
 </script>
 
 <style scoped>
-.review-card-container{
+.review-card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
