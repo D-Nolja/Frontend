@@ -31,9 +31,9 @@ const props = defineProps({
 const { searchParams } = storeToRefs(placeStore);
 
 onMounted(() => {
-  searchParams.value.category = null;
-  searchParams.value.keyword = null;
-  searchParams.value.limit = null;
+  searchParams.value.category = "";
+  searchParams.value.keyword = "";
+  searchParams.value.limit = "";
 
   // console.log("start ", searchParams.value);
 });

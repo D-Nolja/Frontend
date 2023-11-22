@@ -2,9 +2,14 @@ import { getAuthInstance } from "@/utils/auth.js";
 const placeInstance = getAuthInstance();
 
 // 전체
-async function searchPlacesAll(success, fail) {
+async function searchPlacesAll(param, success, fail) {
   console.log("token ", sessionStorage.getItem("accessToken"));
-  await placeInstance.get(`/location`).then(success).catch(fail);
+  await placeInstance
+    .get(
+      `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}`
+    )
+    .then(success)
+    .catch(fail);
 }
 
 // 검색어
@@ -16,7 +21,7 @@ keyWord
 async function searchPlacesKeyword(param, success, fail) {
   await placeInstance
     .get(
-      `/location?keyword=${param.keyword}&currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}`
+      `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&keyword=${param.keyword}`
     )
     .then(success)
     .catch(fail);
@@ -31,7 +36,7 @@ category
 async function searchPlacesCategory(param, success, fail) {
   await placeInstance
     .get(
-      `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}`
+      `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&category=${param.category}`
     )
     .then(success)
     .catch(fail);
@@ -64,7 +69,7 @@ category
 async function searchPlacesKnC(param, success, fail) {
   await placeInstance
     .get(
-      `/location?keyword=${param.keyword}&currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&category=${param.category}`
+      `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&keyword=${param.keyword}&category=${param.category}`
     )
     .then(success)
     .catch(fail);
@@ -127,7 +132,7 @@ async function searchPlacesKnCnS(param, success, fail) {
     .get(
       `/shortest?x=${param.x}&y=${param.y}&limit=${param.limit * 10}&maxCount=${
         param.maxCount
-      }&keyword=${param.keyword}&category=${param.category}`
+      }&category=${param.category}&keyword=${param.keyword}`
     )
     .then(success)
     .catch(fail);

@@ -97,6 +97,8 @@ const searchKeyword = async (event) => {
   searchParams.value.keyword = target;
   console.log("searchParams ", searchParams.value);
   selectSearchMethod(searchParams.value);
+
+  event.currentTarget.value = "";
 };
 const getClickedPlace = (event) => {
   // console.log("card clicked ", event.currentTarget);

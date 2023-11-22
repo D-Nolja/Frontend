@@ -92,6 +92,8 @@ export const usePlaceStore = defineStore(
         console.log("cate + keyword + shortest");
         await getPlacesKnCnS();
       }
+
+      searchParams.value.keyword = "";
     };
 
     // end
@@ -131,6 +133,7 @@ export const usePlaceStore = defineStore(
     const getPlacesAll = async () => {
       console.log("getPlacesAll");
       await searchPlacesAll(
+        searchParams.value,
         (response) => {
           console.log("전체 조회 ", response);
           let { data } = response;
@@ -159,17 +162,13 @@ export const usePlaceStore = defineStore(
     };
 
     const getPlacesCategory = async () => {
+      console.log("하...", searchParams.value);
       await searchPlacesCategory(
         searchParams.value,
         (response) => {
-          console.log("[카테고리] 시설조회 ", response);
           let { data } = response;
           searchPlaces.value = data.info.searchResult;
           console.log("[카테고리] 시설조회  places : ", searchPlaces.value);
-          console.log(
-            "[카테고리] 시설조회  totalPageCount ",
-            data.info.totalPageCount
-          );
           totalPageCount.value = data.info.totalPageCount;
         },
         (error) => {

@@ -18,6 +18,8 @@ watch(
       total.value = newValue;
       pageSize.value = searchParams.value.sizePerPage;
       current.value = searchParams.value.pageNo;
+      searchParams.value.sizePerPage = 5;
+      searchParams.value.pageNo = 1;
     }
   },
   { immediate: true }

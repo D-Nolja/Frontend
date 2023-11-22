@@ -15,7 +15,7 @@ function handleMarkPlace(place) {
   <div class="planView-container">
     <TheSideNav />
     <SideMenu @mark-place="handleMarkPlace" />
-    <VMap :clickedPlace="clickedPlace" />
+    <VMap :clickedPlace="clickedPlace" mapId="map" />
   </div>
 </template>
 
