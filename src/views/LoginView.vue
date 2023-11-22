@@ -9,8 +9,7 @@ import VJoinBox from "@/components/Auth/VJoinBox.vue";
   <div class="contents-container">
     <the-header></the-header>
 
-    <!-- <VLoginBox/> -->
-    <VJoinBox />
+    <VLoginBox />
 
     <the-footer></the-footer>
   </div>

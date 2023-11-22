@@ -35,6 +35,10 @@
   flex-direction: column;
   justify-content: center;
   margin: 20px 0;
+  background-color: #f9f9f9; /* 배경색 추가 */
+  padding: 20px; /* 패딩 추가 */
+  border-radius: 8px; /* 테두리 둥글게 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 }
 
 #review-all-file {
@@ -52,10 +56,12 @@
   font-style: normal;
   font-weight: 600;
   line-height: 1.5rem; /* 85.714% */
+  width: 100%;
 }
 
 #review-all-txt-title ::placeholder {
   font-size: 1rem;
+  font-weight: 400;
 }
 
 #review-all-txt-date {
@@ -73,7 +79,7 @@
 }
 
 #review-all-container input {
-  padding: 10px;
+  padding: 5px;
   border-radius: 3px;
   border: 1px solid #e0e0e0;
   color: #333;
