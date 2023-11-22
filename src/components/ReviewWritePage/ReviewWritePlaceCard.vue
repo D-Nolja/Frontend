@@ -8,14 +8,14 @@
       <!-- center 잡기 -->
     </div>
     <VTimeline id="rplace-timeline" />
-    <VButtonSubmit txt="여행 후기 목록" color="default" id="replace-list-btn" />
+    <!-- <VButtonSubmit txt="여행 후기 목록" color="default" id="replace-list-btn" /> -->
   </div>
   <!-- <VMap /> -->
 </template>
 
 <script setup>
 import VButtonSubmit from "@/components/Common/VButtonSubmit.vue";
-import VTimeline from "@/components/Common/VTimeline.vue";
+import VTimeline from "@/components/Common/VTimelineWrite.vue";
 import VMap from "@/components/Common/Maps/VMap.vue";
 const props = defineProps({
   mapId: {

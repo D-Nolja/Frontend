@@ -45,3 +45,16 @@ p {
 .ant-pagination-simple-pager input {
   width: 30px;
 }
+
+textarea {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  color: #333;
+  width: 100%;
+}
+
+textarea :focus {
+  border: 1px solid #729fdd !important;
+  outline: none;
+}

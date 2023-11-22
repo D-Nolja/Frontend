@@ -1,5 +1,5 @@
 <template>
-  <div id="map"></div>
+  <div :id="mapId" class="map-container"></div>
 </template>
 
 <script setup>
@@ -13,6 +13,15 @@ let places = ref(null);
 let map = ref(null);
 let mapLoaded = ref(false);
 let changeClicked = ref(false);
+
+const props = defineProps({
+  mapId: {
+    type: String,
+    default() {
+      return "map";
+    },
+  },
+});
 
 onMounted(() => {
   if (searchPlaces != null) {
@@ -57,7 +66,10 @@ function clearMarkers() {
 
 const initMap = () => {
   console.log("initMap 되냐고!!!");
-  const container = document.getElementById("map");
+  // const container = document.getElementById("map");
+  console.log("mapId 확인해볼게...", props.mapId);
+  const container = document.getElementById(props.mapId);
+  // const container = document.getElementById("map2");
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
     level: 7,
@@ -148,7 +160,7 @@ function displayMarker(place, bounds) {
 </script>
 
 <style scoped>
-#map {
+.map-container {
   width: 100%;
   height: 100vh;
   z-index: 0;

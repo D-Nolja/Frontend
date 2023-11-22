@@ -10,6 +10,7 @@ import { RouterView } from "vue-router";
 // import PlanView from './views/PlanView.vue';
 // import VModal from "./components/Common/VModal.vue";
 import ReviewView from "./views/ReviewView.vue";
+import ReviewWriteView from "./views/ReviewWriteView.vue";
 </script>
 
 <template>
@@ -25,7 +26,9 @@ import ReviewView from "./views/ReviewView.vue";
   <!-- <div id="modal-container">
     <v-modal></v-modal>
   </div> -->
-  <review-view></review-view>
+  <!-- <review-view></review-view> -->
+  <ReviewWriteView />
+
   <!-- <router-view></router-view> -->
 </template>
 

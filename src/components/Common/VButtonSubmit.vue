@@ -20,6 +20,8 @@ if (props.color === "white") {
   colorId.value = "whiteBtn";
 } else if (props.color === "default") {
   colorId.value = "default";
+} else if (props.color === "grey") {
+  colorId.value = "greyBtn";
 }
 </script>
 
@@ -54,7 +56,13 @@ if (props.color === "white") {
   color: #8ab4ff;
 }
 
-/* #whiteBtn:active{
-    background-color: #f7f7f7;
-} */
+#greyBtn {
+  background-color: #f0f0f0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 쉐도우 효과 */
+  transition: box-shadow 0.3s ease; /* 쉐도우 애니메이션 */
+  color: #8ab4ff;
+}
+#greyBtn :hover {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
 </style>
