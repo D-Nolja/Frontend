@@ -1,36 +1,58 @@
 <template>
   <div id="rplace-card-container">
-    <img src="../../assets/img/rline.svg" alt="" srcset="" />
+    <img src="../../assets/img/rline.svg" alt="" srcset="" id="rplace-line" />
     <p id="rplace-day">Day 01</p>
-    <VMap id="rplace-map" />
+
     <div id="rplace-list">
-      <template>
-        <a-timeline>
-          <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
-          <a-timeline-item
-            >Solve initial network problems 2015-09-01</a-timeline-item
-          >
-          <a-timeline-item>Technical testing 2015-09-01</a-timeline-item>
-          <a-timeline-item
-            >Network problems being solved 2015-09-01</a-timeline-item
-          >
-        </a-timeline>
-      </template>
+      <VMap />
+      <!-- center 잡기 -->
     </div>
-    <VButtonSubmit txt="여행 후기 목록" color="white" />
+    <VTimeline id="rplace-timeline" />
+    <VButtonSubmit txt="여행 후기 목록" color="default" id="replace-list-btn" />
   </div>
+  <!-- <VMap /> -->
 </template>
 
 <script setup>
 import VButtonSubmit from "@/components/Common/VButtonSubmit.vue";
+import VTimeline from "@/components/Common/VTimeline.vue";
 import VMap from "@/components/Common/Maps/VMap.vue";
 </script>
 
 <style scoped>
-#rplace-map {
-  width: 100%;
-  height: 10rem;
+#rplace-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px 0;
+}
+#rplace-day {
+  color: #000;
+  text-align: left;
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.55594rem; /* 113.161% */
+  letter-spacing: 0.04125rem;
+  margin: 20px 0 0 0;
+}
+
+#rplace-list {
+  margin: 5px 0;
+}
+
+#map {
+  width: 60vw;
+  height: 14.5rem;
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#rplace-timeline {
+  margin: 30px 0 0 0;
+}
+
+#replace-list-btn {
+  margin: 0;
 }
 </style>

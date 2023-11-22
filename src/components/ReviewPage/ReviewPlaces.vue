@@ -1,5 +1,11 @@
 <template>
-  <div id="review-places-container"><ReviewPlaceCard /></div>
+  <div id="review-places-container">
+    <ReviewPlaceCard />
+    <ReviewPlaceCard />
+    <ReviewPlaceCard />
+    <ReviewPlaceCard />
+    <ReviewPlaceCard />
+  </div>
 </template>
 
 <script setup>
@@ -8,8 +14,9 @@ import ReviewPlaceCard from "./ReviewPlaceCard.vue";
 
 <style scoped>
 #review-places-container {
-  width: 100%;
+  width: 60vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 </style>
