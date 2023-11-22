@@ -11,7 +11,7 @@ import { RouterView } from "vue-router";
 // import VModal from "./components/Common/VModal.vue";
 // import ReviewView from "./views/ReviewView.vue";
 // import ReviewWriteView from "./views/ReviewWriteView.vue";
-import VDragGroup from "./components/Common/VDragGroup.vue";
+// import VDragGroup from "./components/Common/VDragGroup.vue";
 </script>
 
 <template>
@@ -29,9 +29,9 @@ import VDragGroup from "./components/Common/VDragGroup.vue";
   </div> -->
   <!-- <review-view></review-view> -->
   <!-- <ReviewWriteView /> -->
-  <VDragGroup />
+  <!-- <VDragGroup /> -->
 
-  <!-- <router-view></router-view> -->
+  <router-view></router-view>
 </template>
 
 <style scoped></style>

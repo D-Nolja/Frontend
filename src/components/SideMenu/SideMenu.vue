@@ -5,11 +5,19 @@
       <p id="plan-date">2023.12.04 ~ 2023.</p>
     </div>
     <div id="plan-title-container">
-      <side-menu-search v-if="day === 'all'" :places="places"></side-menu-search>
+      <side-menu-search
+        v-if="day === 'all'"
+        :places="places"
+      ></side-menu-search>
 
-      <div class="scrollable-section" @mousedown="startDrag">
-        <SideMenuSelect v-for="dayPlan in filterdDayPlans" :key="dayPlan.number" :dayPlan="dayPlan"
-          @mark-place="handleMarkPlace" />
+      <!-- <div class="scrollable-section" @mousedown="startDrag"> -->
+      <div class="scrollable-section">
+        <SideMenuSelect
+          v-for="dayPlan in filterdDayPlans"
+          :key="dayPlan.number"
+          :dayPlan="dayPlan"
+          @mark-place="handleMarkPlace"
+        />
       </div>
     </div>
   </div>

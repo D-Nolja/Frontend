@@ -23,7 +23,7 @@
         />
       </div>
 
-      <label id="ss-checkbox"
+      <label id="ss-chekbox"
         ><input type="checkbox" name="parking" />
         <p>주차 가능</p>
       </label>
@@ -33,13 +33,15 @@
     <div class="fixed-section" id="section1">
       <div v-if="places.length === 0">로딩 중</div>
 
-      <VPlaceCardBig
-        v-for="place in places"
-        :key="place.id"
-        :place="place"
-        cardColor="blue"
-        @click.prevent="getClickedPlace"
-      />
+      <VueDraggableNext v-model="places" group="items" class="dragArea">
+        <VPlaceCardBig
+          v-for="place in places"
+          :key="place.id"
+          :place="place"
+          cardColor="blue"
+        />
+        <!-- @click.prevent="getClickedPlace" -->
+      </VueDraggableNext>
 
       <div id="pagination-container">
         <VPagination />
@@ -55,6 +57,7 @@ import VDropdown from "../Common/VDropdown.vue";
 import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
 import { onMounted, ref, watch } from "vue";
+import { VueDraggableNext } from "vue-draggable-next";
 
 const placeStore = usePlaceStore();
 let { searchPlaces, clickedPlace, searchParams } = storeToRefs(placeStore);
@@ -74,6 +77,12 @@ onMounted(async () => {
 watch(() => {
   if (searchPlaces.value != null) {
     places.value = searchPlaces.value;
+  }
+});
+
+watch(places, (newValue, oldValue) => {
+  if (newValue != oldValue) {
+    console.log("places.value 선택함", places.value);
   }
 });
 

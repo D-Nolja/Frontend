@@ -6,28 +6,32 @@
     </div>
 
     <div class="day-section">
-      <VPlaceCardSmall
-        v-for="(place, index) in dayPlan.places"
-        :key="place.name"
-        :place="place"
-        :number="index + 1"
-        cardColor="blue"
-        @click="showPlace(place)"
-      />
+      <VueDraggableNext v-model="dayPlanPlaces" group="items" class="dragArea">
+        <VPlaceCardSmall
+          v-for="(place, index) in dayPlanPlaces"
+          :key="place.name"
+          :place="place"
+          :number="index + 1"
+          cardColor="blue"
+          @click="showPlace(place)"
+        />
+      </VueDraggableNext>
     </div>
   </div>
 </template>
 
 <script setup>
 import VPlaceCardSmall from "@/components/Common/cards/VPlaceCardSmall.vue";
-import { defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps, watch, ref, onMounted } from "vue";
+import { VueDraggableNext } from "vue-draggable-next";
 
 const emit = defineEmits(["markPlace"]);
+const dayPlanPlaces = ref([]);
 const showPlace = (place) => {
   emit("markPlace", place);
 };
 
-defineProps({
+const props = defineProps({
   dayPlan: {
     type: Object,
     default() {
@@ -49,6 +53,16 @@ defineProps({
       };
     },
   },
+});
+
+onMounted(() => {
+  dayPlanPlaces.value = props.dayPlan.places;
+});
+watch(dayPlanPlaces, (newValue, oldValue) => {
+  if (newValue != oldValue) {
+    dayPlanPlaces.value = newValue;
+    console.log("dayPlanPlaces.value 선택했어", dayPlanPlaces.value);
+  }
 });
 </script>
 
