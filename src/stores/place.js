@@ -31,6 +31,7 @@ export const usePlaceStore = defineStore(
       },
     ]); // 배열값
     const clickedPlace = ref(null);
+    const stage = ref(0); // 관광지, 애견시설, 숙박
 
     // default value
     const searchParams = ref({
@@ -304,6 +305,7 @@ export const usePlaceStore = defineStore(
       clickedPlace,
       initializeStore,
       totalPageCount,
+      stage,
     };
   },
   { persist: true }
