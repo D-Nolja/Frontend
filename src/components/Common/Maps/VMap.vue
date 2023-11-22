@@ -5,7 +5,7 @@
 <script setup>
 import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
-import { ref, onMounted, watchEffect, watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 const { VITE_APP_KAKAO_API_KEY } = import.meta.env;
 const placeStore = usePlaceStore();
 let { searchPlaces, clickedPlace } = storeToRefs(placeStore);
@@ -21,23 +21,31 @@ onMounted(() => {
   }
 });
 
-watch(searchPlaces, (newValue, oldValue) => {
-  if (mapLoaded.value && newValue != oldValue) {
-    clearMarkers();
-    places.value = newValue;
-    console.log("값은 바뀔까?");
-    console.log("안바뀌는게 이상함", places.value);
-    placeSearch();
-  }
-}, { immediate: true })
+watch(
+  searchPlaces,
+  (newValue, oldValue) => {
+    if (mapLoaded.value && newValue != oldValue) {
+      clearMarkers();
+      places.value = newValue;
+      console.log("값은 바뀔까?");
+      console.log("안바뀌는게 이상함", places.value);
+      placeSearch();
+    }
+  },
+  { immediate: true }
+);
 
-watch(clickedPlace, (newValue, oldValue) => {
-  if (mapLoaded.value && newValue != oldValue) {
-    changeClicked.value = true;
-    clearMarkers();
-    placeSearch();
-  }
-}, { immediate: true })
+watch(
+  clickedPlace,
+  (newValue, oldValue) => {
+    if (mapLoaded.value && newValue != oldValue) {
+      changeClicked.value = true;
+      clearMarkers();
+      placeSearch();
+    }
+  },
+  { immediate: true }
+);
 
 let markers = ref([]);
 function clearMarkers() {
@@ -48,6 +56,7 @@ function clearMarkers() {
 }
 
 const initMap = () => {
+  console.log("initMap 되냐고!!!");
   const container = document.getElementById("map");
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -65,6 +74,7 @@ const loadMap = () => {
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${VITE_APP_KAKAO_API_KEY}&libraries=services,clusterer`;
     /* global kakao */
     script.onload = () => kakao.maps.load(() => initMap());
+    console.log("load!");
     document.head.appendChild(script);
   }
 };
@@ -77,14 +87,13 @@ function placeSearch() {
     for (let i = 0; i < places.value.length; i++) {
       let target = places.value[i];
       if (target.id == clickedPlace.value.id) {
-        console.log("target ", target)
+        console.log("target ", target);
         displayMarker(target, bounds);
         break;
       }
-
     }
   } else {
-    console.log("여기는..?")
+    console.log("여기는..?");
     places.value.forEach((place) => {
       displayMarker(place, bounds);
     });
@@ -136,8 +145,6 @@ function displayMarker(place, bounds) {
 
 //   marker.setMap(map.value);
 // }
-
-
 </script>
 
 <style scoped>
