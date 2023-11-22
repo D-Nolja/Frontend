@@ -4,7 +4,7 @@
     <p id="rplace-day">Day 01</p>
 
     <div id="rplace-list">
-      <VMap />
+      <VMap :mapId="mapId" />
       <!-- center 잡기 -->
     </div>
     <VTimeline id="rplace-timeline" />
@@ -17,6 +17,16 @@
 import VButtonSubmit from "@/components/Common/VButtonSubmit.vue";
 import VTimeline from "@/components/Common/VTimeline.vue";
 import VMap from "@/components/Common/Maps/VMap.vue";
+const props = defineProps({
+  mapId: {
+    type: String,
+    default() {
+      return "map";
+    },
+  },
+});
+
+console.log("props.mapId", props.mapId);
 </script>
 
 <style scoped>
@@ -42,7 +52,7 @@ import VMap from "@/components/Common/Maps/VMap.vue";
   margin: 5px 0;
 }
 
-#map {
+.map-container {
   width: 60vw;
   height: 14.5rem;
   border-radius: 10px;
