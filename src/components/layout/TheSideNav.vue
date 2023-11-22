@@ -1,12 +1,33 @@
 <script setup>
 import VButton from "@/components/common/VBtn.vue";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRouter } from "vue-router";
+import { usePlaceStore } from "@/stores/place";
+import { storeToRefs } from "pinia";
 
+const placeStore = usePlaceStore();
+let { stage } = storeToRefs(placeStore);
 const clickedButton = ref(null);
 const clickedAllButton = ref(true);
 const router = useRouter();
+const canIMoveNext = ref(true);
+const canIMoveBefore = ref(false);
 
+watch(() => {
+  if (stage.value == 2) {
+    canIMoveNext.value = false;
+  } else {
+    canIMoveNext.value = true;
+  }
+});
+
+watch(() => {
+  if (stage.value > 0) {
+    canIMoveBefore.value = true;
+  } else {
+    canIMoveBefore.value = false;
+  }
+});
 const navigate = (path, day = null) => {
   if (path === "/plan/all") {
     clickedAllButton.value = true;
@@ -41,6 +62,20 @@ const testDays = computed(() => {
 const moveMain = () => {
   router.push({ name: "home" });
 };
+
+const moveBefore = () => {
+  console.log("편집!!!");
+  stage.value = stage.value - 1;
+};
+
+const moveNext = () => {
+  console.log("다음!!!");
+  stage.value = stage.value + 1;
+};
+
+const savePlan = () => {
+  console.log("계획을 저장해보자");
+};
 </script>
 
 <template>
@@ -71,8 +106,24 @@ const moveMain = () => {
       />
     </div>
     <div>
-      <VButton text="편집" @click="navigate('/edit')" class="v-btn" />
-      <VButton text="다음" @click="navigate('/next')" class="v-btn" />
+      <VButton
+        v-if="canIMoveBefore"
+        text="이전"
+        @click="moveBefore"
+        class="v-btn"
+      />
+      <VButton
+        v-if="canIMoveNext"
+        text="다음"
+        @click="moveNext"
+        class="v-btn"
+      />
+      <VButton
+        v-if="!canIMoveNext"
+        text="저장"
+        @click="savePlan"
+        class="v-btn"
+      />
     </div>
   </nav>
 </template>
