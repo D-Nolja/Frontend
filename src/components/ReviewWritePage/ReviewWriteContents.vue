@@ -1,13 +1,13 @@
 <template>
   <div class="contents-container">
-    <ReviewAll />
+    <ReviewWriteAll />
     <ReviewPlaces />
   </div>
 </template>
 
 <script setup>
 import ReviewPlaces from "./ReviewWritePlaces.vue";
-import ReviewAll from "./ReviewAll.vue";
+import ReviewWriteAll from "./ReviewWriteAll.vue";
 </script>
 
 <style scoped>
