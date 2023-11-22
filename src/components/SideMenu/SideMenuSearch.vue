@@ -32,15 +32,20 @@
     <!-- 드래그 영역 -->
     <div class="fixed-section" id="section1">
       <div v-if="places.length === 0">로딩 중</div>
-
-      <VueDraggableNext v-model="places" group="items" class="dragArea">
+      <VueDraggableNext
+        v-model="places"
+        group="items"
+        class="dragArea"
+        :class="{ 'empty-group': places.length === 0 }"
+      >
+        <div v-if="places.length === 0">drag here!</div>
         <VPlaceCardBig
           v-for="place in places"
           :key="place.id"
           :place="place"
           cardColor="blue"
+          @click.prevent="getClickedPlace"
         />
-        <!-- @click.prevent="getClickedPlace" -->
       </VueDraggableNext>
 
       <div id="pagination-container">
@@ -292,5 +297,12 @@ const distance = [
   text-align: center;
   position: absolute;
   bottom: 5%;
+}
+
+.empty-group {
+  min-height: 50px; /* or any suitable size */
+  border: 1px dashed #ccc; /* a subtle border to indicate the area */
+  background-color: #f9f9f9; /* a light background color */
+  text-align: center; /* if using placeholder text */
 }
 </style>

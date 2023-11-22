@@ -6,7 +6,13 @@
     </div>
 
     <div class="day-section">
-      <VueDraggableNext v-model="dayPlanPlaces" group="items" class="dragArea">
+      <VueDraggableNext
+        v-model="dayPlanPlaces"
+        group="items"
+        class="dragArea"
+        :class="{ 'empty-group': dayPlanPlaces.length === 0 }"
+      >
+        <div v-if="dayPlanPlaces.length === 0">drag Here!</div>
         <VPlaceCardSmall
           v-for="(place, index) in dayPlanPlaces"
           :key="place.name"
@@ -55,9 +61,9 @@ const props = defineProps({
   },
 });
 
-onMounted(() => {
-  dayPlanPlaces.value = props.dayPlan.places;
-});
+// onMounted(() => {
+//   dayPlanPlaces.value = props.dayPlan.places;
+// });
 watch(dayPlanPlaces, (newValue, oldValue) => {
   if (newValue != oldValue) {
     dayPlanPlaces.value = newValue;
@@ -114,5 +120,11 @@ watch(dayPlanPlaces, (newValue, oldValue) => {
   flex-direction: column;
   align-items: center;
   padding: 10px;
+}
+.empty-group {
+  min-height: 50px; /* or any suitable size */
+  border: 1px dashed #ccc; /* a subtle border to indicate the area */
+  background-color: #f9f9f9; /* a light background color */
+  text-align: center; /* if using placeholder text */
 }
 </style>
