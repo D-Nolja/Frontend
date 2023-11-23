@@ -11,13 +11,18 @@
       ></side-menu-search>
 
       <!-- <div class="scrollable-section" @mousedown="startDrag"> -->
-      <div class="scrollable-section">
-        <SideMenuSelect
-          v-for="dayPlan in filterdDayPlans"
-          :key="dayPlan.number"
-          :dayPlan="dayPlan"
-          @mark-place="handleMarkPlace"
-        />
+      <div class="select-plan-section" @mousedown="startDrag">
+        <div class="scrollable-section">
+          <SideMenuSelect
+            v-for="dayPlan in filterdDayPlans"
+            :key="dayPlan.day"
+            :dayPlan="dayPlan"
+            @mark-place="handleMarkPlace"
+          />
+        </div>
+
+        <!-- 수정 -->
+        <div class="drag-handle">>>></div>
       </div>
     </div>
   </div>
@@ -28,12 +33,12 @@ import SideMenuSelect from "../SideMenu/SideMenuSelect.vue";
 import SideMenuSearch from "../SideMenu/SideMenuSearch.vue";
 import { usePlaceStore } from "@/stores/place.js";
 import { storeToRefs } from "pinia";
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { watchEffect, computed } from "vue";
 
 const placeStore = usePlaceStore();
-const { places } = storeToRefs(placeStore);
+const { places, dayPlaces, planDetails } = storeToRefs(placeStore);
 
 const emit = defineEmits("markPlace");
 function handleMarkPlace(place) {
@@ -42,117 +47,91 @@ function handleMarkPlace(place) {
 }
 const route = useRoute();
 const day = ref("all");
+
 watchEffect(() => {
   if (route.params.day && !isNaN(route.params.day)) {
     day.value = route.params.day.toString();
   } else {
     day.value = "all";
   }
+  console.log("현재 위치", day.value);
 });
 
+// const filterdDayPlans = computed(() => {
+//   if (day.value === "all") {
+//     console.log("dayPlaces.value", dayPlaces);
+
+//     return dayPlaces.value;
+//   } else {
+//     console.log();
+//     return dayPlaces.value[day.value];
+//   }
+// });
 const filterdDayPlans = computed(() => {
   if (day.value === "all") {
-    return dayPlans.value;
+    console.log("planDetails", planDetails.value);
+    return planDetails.value;
   } else {
-    return dayPlans.value.filter(
-      (dayPlan) => dayPlan.number.toString() === day.value
+    return planDetails.value.filter(
+      (planDetail) => planDetail.day.toString() === day.value
     );
   }
 });
 
-// const places = ref([
+watch(() => {
+  console.log;
+});
+
+// const dayPlans = ref([
 //   {
-//     name: "혜인식탁",
-//     type: "맛집",
-//     x: "33.24833404783013",
-//     y: "126.56835909631332",
-//     address: "도로명 주소1",
-//     tel: "010-1234-1234",
-//     openopenTime: "11:30 ~ 16:00",
-//     info: "반려동물 동반 가능 / 무료",
+//     number: 1,
+//     date: 12.05,
+//     places: [
+//       {
+//         name: "혜인식탁",
+//         type: "맛집",
+//         x: "33.24833404783013",
+//         y: "126.56835909631332",
+//         address: "도로명 주소1",
+//         tel: "010-1234-1234",
+//         openopenTime: "11:30 ~ 16:00",
+//         info: "반려동물 동반 가능 / 무료",
+//       },
+//     ],
 //   },
 //   {
-//     name: "원빈식탁",
-//     type: "맛집",
-//     x: "33.27874670832252",
-//     y: "126.70801347099405",
-//     address: "도로명 주소1",
-//     tel: "010-9876-9876",
-//     openopenTime: "12:30 ~ 15:00",
-//     info: "반려동물 동반 가능 / 무료",
+//     number: 2,
+//     date: 12.06,
+//     places: [
+//       {
+//         name: "원빈식탁",
+//         type: "맛집",
+//         x: "33.27874670832252",
+//         y: "126.70801347099405",
+//         address: "도로명 주소1",
+//         tel: "010-9876-9876",
+//         openopenTime: "12:30 ~ 15:00",
+//         info: "반려동물 동반 가능 / 무료",
+//       },
+//     ],
 //   },
 //   {
-//     name: "형민식탁",
-//     type: "맛집",
-//     x: "33.239221362414035",
-//     y: "126.60445492699344",
-//     address: "도로명 주소1",
-//     tel: "010-9876-9876",
-//     openopenTime: "12:30 ~ 15:00",
-//     info: "반려동물 동반 가능 / 무료",
-//   },
-//   {
-//     name: "은서식탁",
-//     type: "맛집",
-//     x: "33.2488301865394",
-//     y: "126.32352822201112",
-//     address: "도로명 주소1",
-//     tel: "010-9876-9876",
-//     openopenTime: "12:30 ~ 15:00",
-//     info: "반려동물 동반 가능 / 무료",
+//     number: 3,
+//     date: 12.07,
+//     places: [
+//       {
+//         name: "은서식탁",
+//         type: "맛집",
+//         x: "33.2488301865394",
+//         y: "126.32352822201112",
+//         address: "도로명 주소1",
+//         tel: "010-9876-9876",
+//         openopenTime: "12:30 ~ 15:00",
+//         info: "반려동물 동반 가능 / 무료",
+//       },
+//     ],
 //   },
 // ]);
-
-const dayPlans = ref([
-  {
-    number: 1,
-    date: 12.05,
-    places: [
-      {
-        name: "혜인식탁",
-        type: "맛집",
-        x: "33.24833404783013",
-        y: "126.56835909631332",
-        address: "도로명 주소1",
-        tel: "010-1234-1234",
-        openopenTime: "11:30 ~ 16:00",
-        info: "반려동물 동반 가능 / 무료",
-      },
-    ],
-  },
-  {
-    number: 2,
-    date: 12.06,
-    places: [
-      {
-        name: "원빈식탁",
-        type: "맛집",
-        x: "33.27874670832252",
-        y: "126.70801347099405",
-        address: "도로명 주소1",
-        tel: "010-9876-9876",
-        openopenTime: "12:30 ~ 15:00",
-        info: "반려동물 동반 가능 / 무료",
-      },
-    ],
-  },
-  {
-    number: 3,
-    date: 12.07,
-    places: [
-      {
-        name: "은서식탁",
-        type: "맛집",
-        x: "33.2488301865394",
-        y: "126.32352822201112",
-        address: "도로명 주소1",
-        tel: "010-9876-9876",
-        openopenTime: "12:30 ~ 15:00",
-        info: "반려동물 동반 가능 / 무료",
-      },
-    ],
-  },
-]);
 
 const sideMenu = ref(null);
 const minWidth = 600; // 최소 너비 설정
@@ -178,17 +157,19 @@ const onMouseUp = () => {
 };
 
 const startDrag = (e) => {
-  console.log("우와 마우스가 움직여");
-  startX = e.clientX;
-  startWidth = parseInt(
-    document.defaultView.getComputedStyle(sideMenu.value).width,
-    10
-  );
-  document.addEventListener("mousemove", onMouseMove);
-  document.addEventListener("mouseup", onMouseUp);
-  e.preventDefault();
-  if (sideMenu.value) {
-    sideMenu.value.classList.add("dragging");
+  if (e.target.classList.contains("drag-handle")) {
+    console.log("우와 마우스가 움직여");
+    startX = e.clientX;
+    startWidth = parseInt(
+      document.defaultView.getComputedStyle(sideMenu.value).width,
+      10
+    );
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+    e.preventDefault();
+    if (sideMenu.value) {
+      sideMenu.value.classList.add("dragging");
+    }
   }
 };
 
@@ -234,7 +215,7 @@ onUnmounted(() => {
 }
 
 .scrollable-section {
-  width: 300px;
+  width: 600px;
   display: flex;
   overflow-x: auto;
 }
@@ -261,5 +242,10 @@ onUnmounted(() => {
 #plan-date {
   color: #b7b7b7;
   font-weight: 500;
+}
+
+.drag-handle {
+  width: 600px;
+  background-color: #333;
 }
 </style>

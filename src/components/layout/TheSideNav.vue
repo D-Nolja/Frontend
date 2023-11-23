@@ -6,7 +6,7 @@ import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
 
 const placeStore = usePlaceStore();
-let { stage } = storeToRefs(placeStore);
+let { stage, daynumbers } = storeToRefs(placeStore);
 const clickedButton = ref(null);
 const clickedAllButton = ref(true);
 const router = useRouter();
@@ -31,14 +31,14 @@ watch(() => {
 const navigate = (path, day = null) => {
   if (path === "/plan/all") {
     clickedAllButton.value = true;
-    clickedButton.value = null; // Reset day buttons when "전체일정" is clicked
+    clickedButton.value = null;
   } else {
     clickedAllButton.value = false;
     clickedButton.value = day;
   }
 
-  console.log("cab : ", clickedAllButton.value);
-  console.log("cb : ", clickedButton.value);
+  console.log("clickedAllButton : ", clickedAllButton.value);
+  console.log("clickedButton : ", clickedButton.value);
 
   router.push(path);
 };
@@ -50,7 +50,8 @@ const allButtonColor = computed(() =>
 const testDays = computed(() => {
   const tmpDays = [];
 
-  for (let i = 1; i <= 3; i++) {
+  let tmpNumber = daynumbers.value;
+  for (let i = 1; i <= tmpNumber; i++) {
     tmpDays.push({
       day: i,
       color: clickedButton.value == i ? "blue" : "white",

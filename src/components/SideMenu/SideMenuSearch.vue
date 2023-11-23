@@ -38,7 +38,7 @@
         class="dragArea"
         :class="{ 'empty-group': places.length === 0 }"
       >
-        <div v-if="places.length === 0">drag here!</div>
+        <div v-if="places.length === 0">Empty</div>
         <VPlaceCardBig
           v-for="place in places"
           :key="place.id"
@@ -314,9 +314,9 @@ watch(stage, (newValue, oldValue) => {
 }
 
 .empty-group {
-  min-height: 50px; /* or any suitable size */
-  border: 1px dashed #ccc; /* a subtle border to indicate the area */
-  background-color: #f9f9f9; /* a light background color */
-  text-align: center; /* if using placeholder text */
+  min-height: 50px;
+  border: 1px dashed #ccc;
+  background-color: #f9f9f9;
+  text-align: center;
 }
 </style>
