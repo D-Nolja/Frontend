@@ -15,6 +15,11 @@
 <script setup>
 import ReviewPlaces from "./ReviewWritePlaces.vue";
 import ReviewWriteAll from "./ReviewWriteAll.vue";
+
+
+
+
+
 </script>
 
 <style scoped>
@@ -24,6 +29,7 @@ import ReviewWriteAll from "./ReviewWriteAll.vue";
   align-items: center;
   margin: 90px auto;
 }
+
 #notice {
   margin: 30px 0;
   width: 60vw;

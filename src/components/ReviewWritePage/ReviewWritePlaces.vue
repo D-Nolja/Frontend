@@ -1,12 +1,8 @@
 <template>
   <div id="review-places-container">
-    <ReviewPlaceCard v-for="mapId in mapIdAll" :key="mapId" :mapId="mapId" />
-    <VButtonSubmit
-      txt="저장하기"
-      color="grey"
-      class="save-btn"
-      @click="saveReview"
-    />
+
+    <ReviewPlaceCard v-for="thep in thePlanValue" :key="thep.day" :item="thep" />
+    <VButtonSubmit txt="저장하기" color="grey" class="save-btn" @click="saveReview" />
   </div>
 </template>
 
@@ -14,13 +10,23 @@
 import ReviewPlaceCard from "./ReviewWritePlaceCard.vue";
 import VButtonSubmit from "@/components/Common/VButtonSubmit.vue";
 import { useRouter } from "vue-router";
+import { usePlanStore } from '@/stores/plan.js';
+import { useReviewStore } from "@/stores/review";
+import { storeToRefs } from "pinia";
+import { watch, ref } from "vue";
+
+const planStore = usePlanStore();
+const reviewStore = useReviewStore();
+const { writtenReview } = storeToRefs(reviewStore);
+const { thePlan } = storeToRefs(planStore);
+const thePlanValue = ref(null);
 const router = useRouter();
-const temp = [1, 2, 3, 4];
-const mapIdAll = [];
-temp.map((item) => {
-  console.log("map" + item);
-  mapIdAll.push("map" + item);
-});
+
+watch(() => {
+  console.log("thePlan", thePlan.value);
+  thePlanValue.value = thePlan.value.planDetails;
+  writtenReview.value.planId = thePlanValue.value.planId;
+})
 
 const saveReview = () => {
   console.log("click");
