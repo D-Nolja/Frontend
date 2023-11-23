@@ -1,8 +1,12 @@
 <template>
-  <div ref="sideMenu" class="side-menu">
+  <div
+    ref="sideMenu"
+    class="side-menu"
+    :style="{ maxWidth: scrollableSectionWidth }"
+  >
     <div id="plan-title">
       <p id="plan-name">싸방학 언제 와</p>
-      <p id="plan-date">2023.12.04 ~ 2023.</p>
+      <p id="plan-date">2023.12.04 ~ 2023.12.08</p>
     </div>
     <div id="plan-title-container">
       <side-menu-search
@@ -11,6 +15,7 @@
       ></side-menu-search>
 
       <!-- <div class="scrollable-section" @mousedown="startDrag"> -->
+
       <div class="select-plan-section" @mousedown="startDrag">
         <div class="scrollable-section">
           <SideMenuSelect
@@ -22,7 +27,7 @@
         </div>
 
         <!-- 수정 -->
-        <div class="drag-handle">>>></div>
+        <div class="drag-handle">제발... 보여줘....</div>
       </div>
     </div>
   </div>
@@ -47,26 +52,26 @@ function handleMarkPlace(place) {
 }
 const route = useRoute();
 const day = ref("all");
+const scrollableSectionWidth = ref("900px"); // 초기 너비 값
 
+const updateScrollableSectionWidth = (newWidth) => {
+  scrollableSectionWidth.value = newWidth + "px";
+};
+
+let widthValue = ref(300);
 watchEffect(() => {
   if (route.params.day && !isNaN(route.params.day)) {
     day.value = route.params.day.toString();
+    widthValue.value = 300;
   } else {
     day.value = "all";
+    widthValue.value = 900;
   }
   console.log("현재 위치", day.value);
+
+  updateScrollableSectionWidth(widthValue.value);
 });
 
-// const filterdDayPlans = computed(() => {
-//   if (day.value === "all") {
-//     console.log("dayPlaces.value", dayPlaces);
-
-//     return dayPlaces.value;
-//   } else {
-//     console.log();
-//     return dayPlaces.value[day.value];
-//   }
-// });
 const filterdDayPlans = computed(() => {
   if (day.value === "all") {
     console.log("planDetails", planDetails.value);
@@ -76,10 +81,6 @@ const filterdDayPlans = computed(() => {
       (planDetail) => planDetail.day.toString() === day.value
     );
   }
-});
-
-watch(() => {
-  console.log;
 });
 
 // const dayPlans = ref([
