@@ -1,13 +1,13 @@
 <template>
   <div id="rplace-card-container">
     <img src="../../assets/img/rline.svg" alt="" srcset="" id="rplace-line" />
-    <p id="rplace-day">Day 01</p>
+    <p id="rplace-day">Day {{ item.day }}</p>
 
     <div id="rplace-list">
       <VMap :mapId="mapId" />
       <!-- center 잡기 -->
     </div>
-    <VTimeline id="rplace-timeline" />
+    <VTimeline id="rplace-timeline" :item="item" />
     <!-- <VButtonSubmit txt="여행 후기 목록" color="default" id="replace-list-btn" /> -->
   </div>
   <!-- <VMap /> -->
@@ -16,16 +16,19 @@
 <script setup>
 import VTimeline from "@/components/Common/VTimelineWrite.vue";
 import VMap from "@/components/Common/Maps/VMap.vue";
+import { watch, ref } from "vue";
 const props = defineProps({
-  mapId: {
-    type: String,
-    default() {
-      return "map";
-    },
-  },
+  item: Object,
 });
 
-console.log("props.mapId", props.mapId);
+const mapId = ref("");
+watch(() => {
+  mapId.value = `map${props.item.day}`;
+  console.log("mapId.value", mapId.value);
+  console.log("props.item", props.item);
+})
+
+
 </script>
 
 <style scoped>
@@ -35,6 +38,7 @@ console.log("props.mapId", props.mapId);
   justify-content: center;
   margin: 20px 0;
 }
+
 #rplace-day {
   color: #000;
   text-align: left;
@@ -42,7 +46,8 @@ console.log("props.mapId", props.mapId);
   font-size: 1.05rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.55594rem; /* 113.161% */
+  line-height: 1.55594rem;
+  /* 113.161% */
   letter-spacing: 0.04125rem;
   margin: 20px 0 0 0;
 }
