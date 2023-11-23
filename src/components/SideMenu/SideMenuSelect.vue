@@ -33,8 +33,11 @@ import { defineEmits, defineProps, watch, ref, onMounted } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import { usePlaceStore } from "@/stores/place.js";
 import { storeToRefs } from "pinia";
+import { UNREF } from "@vue/compiler-core";
 
 const placeStore = usePlaceStore();
+const { selectPlanOptions, dayPlaces } = storeToRefs(placeStore);
+const { updateSelectPlanOptions } = placeStore;
 const emit = defineEmits(["markPlace"]);
 const dayPlanPlaces = ref([]);
 const showPlace = (place) => {
@@ -47,16 +50,51 @@ const props = defineProps({
   },
 });
 
+const addPlaceOption = (places) => {
+  dp.value = [];
+  console.log("addPlaceOption", places);
+  places.forEach((place) => {
+    console.log("addPlaceOption", place);
+
+    if ("spotId" in place) {
+      dp.value.push(place.spotId);
+    } else if ("id" in place) {
+      dp.value.push(place.id);
+    }
+  });
+
+  console.log("dp.value", dp.value);
+  dayPlaces.value[places.day] = dp.value;
+};
+
+let day = ref(0);
 onMounted(() => {
   dayPlanPlaces.value = props.dayPlan.dailyPlan;
+  dayPlanPlaces.value.day = props.dayPlan.day;
+  day.value = props.dayPlan.day;
+  console.log("dayPlanPlaces : ", dayPlanPlaces.value);
+
+  addPlaceOption(dayPlanPlaces.value);
+  console.log("dayPlaces value", dayPlaces.value);
+  console.log("updateSelectPlanOptions1");
+  updateSelectPlanOptions();
 });
+
+let dp = ref([]);
 watch(() => {
   console.log("props.dayPlan", props.dayPlan);
 });
 
 watch(dayPlanPlaces, (newValue, oldValue) => {
   if (newValue != oldValue) {
+    console.log("---------------------");
     dayPlanPlaces.value = newValue;
+
+    dayPlanPlaces.value.day = day.value;
+    console.log("dayPlanPlaces2 : ", dayPlanPlaces.value);
+    addPlaceOption(dayPlanPlaces.value);
+    console.log("updateSelectPlanOptions", dayPlanPlaces.value);
+    updateSelectPlanOptions();
   }
 });
 </script>

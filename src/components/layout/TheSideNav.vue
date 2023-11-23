@@ -6,7 +6,9 @@ import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
 
 const placeStore = usePlaceStore();
-let { stage, daynumbers } = storeToRefs(placeStore);
+let { stage, daynumbers, searchParams, selectPlanOptions } =
+  storeToRefs(placeStore);
+const { selectSearchMethod, savePlanNow } = placeStore;
 const clickedButton = ref(null);
 const clickedAllButton = ref(true);
 const router = useRouter();
@@ -65,17 +67,29 @@ const moveMain = () => {
 };
 
 const moveBefore = () => {
+  searchParams.value.limit = "";
+  searchParams.value.category = "";
+  searchParams.value.keyword = "";
   console.log("편집!!!");
   stage.value = stage.value - 1;
+  selectSearchMethod(searchParams.value);
 };
 
 const moveNext = () => {
+  searchParams.value.limit = "";
+  searchParams.value.category = "";
+  searchParams.value.keyword = "";
+  console.log("다음 이동 ---- ", searchParams.value);
   console.log("다음!!!");
+
   stage.value = stage.value + 1;
+  selectSearchMethod(searchParams.value);
 };
 
-const savePlan = () => {
+const save = async () => {
   console.log("계획을 저장해보자");
+  console.log("계획 저장 ", selectPlanOptions.value);
+  await savePlanNow();
 };
 </script>
 
@@ -119,12 +133,7 @@ const savePlan = () => {
         @click="moveNext"
         class="v-btn"
       />
-      <VButton
-        v-if="!canIMoveNext"
-        text="저장"
-        @click="savePlan"
-        class="v-btn"
-      />
+      <VButton v-if="!canIMoveNext" text="저장" @click="save" class="v-btn" />
     </div>
   </nav>
 </template>

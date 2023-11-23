@@ -2,7 +2,7 @@
   <a-dropdown>
     <div class="dropdownBtn" @click.prevent="openDropdown">
       {{ selectedName }}
-      <DownOutlined />
+      <!-- <DownOutlined /> -->
     </div>
     <template #overlay>
       <a-menu @click="handleMenuItemClick">
@@ -34,7 +34,6 @@ onMounted(() => {
   searchParams.value.category = "";
   searchParams.value.keyword = "";
   searchParams.value.limit = "";
-
   // console.log("start ", searchParams.value);
 });
 
@@ -46,9 +45,9 @@ function handleMenuItemClick(event) {
 
   console.log("clickedItem ", clickedItem);
 
-  if (clickedItem) {
-    selectedName.value = clickedItem.name;
-  }
+  // if (clickedItem) {
+  //   selectedName.value = clickedItem.name;
+  // }
   selectMethod(clickedItem);
 }
 
