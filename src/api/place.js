@@ -3,7 +3,6 @@ const placeInstance = getAuthInstance();
 
 // 전체
 async function searchPlacesAll(param, success, fail) {
-  console.log("token ", sessionStorage.getItem("accessToken"));
   await placeInstance
     .get(
       `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}`
@@ -34,6 +33,7 @@ sizePerPage
 category
  */
 async function searchPlacesCategory(param, success, fail) {
+  console.log("searchPlacseCategory", param);
   await placeInstance
     .get(
       `/location?currentPage=${param.pageNo}&sizePerPage=${param.sizePerPage}&category=${param.category}`

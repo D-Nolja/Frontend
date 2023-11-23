@@ -23,9 +23,11 @@
         />
       </div>
 
-      <label id="ss-chekbox"
-        ><input type="checkbox" name="parking" />
-        <p>주차 가능</p>
+      <label id="ss-chekbox">
+        <div id="checkbox-park">
+          <input type="checkbox" name="parking" />
+          <p>주차 가능</p>
+        </div>
       </label>
     </div>
 
@@ -126,32 +128,14 @@ const stages = ref([
     { type: 0, id: 4, name: "반려동물용품" },
   ],
   [
-    {
-      id: 0,
-      name: "박물관",
-    },
-    {
-      id: 1,
-      name: "여행지",
-    },
-    {
-      id: 2,
-      name: "미술관",
-    },
-    {
-      id: 3,
-      name: "문예회관",
-    },
-    {
-      id: 4,
-      name: "음식점/카페",
-    },
-    {
-      id: 5,
-      name: "관광지",
-    },
+    { type: 0, id: 0, name: "박물관" },
+    { type: 0, id: 1, name: "여행지" },
+    { type: 0, id: 2, name: "미술관" },
+    { type: 0, id: 3, name: "문예회관" },
+    { type: 0, id: 4, name: "음식점/카페" },
+    { type: 0, id: 5, name: "관광지" },
   ],
-  [{ id: 0, name: "숙박업소" }],
+  [{ type: 0, id: 0, name: "숙박업소" }],
 ]);
 
 // const stay = [{ id: 0, name: "숙박업소" }];
@@ -282,20 +266,6 @@ watch(stage, (newValue, oldValue) => {
   color: #333;
 }
 
-#ss-checkbox {
-  text-align: end;
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  margin-right: 3px;
-  margin-top: 10px;
-}
-
-#ss-checkbox p {
-  margin-left: 5px;
-}
-
 .fixed-section {
   width: 300px;
   /* 고정 섹션의 너비 */
@@ -318,5 +288,16 @@ watch(stage, (newValue, oldValue) => {
   border: 1px dashed #ccc;
   background-color: #f9f9f9;
   text-align: center;
+}
+
+#checkbox-park {
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#checkbox-park p {
+  margin-left: 5px;
+  font-size: 13px;
 }
 </style>
