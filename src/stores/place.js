@@ -10,7 +10,13 @@ import {
   searchPlacesKnS,
   searchPlacesKnCnS,
 } from "@/api/place.js";
-import { savePlan } from "../api/plan";
+import {
+  addPlan,
+  getPlanList,
+  getPlanDetail,
+  modifyPlan,
+  deletePlan,
+} from "@/api/plan.js";
 
 export const usePlaceStore = defineStore(
   "placeStore",
@@ -386,14 +392,14 @@ export const usePlaceStore = defineStore(
 
     // 계획 저장
     const savePlanNow = async () => {
-      await savePlan(
+      await addPlan(
         selectPlanOptions.value,
 
         (respone) => {
-          console.log("savePlan", respone);
+          console.log("addPlan", respone);
         },
         (error) => {
-          console.log("savePlan", error);
+          console.log("addPlan", error);
         }
       );
     };

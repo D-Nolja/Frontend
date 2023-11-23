@@ -90,6 +90,8 @@ const save = async () => {
   console.log("계획을 저장해보자");
   console.log("계획 저장 ", selectPlanOptions.value);
   await savePlanNow();
+
+  router.push({ name: "home" });
 };
 </script>
 
