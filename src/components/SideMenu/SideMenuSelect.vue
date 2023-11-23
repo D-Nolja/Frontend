@@ -1,8 +1,9 @@
 <template>
   <div class="menu-section" id="section2">
     <div id="day-section-title">
-      <p>{{ dayPlan.number }}일차</p>
+      <p>{{ dayPlan.day }}일차</p>
       <p>{{ dayPlan.date }}</p>
+      <!-- 수정-->
     </div>
 
     <div class="day-section">
@@ -15,7 +16,7 @@
         <div v-if="dayPlanPlaces.length === 0">drag Here!</div>
         <VPlaceCardSmall
           v-for="(place, index) in dayPlanPlaces"
-          :key="place.name"
+          :key="place.day"
           :place="place"
           :number="index + 1"
           cardColor="blue"
@@ -30,7 +31,10 @@
 import VPlaceCardSmall from "@/components/Common/cards/VPlaceCardSmall.vue";
 import { defineEmits, defineProps, watch, ref, onMounted } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
+import { usePlaceStore } from "@/stores/place.js";
+import { storeToRefs } from "pinia";
 
+const placeStore = usePlaceStore();
 const emit = defineEmits(["markPlace"]);
 const dayPlanPlaces = ref([]);
 const showPlace = (place) => {
@@ -40,34 +44,19 @@ const showPlace = (place) => {
 const props = defineProps({
   dayPlan: {
     type: Object,
-    default() {
-      return {
-        number: 1,
-        date: 12.05,
-        places: [
-          {
-            name: "혜인식탁",
-            cate: "맛집",
-            time: "11:30 ~ 16:00",
-          },
-          {
-            name: "원빈식탁",
-            cate: "맛집",
-            time: "11:30 ~ 16:00",
-          },
-        ],
-      };
-    },
   },
 });
 
-// onMounted(() => {
-//   dayPlanPlaces.value = props.dayPlan.places;
-// });
+onMounted(() => {
+  dayPlanPlaces.value = props.dayPlan.dailyPlan;
+});
+watch(() => {
+  console.log("props.dayPlan", props.dayPlan);
+});
+
 watch(dayPlanPlaces, (newValue, oldValue) => {
   if (newValue != oldValue) {
     dayPlanPlaces.value = newValue;
-    console.log("dayPlanPlaces.value 선택했어", dayPlanPlaces.value);
   }
 });
 </script>
