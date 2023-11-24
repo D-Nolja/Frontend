@@ -17,6 +17,7 @@ export const usePlanStore = defineStore("planStore", () => {
 
   const planList = ref(null);
   const thePlan = ref(null);
+  const thePlanShow = ref(null);
   const showPlanList = async () => {
     await getPlanList(
       searchParamPlan.value,
@@ -46,6 +47,20 @@ export const usePlanStore = defineStore("planStore", () => {
     );
   };
 
+  const showPlanShowDetail = async (planId) => {
+    await getPlanDetail(
+      planId,
+      (response) => {
+        console.log("showPlanDetail", response);
+        let { data } = response;
+        thePlanShow.value = data.info;
+      },
+      (error) => {
+        console.log("showPlanDetail", error);
+      }
+    );
+  };
+
   const delPlan = async (planId) => {
     await deletePlan(
       planId,
@@ -60,6 +75,7 @@ export const usePlanStore = defineStore("planStore", () => {
       }
     );
   };
+
   return {
     searchParamPlan,
     planList,
@@ -67,5 +83,7 @@ export const usePlanStore = defineStore("planStore", () => {
     showPlanDetail,
     showPlanList,
     delPlan,
+    thePlanShow,
+    showPlanShowDetail,
   };
 });

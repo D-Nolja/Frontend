@@ -5,10 +5,10 @@
     :style="{ maxWidth: scrollableSectionWidth }"
   >
     <div id="plan-title">
-      <!-- <p id="plan-name">싸방학 언제 와</p> -->
-      <VInput txt="제목을 입력하세요" id="name-input" v-model="planName" />
-      <!-- <p id="plan-date">2023.12.04 ~ 2023.12.08</p> -->
-      <div id="plan-date" class="plan-date-input">
+      <p id="plan-name">싸방학 언제 와</p>
+      <!-- <VInput txt="제목을 입력하세요" id="name-input" v-model="planName" /> -->
+      <p id="plan-date">2023.12.04 ~ 2023.12.08</p>
+      <!-- <div id="plan-date" class="plan-date-input"> -->
         <!-- <div class="start-container">
           <p>여행 시작일</p>
           <input type="date" v-model="startDate" />
@@ -42,7 +42,7 @@
         </div>
 
         <!-- 수정 -->
-        <div class="drag-handle">어디있냐</div>
+        <div class="drag-handle"></div>
       </div>
     </div>
   </div>
@@ -50,8 +50,8 @@
 
 <script setup>
 import VDatePicker from "@/components/Common/VDatePicker.vue";
-import SideMenuSelect from "../SideMenu/SideMenuSelect.vue";
-import SideMenuSearch from "../SideMenu/SideMenuSearch.vue";
+import SideMenuSelect from "../SideMenuShow/SideMenuSelect.vue";
+import SideMenuSearch from "../SideMenuShow/SideMenuSearch.vue";
 import { usePlaceStore } from "@/stores/place.js";
 import { storeToRefs } from "pinia";
 import { ref, onMounted, onUnmounted, watch } from "vue";
@@ -59,25 +59,29 @@ import { useRoute } from "vue-router";
 import { watchEffect, computed } from "vue";
 import VInput from "../Common/VInput.vue";
 const placeStore = usePlaceStore();
-const { places, dayPlaces, planDetails, selectPlanOptions } =
+const { places, dayPlaces, planShowDetails, selectPlanOptions } =
   storeToRefs(placeStore);
 const startDate = ref("2023-12-04"); // 시작 날짜의 기본값 설정
 const endDate = ref("2023-12-08"); // 종료 날짜의 기본값 설정
 const planName = ref("");
 
-watch(() => {
-  selectPlanOptions.value.title = planName.value;
-  selectPlanOptions.value.start = startDate.value;
-  selectPlanOptions.value.end = endDate.value;
+console.log("pppppp", planShowDetails)
+// watch(() => {
+//   // selectPlanOptions.value.title = planName.value;
+//   // selectPlanOptions.value.start = startDate.value;
+//   // selectPlanOptions.value.end = endDate.value;
 
-  console.log(selectPlanOptions.value);
-});
+//    console.log("----------------planShowDetails2----------------", planShowDetails.value)
+//   // console.log(selectPlanOptions.value);
+// });
 
-onMounted(() => {
-  selectPlanOptions.value.title = "";
-  selectPlanOptions.value.start = "";
-  selectPlanOptions.value.end = "";
-});
+// onMounted(() => {
+
+//   console.log("----------------planShowDetails1----------------", planShowDetails.value)
+//   // selectPlanOptions.value.title = "";
+//   // selectPlanOptions.value.start = "";
+//   // selectPlanOptions.value.end = "";
+// });
 
 const tempDay = {
   day: 1,
@@ -112,10 +116,10 @@ watchEffect(() => {
 
 const filterdDayPlans = computed(() => {
   if (day.value === "all") {
-    console.log("planDetails", planDetails.value);
-    return planDetails.value;
+    console.log("planDetails", planShowDetails.value);
+    return planShowDetails.value;
   } else {
-    return planDetails.value.filter(
+    return planShowDetails.value.filter(
       (planDetail) => planDetail.day.toString() === day.value
     );
   }
@@ -294,8 +298,7 @@ onUnmounted(() => {
 
 .drag-handle {
   width: 600px;
-  background-color: #e6effe;
-  color: #e6effe;
+  background-color: #bfd6ff;
 }
 
 #name-input {

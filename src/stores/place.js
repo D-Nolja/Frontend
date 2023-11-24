@@ -134,6 +134,8 @@ export const usePlaceStore = defineStore(
       },
     ]);
 
+    const planShowDetails = ref([]);
+
     const daynumbers = ref(0);
     watch(() => {
       daynumbers.value = planDetails.value.length;
@@ -425,6 +427,7 @@ export const usePlaceStore = defineStore(
 
       dayPlacesDetail,
       markerLatLngs,
+      planShowDetails,
       clickedDays,
     };
   },

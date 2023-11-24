@@ -2,21 +2,31 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { usePlanStore } from "@/stores/plan.js";
-
+import { usePlaceStore } from "@/stores/place.js";
+import { storeToRefs } from "pinia";
 const props = defineProps({
   plan: {
     type: Object,
   },
 });
+const placeStore = usePlaceStore();
+const { planDetails } = storeToRefs(placeStore);
 const planStore = usePlanStore();
-const { delPlan, showPlanDetail } = planStore;
+const { thePlanShow } = storeToRefs(planStore);
+const { delPlan, showPlanShowDetail } = planStore;
+const { planShowDetails } = storeToRefs(placeStore);
 const router = useRouter();
 console.log("props", props);
 let formatDate = `${props.plan.start} ~ ${props.plan.end}`;
 
-const mvPlanDetail = () => {
+const mvPlanDetail = async () => {
   console.log("상세보기");
-  router.push("plan/all");
+  await showPlanShowDetail(props.plan.planId);
+  // planDetails.value = thePlan.value;
+  console.log("thePlanShow", thePlanShow.value);
+  planShowDetails.value = thePlanShow.value;
+  console.log("planDetail.value", planDetails.value);
+  router.push("plan/view/all");
 };
 const mvWriteReview = async () => {
   console.log("후기 작성 페이지 이동");

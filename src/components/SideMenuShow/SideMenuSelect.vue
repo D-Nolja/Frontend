@@ -143,7 +143,7 @@ watch(dayPlanPlaces, (newValue, oldValue) => {
 .day-section {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 80vh;
+  height: 82vh;
   width: 270px;
   border-radius: 10px;
   background-color: #f7f8f9;
