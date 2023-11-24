@@ -71,7 +71,6 @@ const addPlaceOption = (places) => {
 let day = ref(0);
 onMounted(() => {
   dayPlanPlaces.value = props.dayPlan.dailyPlan;
-  console.log("show!!");
   dayPlanPlaces.value.day = props.dayPlan.day;
   day.value = props.dayPlan.day;
   console.log("dayPlanPlaces : ", dayPlanPlaces.value);
@@ -144,7 +143,7 @@ watch(dayPlanPlaces, (newValue, oldValue) => {
 .day-section {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 80vh;
+  height: 82vh;
   width: 270px;
   border-radius: 10px;
   background-color: #f7f8f9;

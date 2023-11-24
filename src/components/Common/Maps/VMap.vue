@@ -4,11 +4,13 @@
 
 <script setup>
 import { usePlaceStore } from "@/stores/place";
+import { processExpression } from "@vue/compiler-core";
 import { storeToRefs } from "pinia";
 import { ref, onMounted, watch } from "vue";
 const { VITE_APP_KAKAO_API_KEY } = import.meta.env;
 const placeStore = usePlaceStore();
-let { searchPlaces, clickedPlace } = storeToRefs(placeStore);
+let { searchPlaces, clickedPlace, clickedDays, markerLatLngs } =
+  storeToRefs(placeStore);
 let places = ref(null);
 let map = ref(null);
 let mapLoaded = ref(false);
@@ -21,6 +23,12 @@ const props = defineProps({
       return "map";
     },
   },
+  mapLocations: {
+    type: Array,
+    default() {
+      return [{ x: 126.570667, y: 33.450701 }];
+    },
+  },
 });
 
 onMounted(() => {
@@ -28,7 +36,69 @@ onMounted(() => {
     // clickedPlace.value = null;
     loadMap();
   }
+
+  if (props.mapLocations) {
+    if (mapLoaded.value) {
+      clearMarkers(); // 기존 마커 제거
+      const bounds = new kakao.maps.LatLngBounds(); // bounds 초기화
+
+      const temp = props.mapLocations;
+      temp.forEach((location) => {
+        console.log("marker 찍기", location);
+        displayMarker(location, bounds); // 각 위치에 대한 마커 표시
+      });
+
+      if (map.value) {
+        map.value.setBounds(bounds); // 모든 마커를 포함하도록 맵 경계 조정
+      }
+    }
+  }
+  console.log("props.mapLocations1", props);
 });
+
+watch(clickedDays, (newValue, oldValue) => {
+  if (newValue != oldValue) {
+    console.log("clickedDays in map", clickedDays.value);
+    if (mapLoaded.value) {
+      clearMarkers(); // 기존 마커 제거
+      const bounds = new kakao.maps.LatLngBounds(); // bounds 초기화
+
+      const temp = markerLatLngs.value;
+      temp.forEach((location) => {
+        console.log("marker 찍기", location);
+        displayMarker(location, bounds); // 각 위치에 대한 마커 표시
+      });
+
+      if (map.value) {
+        map.value.setBounds(bounds); // 모든 마커를 포함하도록 맵 경계 조정
+        map.value.relayout();
+      }
+    }
+  }
+});
+
+watch(
+  props.mapLocations,
+  () => {
+    console.log("props.mapLocations", props.mapLocations);
+    console.log("!!");
+    if (mapLoaded.value) {
+      clearMarkers(); // 기존 마커 제거
+      const bounds = new kakao.maps.LatLngBounds(); // bounds 초기화
+
+      const temp = props.mapLocations;
+      temp.forEach((location) => {
+        console.log("marker 찍기", location);
+        displayMarker(location, bounds); // 각 위치에 대한 마커 표시
+      });
+
+      if (map.value) {
+        map.value.setBounds(bounds); // 모든 마커를 포함하도록 맵 경계 조정
+      }
+    }
+  },
+  { immediate: true }
+);
 
 watch(
   searchPlaces,
@@ -68,6 +138,7 @@ const initMap = () => {
   console.log("initMap 되냐고!!!");
   // const container = document.getElementById("map");
   console.log("mapId 확인해볼게...", props.mapId);
+
   const container = document.getElementById(props.mapId);
   // const container = document.getElementById("map2");
   const options = {
@@ -161,6 +232,12 @@ function displayMarker(place, bounds) {
 
 <style scoped>
 .map-container {
+  width: 100% !important;
+  height: 100vh;
+  z-index: 0;
+}
+
+[id^="map"] {
   width: 100%;
   height: 100vh;
   z-index: 0;

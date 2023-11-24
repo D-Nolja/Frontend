@@ -28,6 +28,8 @@ const router = createRouter({
       path: "/plan/view/:day",
       name: "planView",
       component: () => import("@/views/PlanShowView.vue"),
+
+
     },
     {
       path: "/qna",
@@ -38,6 +40,22 @@ const router = createRouter({
       path: "/join",
       name: "join",
       component: () => import("@/views/JoinView.vue"),
+    },
+    {
+      path: "/writeReview",
+      name: "reviewWrite",
+      component: () => import("@/views/ReviewWriteView.vue"),
+    },
+    {
+      path: "/review",
+      name: "review",
+      component: () => import("@/views/ReviewView.vue"),
+    },
+
+    {
+      path: "/modifyReview",
+      name: "reviewModify",
+      component: () => import("@/views/ReviewModifyView.vue"),
     },
   ],
 });

@@ -1,8 +1,8 @@
 <template>
   <a-timeline>
-    <a-timeline-item v-for="item in timelineItems" :key="item.id">
+    <a-timeline-item v-for="rd in item.reviewDetails" :key="rd.reviewId">
       <div id="place-name-with-write">
-        <p id="place-name">{{ item.name }}</p>
+        <p id="place-name">{{ rd.name }}</p>
         <img
           src="../../assets/img/write.svg"
           alt=""
@@ -11,7 +11,7 @@
           @click="toggle(item)"
         />
       </div>
-      <p v-if="item.review">{{ item.review }}</p>
+      <p v-if="item.review">{{ rd.content }}</p>
       <template v-if="!item.showDiv">
         <img
           v-if="item.imageSrc"
@@ -36,7 +36,7 @@
           id="review-all-txt"
           rows="10"
           placeholder="내용을 입력하세요"
-          v-model="item.tempReview"
+          v-model="rd.content"
         ></textarea>
         <div id="finish-btn-container">
           <VButtonSubmit
@@ -70,6 +70,7 @@ const props = defineProps({
   item: Object,
 });
 
+console.log("item", props.item);
 watch(() => {
   console.log("timelinewrite item", props.item.dailyPlan);
   timelineItems.value = props.item.dailyPlan;

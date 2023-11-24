@@ -43,13 +43,14 @@ import { uploadReviewImg } from "@/api/review.js";
 const planStore = usePlanStore();
 const reviewStore = useReviewStore();
 
-const { writtenReview } = storeToRefs(reviewStore);
+const { writtenReview, reviewDetail } = storeToRefs(reviewStore);
 const { thePlan } = storeToRefs(planStore);
 const fileImgSrc = ref(null);
 const reviewTitle = ref("");
 const reviewContents = ref("");
 
 onMounted(() => {
+  console.log("reviewDetail", reviewDetail.value);
   writtenReview.value.reviewTitle = "";
   writtenReview.value.mainImg = "";
   writtenReview.value.mainContents = "";

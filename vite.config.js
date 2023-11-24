@@ -11,14 +11,14 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  server: {
-    proxy: {
-      "/server": {
-        target:
-          "http://D-nolja-prod.eba-pk7qjxkg.ap-northeast-2.elasticbeanstalk.com",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/server/, ""),
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/server": {
+  //       target:
+  //         "http://D-nolja-prod.eba-pk7qjxkg.ap-northeast-2.elasticbeanstalk.com",
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/server/, ""),
+  //     },
+  //   },
+  // },
 });

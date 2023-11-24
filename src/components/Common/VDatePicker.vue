@@ -4,10 +4,13 @@
       <a-space>
         <a-range-picker
           v-model:value="dateRange"
-          :open="true"
           :size="large"
+          :open="isOpen"
           :disabledDate="disabledDate"
         />
+        <div class="openBtn-container">
+          <VButtonSubmit @click="toggleOpen" id="openBtn" :txt="선택" />
+        </div>
       </a-space>
     </div>
   </div>
@@ -15,27 +18,52 @@
 
 <script setup>
 import { ref, watch, onMounted } from "vue";
-
+import { usePlaceStore } from "@/stores/place.js";
+import { storeToRefs } from "pinia";
+import VButtonSubmit from "../Common/VButtonSubmit.vue";
+const placeStore = usePlaceStore();
+const { selectPlanOptions } = storeToRefs(placeStore);
 const dateRange = ref([]);
 const maxRange = 4; // 최대 선택 가능 일수
 const wrapperRef = ref(null); // DOM 요소를 참조하기 위한 ref
 const height = ref(0);
+const isOpen = ref(false); // Define open state
 onMounted(() => {
-  if (wrapperRef.value) {
-    console.log("달력의 높이:", wrapperRef.value.offsetHeight);
-    height.value = wrapperRef.value.offsetHeight * 100;
-  }
+  // if (wrapperRef.value) {
+  //   console.log("달력의 높이:", wrapperRef.value.offsetHeight);
+  //   height.value = wrapperRef.value.offsetHeight * 100;
+  // }
+  console.log("selectPlanOptions.value", selectPlanOptions.value.start);
 });
 
+const toggleOpen = () => {
+  isOpen.value = !isOpen.value;
+};
+
+let startDate = "";
+let endDate = "";
 watch(dateRange, (newValue) => {
   if (newValue && newValue.length === 2) {
-    const startDate = newValue[0].$d;
-    const endDate = newValue[1].$d;
+    startDate = newValue[0].$d;
+    endDate = newValue[1].$d;
 
     console.log("시작 날짜:", formatDate(startDate));
     console.log("종료 날짜:", formatDate(endDate));
+
+    console.log("selectPlanOptions.value", selectPlanOptions.value.start);
+
+    selectPlanOptions.value.start = formatDate(startDate);
+    selectPlanOptions.value.end = formatDate(endDate);
   }
 });
+
+// watch(startDate, () => {
+//   selectPlanOptions.value.start = startDate.value;
+// });
+
+// watch(endDate, () => {
+//   selectPlanOptions.value.end = endDate.value;
+// });
 
 const formatDate = (value) => {
   const date = new Date(value);
@@ -58,24 +86,31 @@ const disabledDate = (current) => {
   const endDateLimit = new Date(startDate);
   endDateLimit.setDate(startDate.getDate() + maxRange);
 
-  return current.valueOf() > endDateLimit.valueOf();
+  return current.valueOf() < endDateLimit.valueOf();
 };
 </script>
 
 <style scoped>
-#date-picker-container {
-  display: flex;
-  justify-content: center;
-
-  height: 320px;
+#openBtn {
+  height: 30px;
+  margin: 0;
 }
 
-:where(.css-dev-only-do-not-override-185kyl0) .ant-picker-dropdown {
+.openBtn-container {
+  display: flex;
+  align-items: center;
+}
+/* #date-picker-container {
+  display: flex;
+  justify-content: center;
+  height: 320px;
+} */
+
+/* :where(.css-dev-only-do-not-override-185kyl0) .ant-picker-dropdown {
   position: static !important;
 }
 ::v-deep .ant-picker-panel-container {
   display: flex;
   justify-content: center;
-  /* 필요한 경우 여기에 추가 스타일을 적용하세요 */
-}
+} */
 </style>
