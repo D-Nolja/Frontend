@@ -9,9 +9,10 @@ const { userInfo, modifiedUserInfo, profileImg } = storeToRefs(userStore);
 const { sendProfile, modifyUserInfo } = userStore;
 
 const isEditable = ref(true);
-const fileImgSrc = ref(null);
+const fileImgSrc = ref("");
 
 onMounted(() => {
+  console.log("userInfo", userInfo.value);
   fileImgSrc.value = userInfo.value.img;
 });
 const changeEdit = () => {

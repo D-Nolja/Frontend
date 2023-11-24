@@ -9,7 +9,7 @@
       <!-- <VInput txt="제목을 입력하세요" id="name-input" v-model="planName" /> -->
       <p id="plan-date">2023.12.04 ~ 2023.12.08</p>
       <!-- <div id="plan-date" class="plan-date-input"> -->
-        <!-- <div class="start-container">
+      <!-- <div class="start-container">
           <p>여행 시작일</p>
           <input type="date" v-model="startDate" />
         </div>
@@ -18,32 +18,28 @@
           <input type="date" v-model="endDate" />
         </div> -->
 
-        <div>
-          <VDatePicker />
-        </div>
+      <div>
+        <VDatePicker />
       </div>
     </div>
-    <div id="plan-title-container">
-      <side-menu-search
-        v-if="day === 'all'"
-        :places="places"
-      ></side-menu-search>
+  </div>
+  <div id="plan-title-container">
+    <side-menu-search v-if="day === 'all'" :places="places"></side-menu-search>
 
-      <!-- <div class="scrollable-section" @mousedown="startDrag"> -->
+    <!-- <div class="scrollable-section" @mousedown="startDrag"> -->
 
-      <div class="select-plan-section" @mousedown="startDrag">
-        <div class="scrollable-section">
-          <SideMenuSelect
-            v-for="dayPlan in filterdDayPlans"
-            :key="dayPlan.day"
-            :dayPlan="dayPlan"
-            @mark-place="handleMarkPlace"
-          />
-        </div>
-
-        <!-- 수정 -->
-        <div class="drag-handle"></div>
+    <div class="select-plan-section" @mousedown="startDrag">
+      <div class="scrollable-section">
+        <SideMenuSelect
+          v-for="dayPlan in filterdDayPlans"
+          :key="dayPlan.day"
+          :dayPlan="dayPlan"
+          @mark-place="handleMarkPlace"
+        />
       </div>
+
+      <!-- 수정 -->
+      <div class="drag-handle"></div>
     </div>
   </div>
 </template>
@@ -57,15 +53,14 @@ import { storeToRefs } from "pinia";
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { watchEffect, computed } from "vue";
-import VInput from "../Common/VInput.vue";
-const placeStore = usePlaceStore();
-const { places, dayPlaces, planShowDetails, selectPlanOptions } =
-  storeToRefs(placeStore);
-const startDate = ref("2023-12-04"); // 시작 날짜의 기본값 설정
-const endDate = ref("2023-12-08"); // 종료 날짜의 기본값 설정
-const planName = ref("");
 
-console.log("pppppp", planShowDetails)
+const placeStore = usePlaceStore();
+const { places, planShowDetails } = storeToRefs(placeStore);
+
+console.log("나와줄래?", planShowDetails.value);
+// onMounted(() => {
+//   console.log("나와줄래?", planShowDetails.value);
+// });
 // watch(() => {
 //   // selectPlanOptions.value.title = planName.value;
 //   // selectPlanOptions.value.start = startDate.value;
@@ -124,57 +119,6 @@ const filterdDayPlans = computed(() => {
     );
   }
 });
-
-// const dayPlans = ref([
-//   {
-//     number: 1,
-//     date: 12.05,
-//     places: [
-//       {
-//         name: "혜인식탁",
-//         type: "맛집",
-//         x: "33.24833404783013",
-//         y: "126.56835909631332",
-//         address: "도로명 주소1",
-//         tel: "010-1234-1234",
-//         openopenTime: "11:30 ~ 16:00",
-//         info: "반려동물 동반 가능 / 무료",
-//       },
-//     ],
-//   },
-//   {
-//     number: 2,
-//     date: 12.06,
-//     places: [
-//       {
-//         name: "원빈식탁",
-//         type: "맛집",
-//         x: "33.27874670832252",
-//         y: "126.70801347099405",
-//         address: "도로명 주소1",
-//         tel: "010-9876-9876",
-//         openopenTime: "12:30 ~ 15:00",
-//         info: "반려동물 동반 가능 / 무료",
-//       },
-//     ],
-//   },
-//   {
-//     number: 3,
-//     date: 12.07,
-//     places: [
-//       {
-//         name: "은서식탁",
-//         type: "맛집",
-//         x: "33.2488301865394",
-//         y: "126.32352822201112",
-//         address: "도로명 주소1",
-//         tel: "010-9876-9876",
-//         openopenTime: "12:30 ~ 15:00",
-//         info: "반려동물 동반 가능 / 무료",
-//       },
-//     ],
-//   },
-// ]);
 
 const sideMenu = ref(null);
 const minWidth = 600; // 최소 너비 설정

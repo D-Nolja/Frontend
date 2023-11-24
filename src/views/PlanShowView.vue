@@ -2,11 +2,8 @@
 import TheSideNav from "@/components/layout/TheSideNav.vue";
 import SideMenu from "@/components/SideMenuShow/SideMenu.vue";
 import VMap from "@/components/Common/Maps/VMap.vue";
-import { usePlaceStore } from "@/stores/place.js";
-import { ref, watch } from "vue";
-import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
-const placeStore = usePlaceStore();
 const clickedPlace = ref(null);
 </script>
 

@@ -13,7 +13,7 @@ const placeStore = usePlaceStore();
 const { planDetails } = storeToRefs(placeStore);
 const planStore = usePlanStore();
 const { thePlanShow } = storeToRefs(planStore);
-const { delPlan, showPlanShowDetail } = planStore;
+const { delPlan, showPlanShowDetail, showPlanDetail } = planStore;
 const { planShowDetails } = storeToRefs(placeStore);
 const router = useRouter();
 console.log("props", props);
@@ -25,9 +25,10 @@ const mvPlanDetail = async () => {
   // planDetails.value = thePlan.value;
   console.log("thePlanShow", thePlanShow.value);
   planShowDetails.value = thePlanShow.value;
-  console.log("planDetail.value", planDetails.value);
+  console.log("planShowDetails.value", planShowDetails.value);
   router.push("plan/view/all");
 };
+
 const mvWriteReview = async () => {
   console.log("후기 작성 페이지 이동");
   await showPlanDetail(props.plan.planId);
