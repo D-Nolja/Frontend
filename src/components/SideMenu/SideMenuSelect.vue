@@ -70,6 +70,7 @@ const addPlaceOption = (places) => {
 let day = ref(0);
 onMounted(() => {
   dayPlanPlaces.value = props.dayPlan.dailyPlan;
+  console.log("show!!");
   dayPlanPlaces.value.day = props.dayPlan.day;
   day.value = props.dayPlan.day;
   console.log("dayPlanPlaces : ", dayPlanPlaces.value);
