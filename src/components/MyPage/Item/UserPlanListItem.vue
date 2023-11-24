@@ -1,34 +1,34 @@
 <script setup>
-import { ref, watch } from 'vue';
-import { useRouter } from "vue-router"
-import { usePlanStore } from '@/stores/plan.js';
+import { ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import { usePlanStore } from "@/stores/plan.js";
 
 const props = defineProps({
   plan: {
     type: Object,
-  }
-})
+  },
+});
 const planStore = usePlanStore();
 const { delPlan, showPlanDetail } = planStore;
 const router = useRouter();
-console.log("props", props)
-let formatDate = `${props.plan.start} ~ ${props.plan.end}`
+console.log("props", props);
+let formatDate = `${props.plan.start} ~ ${props.plan.end}`;
 
 const mvPlanDetail = () => {
   console.log("상세보기");
-  // router.push({ name: "" });
-}
+  router.push("plan/all");
+};
 const mvWriteReview = async () => {
   console.log("후기 작성 페이지 이동");
   await showPlanDetail(props.plan.planId);
   router.push({ name: "reviewWrite" });
-}
+};
 const deletePlan = async () => {
-  console.log(props.plan.planId)
+  console.log(props.plan.planId);
   console.log("여행 계획 삭제");
-
   await delPlan(props.plan.planId);
-}
+  window.location.reload();
+};
 </script>
 
 <template>
@@ -39,14 +39,16 @@ const deletePlan = async () => {
       <a key="list-loadmore-delete" @click="deletePlan">삭제</a>
     </template>
 
-
-    <a-list-item-meta :description="formatDate" id="plan-description" class="text-truncate">
+    <a-list-item-meta
+      :description="formatDate"
+      id="plan-description"
+      class="text-truncate"
+    >
       <template #title>
         <p id="plan-title" class="text-truncate">{{ plan.title }}</p>
-
       </template>
       <template #avatar>
-        <img src="@/assets/img/avatar.svg" alt="" id="plan-img">
+        <img src="@/assets/img/avatar.svg" alt="" id="plan-img" />
       </template>
     </a-list-item-meta>
   </a-list-item>
@@ -61,10 +63,9 @@ const deletePlan = async () => {
   width: 95%;
   padding: 1.5rem;
   border-radius: 0.87606rem;
-  border: 1.869px solid #EAEAEA;
-  background: var(--neutral-1, #FFF);
+  border: 1.869px solid #eaeaea;
+  background: var(--neutral-1, #fff);
 }
-
 
 #plan-title {
   color: var(--character-primary-85, rgba(0, 0, 0, 0.85));

@@ -53,6 +53,9 @@ export const usePlaceStore = defineStore(
     const clickedPlace = ref(null);
     const stage = ref(0); // 관광지, 애견시설, 숙박
 
+    const markerLatLngs = ref([]);
+    const clickedDays = ref(false);
+
     // default value
     const searchParams = ref({
       x: "", // 현재 위치의 경도
@@ -66,6 +69,7 @@ export const usePlaceStore = defineStore(
     });
 
     const dayPlaces = ref([[], [], [], [], [], []]); // 0~5일 (총 6개, 0일)
+    const dayPlacesDetail = ref([[], [], [], [], [], []]); // 0~5일 (총 6개, 0일)
     const updateSelectPlanOptions = () => {
       console.log("dayPlaces filter ", dayPlaces.value);
       console.log("selectPlanOptions!!!! ", selectPlanOptions.value);
@@ -75,6 +79,7 @@ export const usePlaceStore = defineStore(
       console.log("selectPlanOptions!!!! ", selectPlanOptions.value);
     };
 
+    // const planDetails = ref([]);
     const planDetails = ref([
       {
         day: 1,
@@ -90,19 +95,6 @@ export const usePlaceStore = defineStore(
             y: 33.3082858,
             openTime: "매일 15:00~10:01",
             img: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210325_215%2F1616642660264WUAXL_JPEG%2Fimage.jpg",
-          },
-
-          {
-            reviewId: 30,
-            order: 3,
-            spotId: 700,
-            name: "테라스힐 가족 독채펜션",
-            category: "stay",
-            type: "숙박업소",
-            x: 126.5727435,
-            y: 33.4703745,
-            openTime: "16:00~12:00",
-            img: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzA3MjVfNDUg%2FMDAxNjkwMjcxNjMxNDYz.jhoP3oNS-AMB-N0Kq-LJsqnXYVlGNG3D0psjqCLtVegg.-XeMNx8HFiCs4f6nW1op6U5BcFVka4aftR68ZWYxBwAg.JPEG.banlife_official%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5_%25283%2529.jpeg",
           },
         ],
       },
@@ -392,14 +384,15 @@ export const usePlaceStore = defineStore(
 
     // 계획 저장
     const savePlanNow = async () => {
+      console.log("savePlanNow", selectPlanOptions.value);
       await addPlan(
         selectPlanOptions.value,
 
         (respone) => {
-          console.log("addPlan", respone);
+          console.log("savePlanNow", respone);
         },
         (error) => {
-          console.log("addPlan", error);
+          console.log("savePlanNow", error);
         }
       );
     };
@@ -429,6 +422,10 @@ export const usePlaceStore = defineStore(
       selectPlanOptions,
       updateSelectPlanOptions,
       savePlanNow,
+
+      dayPlacesDetail,
+      markerLatLngs,
+      clickedDays,
     };
   },
   { persist: true }

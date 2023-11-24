@@ -1,9 +1,9 @@
 <template>
   <div id="review-places-container">
     <ReviewPlaceCard
-      v-for="thep in thePlanValue"
-      :key="thep.day"
-      :item="thep"
+      v-for="content in contents"
+      :key="content.day"
+      :item="content"
     />
     <VButtonSubmit
       txt="저장하기"
@@ -15,31 +15,38 @@
 </template>
 
 <script setup>
-import ReviewPlaceCard from "./ReviewWritePlaceCard.vue";
+import ReviewPlaceCard from "./ReviewModifyPlaceCard.vue";
 import VButtonSubmit from "@/components/Common/VButtonSubmit.vue";
 import { useRouter } from "vue-router";
 import { usePlanStore } from "@/stores/plan.js";
 import { useReviewStore } from "@/stores/review";
 import { storeToRefs } from "pinia";
-import { watch, ref, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 
 const planStore = usePlanStore();
 const reviewStore = useReviewStore();
 const { saveReviewNow } = reviewStore;
-const { writtenReview } = storeToRefs(reviewStore);
+const { writtenReview, tempId, reviewDetail } = storeToRefs(reviewStore);
 const { thePlan } = storeToRefs(planStore);
-const thePlanValue = ref(null);
+const { showPlanDetail } = planStore;
+
 const router = useRouter();
 
-onMounted(() => {
+const contents = ref(null);
+onMounted(async () => {
+  console.log("1!!!");
+  await showPlanDetail(tempId.value);
   console.log("!!!", thePlan.value.planId);
   writtenReview.value.planId = thePlan.value.planId;
+  console.log("thePlan.value", thePlan.value);
+  console.log("reviewDetail.value", reviewDetail.value);
+  contents.value = reviewDetail.value.reviewList;
 });
 
-watch(() => {
-  console.log("thePlan", thePlan.value);
-  thePlanValue.value = thePlan.value.planDetails;
-});
+// watch(() => {
+//   console.log("thePlan", thePlan.value);
+//   thePlanValue.value = thePlan.value.planDetails;
+// });
 
 const saveReview = async () => {
   console.log("click");

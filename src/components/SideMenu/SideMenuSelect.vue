@@ -36,7 +36,8 @@ import { storeToRefs } from "pinia";
 import { UNREF } from "@vue/compiler-core";
 
 const placeStore = usePlaceStore();
-const { selectPlanOptions, dayPlaces } = storeToRefs(placeStore);
+const { selectPlanOptions, dayPlaces, dayPlacesDetail } =
+  storeToRefs(placeStore);
 const { updateSelectPlanOptions } = placeStore;
 const emit = defineEmits(["markPlace"]);
 const dayPlanPlaces = ref([]);
@@ -78,6 +79,7 @@ onMounted(() => {
   console.log("dayPlaces value", dayPlaces.value);
   console.log("updateSelectPlanOptions1");
   updateSelectPlanOptions();
+  console.log("dayPlan", props.dayPlan);
 });
 
 let dp = ref([]);
@@ -91,7 +93,9 @@ watch(dayPlanPlaces, (newValue, oldValue) => {
     dayPlanPlaces.value = newValue;
 
     dayPlanPlaces.value.day = day.value;
+    console.log("day,value2", day.value);
     console.log("dayPlanPlaces2 : ", dayPlanPlaces.value);
+    dayPlacesDetail.value[day.value] = dayPlanPlaces.value;
     addPlaceOption(dayPlanPlaces.value);
     console.log("updateSelectPlanOptions", dayPlanPlaces.value);
     updateSelectPlanOptions();
