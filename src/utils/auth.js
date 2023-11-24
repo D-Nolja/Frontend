@@ -2,8 +2,10 @@ import axios from "axios";
 // axios instance
 
 function getAuthInstance() {
+  // console.log(import.meta.env.BASE_URL);
   const authInstance = axios.create({
-    baseURL: "/server",
+    baseURL:
+      "http://D-nolja-prod.eba-pk7qjxkg.ap-northeast-2.elasticbeanstalk.com",
     // headers: { "Content-Type": "application/json;charset=utf-8" },
   });
 
