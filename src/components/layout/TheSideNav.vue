@@ -6,8 +6,16 @@ import { usePlaceStore } from "@/stores/place";
 import { storeToRefs } from "pinia";
 
 const placeStore = usePlaceStore();
-let { stage, daynumbers, searchParams, selectPlanOptions } =
-  storeToRefs(placeStore);
+let {
+  stage,
+  daynumbers,
+  searchParams,
+  selectPlanOptions,
+  dayPlaces,
+  dayPlacesDetail,
+  markerLatLngs,
+  clickedDays,
+} = storeToRefs(placeStore);
 const { selectSearchMethod, savePlanNow } = placeStore;
 const clickedButton = ref(null);
 const clickedAllButton = ref(true);
@@ -30,19 +38,39 @@ watch(() => {
     canIMoveBefore.value = false;
   }
 });
+let temp = [];
 const navigate = (path, day = null) => {
+  markerLatLngs.value = [];
+  temp = [];
+
+  console.log("markerLatLngs.value", markerLatLngs.value);
   if (path === "/plan/all") {
     clickedAllButton.value = true;
     clickedButton.value = null;
   } else {
+    console.log("clickedDays.value in nav", clickedDays.value);
     clickedAllButton.value = false;
     clickedButton.value = day;
+    console.log("dayPlacesDetail", dayPlacesDetail.value[day]);
+    clickedDays.value = !clickedDays.value;
+    dayPlacesDetail.value[day].forEach((place) => {
+      const newLatLng = { x: place.x, y: place.y };
+      temp.push(newLatLng);
+    });
+    markerLatLngs.value = temp;
   }
 
+  console.log("dayPlageaksjfs", selectPlanOptions.value);
+
+  console.log(
+    "selectPlanOptions.value.plans[day-1]",
+    selectPlanOptions.value.plans[day - 1]
+  );
   console.log("clickedAllButton : ", clickedAllButton.value);
   console.log("clickedButton : ", clickedButton.value);
 
   router.push(path);
+  // clickedDays.value = false;
 };
 
 const allButtonColor = computed(() =>
@@ -91,7 +119,7 @@ const save = async () => {
   console.log("계획 저장 ", selectPlanOptions.value);
   await savePlanNow();
 
-  router.push({ name: "home" });
+  router.push({ name: "myPage" });
 };
 </script>
 

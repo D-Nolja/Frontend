@@ -5,8 +5,23 @@
     :style="{ maxWidth: scrollableSectionWidth }"
   >
     <div id="plan-title">
-      <p id="plan-name">싸방학 언제 와</p>
-      <p id="plan-date">2023.12.04 ~ 2023.12.08</p>
+      <!-- <p id="plan-name">싸방학 언제 와</p> -->
+      <VInput txt="제목을 입력하세요" id="name-input" v-model="planName" />
+      <!-- <p id="plan-date">2023.12.04 ~ 2023.12.08</p> -->
+      <div id="plan-date" class="plan-date-input">
+        <!-- <div class="start-container">
+          <p>여행 시작일</p>
+          <input type="date" v-model="startDate" />
+        </div>
+        <div class="end-container">
+          <p>여행 종료일</p>
+          <input type="date" v-model="endDate" />
+        </div> -->
+
+        <div>
+          <VDatePicker />
+        </div>
+      </div>
     </div>
     <div id="plan-title-container">
       <side-menu-search
@@ -34,6 +49,7 @@
 </template>
 
 <script setup>
+import VDatePicker from "@/components/Common/VDatePicker.vue";
 import SideMenuSelect from "../SideMenu/SideMenuSelect.vue";
 import SideMenuSearch from "../SideMenu/SideMenuSearch.vue";
 import { usePlaceStore } from "@/stores/place.js";
@@ -41,10 +57,32 @@ import { storeToRefs } from "pinia";
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { watchEffect, computed } from "vue";
-
+import VInput from "../Common/VInput.vue";
 const placeStore = usePlaceStore();
-const { places, dayPlaces, planDetails } = storeToRefs(placeStore);
+const { places, dayPlaces, planDetails, selectPlanOptions } =
+  storeToRefs(placeStore);
+const startDate = ref("2023-12-04"); // 시작 날짜의 기본값 설정
+const endDate = ref("2023-12-08"); // 종료 날짜의 기본값 설정
+const planName = ref("");
 
+watch(() => {
+  selectPlanOptions.value.title = planName.value;
+  selectPlanOptions.value.start = startDate.value;
+  selectPlanOptions.value.end = endDate.value;
+
+  console.log(selectPlanOptions.value);
+});
+
+onMounted(() => {
+  selectPlanOptions.value.title = "";
+  selectPlanOptions.value.start = "";
+  selectPlanOptions.value.end = "";
+});
+
+const tempDay = {
+  day: 1,
+  date: "2023 / 12 / 12",
+};
 const emit = defineEmits("markPlace");
 function handleMarkPlace(place) {
   console.log("planView", place);
@@ -207,6 +245,11 @@ onUnmounted(() => {
   letter-spacing: 0.03375rem;
 }
 
+.plan-date-input {
+  display: flex;
+  width: 270px;
+}
+
 #plan-name {
   font-size: 22px;
 }
@@ -225,6 +268,10 @@ onUnmounted(() => {
   cursor: pointer;
 }
 
+/* .end-container,
+.start-container {
+  display: flex;
+} */
 #plan-title-container {
   display: flex;
   min-height: 86vh;
@@ -232,7 +279,7 @@ onUnmounted(() => {
 
 #plan-title {
   margin: 30px 0 15px 15px;
-  width: 300px;
+  width: 600px;
 }
 
 #plan-name {
@@ -248,5 +295,11 @@ onUnmounted(() => {
 .drag-handle {
   width: 600px;
   background-color: #333;
+}
+
+#name-input {
+  height: 2.5rem;
+  width: 270px;
+  margin-bottom: 7px;
 }
 </style>

@@ -13,8 +13,8 @@
 </template>
 
 <script setup>
-import ReviewPlaces from "./ReviewWritePlaces.vue";
-import ReviewWriteAll from "./ReviewWriteAll.vue";
+import ReviewPlaces from "./ReviewModifyPlaces.vue";
+import ReviewWriteAll from "./ReviewModifyAll.vue";
 </script>
 
 <style scoped>

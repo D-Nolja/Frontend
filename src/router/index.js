@@ -44,6 +44,12 @@ const router = createRouter({
       name: "review",
       component: () => import("@/views/ReviewView.vue"),
     },
+
+    {
+      path: "/modifyReview",
+      name: "reviewModify",
+      component: () => import("@/views/ReviewModifyView.vue"),
+    },
   ],
 });
 

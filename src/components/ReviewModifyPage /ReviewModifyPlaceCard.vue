@@ -4,8 +4,7 @@
     <p id="rplace-day">Day {{ item.day }}</p>
 
     <div id="rplace-list">
-      <VMap :mapId="mapId" :mapLocations="arrayLatLng" />
-      <!-- <VMap :mapId="mapId" /> -->
+      <VMap :mapId="mapId" />
       <!-- center 잡기 -->
     </div>
     <VTimeline id="rplace-timeline" :item="item" />
@@ -15,26 +14,12 @@
 </template>
 
 <script setup>
-import VTimeline from "@/components/Common/VTimelineWrite.vue";
+import VTimeline from "@/components/Common/VTimelineModify.vue";
 import VMap from "@/components/Common/Maps/VMap.vue";
 import { watch, ref } from "vue";
 const props = defineProps({
   item: Object,
 });
-
-// console.log("props.itemprops.itemprops.itemprops.item", props.item);
-
-let arrayLatLng = ref([]);
-watch(
-  () => props.item.dailyPlan,
-  (newDetails) => {
-    if (newDetails && newDetails.length > 0) {
-      arrayLatLng.value = newDetails.map((loc) => ({ x: loc.x, y: loc.y }));
-      console.log("reviewWrite arrayLatLng.value", arrayLatLng.value);
-    }
-  },
-  { immediate: true }
-);
 
 const mapId = ref("");
 watch(() => {
