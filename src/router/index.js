@@ -27,7 +27,9 @@ const router = createRouter({
     {
       path: "/plan/view/:day",
       name: "planView",
-      component: () => import("@/views/PlanView.vue"),
+      component: () => import("@/views/PlanShowView.vue"),
+
+
     },
     {
       path: "/qna",

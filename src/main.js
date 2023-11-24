@@ -41,6 +41,7 @@ app.use(Antd);
 const userStore = useUserStore();
 const headerStateStore = useHeaderStateStore();
 const { isLogin } = storeToRefs(userStore);
+isLogin.value = false;
 // Store 초기화 및 로그인 상태 확인
 userStore.checkInitialLoginState();
 headerStateStore.changeHeaderState(isLogin.value);

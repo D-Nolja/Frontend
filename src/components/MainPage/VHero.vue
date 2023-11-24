@@ -8,11 +8,20 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/user.js";
+import { storeToRefs } from "pinia";
+const userStore = useUserStore();
+const { isLogin } = storeToRefs(userStore);
 
 const router = useRouter();
 
 const movePlan = () => {
-  router.push({ path: "plan/all" });
+  if (!isLogin) {
+    alert("로그인해주세요");
+    router.push({ name: "login" });
+  } else {
+    router.push({ path: "plan/all" });
+  }
 };
 </script>
 
